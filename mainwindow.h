@@ -38,7 +38,9 @@
 **
 ****************************************************************************/
 
+#include "mobot.h"
 #include <QtWidgets>
+#include <memory>
 
 class QWebView;
 QT_BEGIN_NAMESPACE
@@ -72,10 +74,14 @@ protected slots:
     void removeEmbeddedElements();
 
 private:
+    void baroboInit ();
+
     QString jQuery;
     QWebView *view;
     QLineEdit *locationEdit;
     QAction *rotateAction;
     int progress;
+
+    std::unique_ptr<mobot_t> m_dongle;
 //! [1]
 };

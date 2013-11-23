@@ -38,6 +38,8 @@
 **
 ****************************************************************************/
 
+#include "mobot.h"
+
 #include <QtWidgets>
 #include "mainwindow.h"
 

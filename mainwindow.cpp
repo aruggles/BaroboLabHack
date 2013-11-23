@@ -38,6 +38,7 @@
 **
 ****************************************************************************/
 
+#include <QThread>
 #include <QtWidgets>
 #include <QtNetwork>
 #include <QtWebKitWidgets>
@@ -45,7 +46,7 @@
 
 //! [1]
 
-MainWindow::MainWindow(const QUrl& url)
+MainWindow::MainWindow(const QUrl& url) : m_dongle(new mobot_t)
 {
     progress = 0;
 
@@ -103,6 +104,8 @@ MainWindow::MainWindow(const QUrl& url)
 
     setCentralWidget(view);
     setUnifiedTitleAndToolBarOnMac(true);
+
+    baroboInit();
 }
 //! [3]
 
@@ -215,6 +218,46 @@ void MainWindow::removeEmbeddedElements()
 {
     QString code = "qt.jQuery('embed').remove()";
     view->page()->mainFrame()->evaluateJavaScript(code);
+}
+
+#include <unistd.h>
+void MainWindow::baroboInit () {
+  Mobot_init(m_dongle.get());
+
+  char tty[64];
+  if (-1 == Mobot_dongleGetTTY(tty, sizeof(tty))) {
+    fprintf(stderr, "(barobolab) ERROR: Mobot_dongleGetTTY failed\n");
+    abort();
+  }
+
+  if (-1 == Mobot_connectWithTTY(m_dongle.get(), tty)) {
+    fprintf(stderr, "(barobolab) ERROR: Mobot_connectWithTTY failed\n");
+    abort();
+  }
+
+  Mobot_clearQueriedAddresses(m_dongle.get());
+
+  if (-1 == Mobot_queryAddresses(m_dongle.get())) {
+    fprintf(stderr, "(barobolab) ERROR: Mobot_queryAddresses failed\n");
+    abort();
+  }
+
+  //QThread::sleep(1);
+  sleep(1);
+
+  mobotInfo_t* mobotInfo = nullptr;
+  int numScanned = 0;
+  if (-1 == Mobot_getChildrenInfo(m_dongle.get(), &mobotInfo, &numScanned)) {
+    fprintf(stderr, "(barobolab) ERROR: Mobot_getChildrenInfo failed\n");
+    abort();
+  }
+  
+  printf("(barobolab) INFO: found %d addresses: ", numScanned);
+  for (int i = 0; i < numScanned; ++i) {
+    printf("%s ", mobotInfo[i].serialID);
+  }
+
+  printf("\n");
 }
 //! [9]
 
