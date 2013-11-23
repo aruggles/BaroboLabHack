@@ -71,6 +71,8 @@ protected slots:
     void removeObjectElements();
     void removeEmbeddedElements();
 
+    void populateJavaScriptWindowObject();
+    
 private:
     QString jQuery;
     QWebView *view;

@@ -42,6 +42,7 @@
 #include <QtNetwork>
 #include <QtWebKitWidgets>
 #include "mainwindow.h"
+#include "jsinterface.h"
 
 //! [1]
 
@@ -66,6 +67,8 @@ MainWindow::MainWindow(const QUrl& url)
     connect(view, SIGNAL(titleChanged(QString)), SLOT(adjustTitle()));
     connect(view, SIGNAL(loadProgress(int)), SLOT(setProgress(int)));
     connect(view, SIGNAL(loadFinished(bool)), SLOT(finishLoading(bool)));
+    connect(view->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()),
+            this, SLOT(populateJavaScriptWindowObject()));
 
     locationEdit = new QLineEdit(this);
     locationEdit->setSizePolicy(QSizePolicy::Expanding, locationEdit->sizePolicy().verticalPolicy());
@@ -103,6 +106,8 @@ MainWindow::MainWindow(const QUrl& url)
 
     setCentralWidget(view);
     setUnifiedTitleAndToolBarOnMac(true);
+    
+    qDebug() << "App path : " << qApp->applicationDirPath();
 }
 //! [3]
 
@@ -217,4 +222,10 @@ void MainWindow::removeEmbeddedElements()
     view->page()->mainFrame()->evaluateJavaScript(code);
 }
 //! [9]
+
+void MainWindow::populateJavaScriptWindowObject()
+{
+    JsInterface *interface = new JsInterface();
+    view->page()->mainFrame()->addToJavaScriptWindowObject("Robot", interface);
+}
 
