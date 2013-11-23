@@ -4,3 +4,5 @@ fancybrowser.app
 fancybrowser.xcodeproj
 Info.plist
 
+
+Makefile
