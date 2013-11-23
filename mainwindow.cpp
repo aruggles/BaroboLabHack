@@ -228,23 +228,18 @@ void MainWindow::removeEmbeddedElements()
 #include <unistd.h>
 void MainWindow::baroboInit () {
   Mobot_init(m_dongle.get());
-
   char tty[64];
   if (-1 == Mobot_dongleGetTTY(tty, sizeof(tty))) {
-    fprintf(stderr, "(barobolab) ERROR: Mobot_dongleGetTTY failed\n");
-    abort();
+    qFatal("(barobolab) ERROR: Mobot_dongleGetTTY failed\n");
   }
-
   if (-1 == Mobot_connectWithTTY(m_dongle.get(), tty)) {
-    fprintf(stderr, "(barobolab) ERROR: Mobot_connectWithTTY failed\n");
-    abort();
+    qFatal("(barobolab) ERROR: Mobot_connectWithTTY failed\n");
   }
 
   Mobot_clearQueriedAddresses(m_dongle.get());
 
   if (-1 == Mobot_queryAddresses(m_dongle.get())) {
-    fprintf(stderr, "(barobolab) ERROR: Mobot_queryAddresses failed\n");
-    abort();
+    qFatal("(barobolab) ERROR: Mobot_queryAddresses failed\n");
   }
 
   //QThread::sleep(1);
@@ -253,8 +248,7 @@ void MainWindow::baroboInit () {
   mobotInfo_t* mobotInfo = nullptr;
   int numScanned = 0;
   if (-1 == Mobot_getChildrenInfo(m_dongle.get(), &mobotInfo, &numScanned)) {
-    fprintf(stderr, "(barobolab) ERROR: Mobot_getChildrenInfo failed\n");
-    abort();
+    qFatal("(barobolab) ERROR: Mobot_getChildrenInfo failed\n");
   }
   
   printf("(barobolab) INFO: found %d addresses: ", numScanned);

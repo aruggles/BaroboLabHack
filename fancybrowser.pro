@@ -7,8 +7,16 @@ SOURCES =   main.cpp \
 RESOURCES = jquery.qrc
 
 INCLUDEPATH += libbarobo
-LIBS += -Llibbarobo/build -Llibbarobo/build/BaroboConfigFile -Llibbarobo/build/BaroboConfigFile/mxml-2.7 \
-    -lbaroboStatic -lbaroboconfigfile -lmxml
+
+unix {
+    LIBS += -Llibbarobo/build -Llibbarobo/build/BaroboConfigFile -Llibbarobo/build/BaroboConfigFile/mxml-2.7 \
+        -lbaroboStatic -lbaroboconfigfile -lmxml 
+}
+
+win32 {
+    LIBS += -Llibbarobo/build -Llibbarobo/build/BaroboConfigFile -Llibbarobo/build/BaroboConfigFile/mxml-2.7 \
+        -lbaroboStatic -lbaroboconfigfile -lmxml -lws2_32 -lsetupapi
+}
 
 QMAKE_CXXFLAGS += -std=c++11
 
