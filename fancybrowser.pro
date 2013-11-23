@@ -11,6 +11,9 @@ LIBS += -Llibbarobo/build -Llibbarobo/build/BaroboConfigFile -Llibbarobo/build/B
     -lbaroboStatic -lbaroboconfigfile -lmxml
 
 QMAKE_CXXFLAGS += -std=c++11
+CONFIG += c++11
+
+macx:LIBS += -framework IOKIT -framework CoreFoundation
 
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/webkitwidgets/fancybrowser
