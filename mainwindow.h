@@ -73,6 +73,8 @@ protected slots:
     void removeObjectElements();
     void removeEmbeddedElements();
 
+    void populateJavaScriptWindowObject();
+    
 private:
     void baroboInit ();
 

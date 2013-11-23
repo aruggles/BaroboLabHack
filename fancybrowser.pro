@@ -1,7 +1,9 @@
 QT      +=  webkitwidgets network widgets
-HEADERS =   mainwindow.h
+HEADERS =   mainwindow.h \
+            jsinterface.h
 SOURCES =   main.cpp \
-            mainwindow.cpp
+            mainwindow.cpp \
+            jsinterface.cpp
 RESOURCES = jquery.qrc
 
 INCLUDEPATH += libbarobo
