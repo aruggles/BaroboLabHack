@@ -15,11 +15,10 @@ JsInterface::JsInterface (MainWindow* mainWindow) : m_mainWindow(mainWindow) { }
 
 void JsInterface::printDbg()
 {
-    printf("I am testing the test.\n");
+    qDebug() << QString("I am testing the test.\n");
 }
 QString JsInterface::printMessage(const QString &param)
 {
-    printf("testing the print message.\n");
     qDebug() << param;
     return QString("Success");
 }
