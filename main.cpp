@@ -47,10 +47,16 @@ int main(int argc, char * argv[])
 {
     QApplication app(argc, argv);
     QUrl url;
+    QString urlstring("file://");
+    urlstring.append(qApp->applicationDirPath());
+    urlstring.append("/html/index.html");
+    qDebug() << "Opening html file:" << urlstring;
     if (argc > 1)
         url = QUrl::fromUserInput(argv[1]);
-    else
-        url = QUrl("http://www.google.com/ncr");
+    else {
+        //url = QUrl("http://www.google.com/ncr");
+        url = QUrl(urlstring);
+    }
     MainWindow *browser = new MainWindow(url);
     browser->show();
     return app.exec();
