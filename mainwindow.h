@@ -55,6 +55,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(const QUrl& url);
 
+    QString getRobotIDList ();
+    bool connectRobot (const QString& address);
+    void disconnectRobot (const QString& address);
+    int move (const QString& address, double angle1, double angle2, double angle3, double angle4);
+    int moveNB (const QString& address, double angle1, double angle2, double angle3, double angle4);
+    int moveTo (const QString& address, double angle1, double angle2, double angle3, double angle4);
+    int moveToNB (const QString& address, double angle1, double angle2, double angle3, double angle4);
+    QString getJointAngles (const QString& address);
+
 protected slots:
 
     void adjustLocation();
@@ -84,6 +93,10 @@ private:
     QAction *rotateAction;
     int progress;
 
-    std::unique_ptr<mobot_t> m_dongle;
+    using RobotPtr = std::unique_ptr<mobot_t>;
+
+    RobotPtr m_dongle;
+    /* serial ID to connected robot map */
+    std::map<QString, RobotPtr> m_connectedRobots;
 //! [1]
 };

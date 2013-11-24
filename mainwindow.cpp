@@ -38,7 +38,8 @@
 **
 ****************************************************************************/
 
-#include <QThread>
+#include <unistd.h>
+
 #include <QtWidgets>
 #include <QtNetwork>
 #include <QtWebKitWidgets>
@@ -224,8 +225,8 @@ void MainWindow::removeEmbeddedElements()
     QString code = "qt.jQuery('embed').remove()";
     view->page()->mainFrame()->evaluateJavaScript(code);
 }
+//! [9]
 
-#include <unistd.h>
 void MainWindow::baroboInit () {
   Mobot_init(m_dongle.get());
   char tty[64];
@@ -235,14 +236,16 @@ void MainWindow::baroboInit () {
   if (-1 == Mobot_connectWithTTY(m_dongle.get(), tty)) {
     qFatal("(barobolab) ERROR: Mobot_connectWithTTY failed\n");
   }
+  Mobot_setDongleMobot(m_dongle.get());
+}
 
+QString MainWindow::getRobotIDList () {
   Mobot_clearQueriedAddresses(m_dongle.get());
 
   if (-1 == Mobot_queryAddresses(m_dongle.get())) {
     qFatal("(barobolab) ERROR: Mobot_queryAddresses failed\n");
   }
 
-  //QThread::sleep(1);
   sleep(1);
 
   mobotInfo_t* mobotInfo = nullptr;
@@ -251,18 +254,107 @@ void MainWindow::baroboInit () {
     qFatal("(barobolab) ERROR: Mobot_getChildrenInfo failed\n");
   }
   
-  printf("(barobolab) INFO: found %d addresses: ", numScanned);
+  QString botlist ("[ ");
+  botlist += "\"";
+  botlist += m_dongle->serialID;
+  botlist += "\"";
+
   for (int i = 0; i < numScanned; ++i) {
-    printf("%s ", mobotInfo[i].serialID);
+    botlist += ", \"";
+    botlist += mobotInfo[i].serialID;
+    botlist += "\"";
+  }
+  botlist += " ]";
+
+  qDebug() << botlist << '\n';
+
+  return botlist;
+}
+
+bool MainWindow::connectRobot (const QString& address) {
+  if (m_connectedRobots.end() != m_connectedRobots.find(address)) {
+    /* The requested robot is already connected */
+    return true;
   }
 
-  printf("\n");
+  auto newrobot = new mobot_t;
+  Mobot_init(newrobot);
+
+  /* extract the 8-bit byte array from QString, from which we can then extract
+   * the C-string */
+  auto baAddress = address.toLocal8Bit();
+
+  if (-1 == Mobot_connectWithAddress(newrobot, baAddress.data(), 1)) {
+    delete newrobot;
+    qDebug() << "(barobolab) ERROR: Mobot_connectWithTTY failed\n";
+    return false;
+  }
+
+  m_connectedRobots.insert(std::make_pair(address, RobotPtr(newrobot)));
+  return true;
 }
-//! [9]
+
+void MainWindow::disconnectRobot (const QString& address) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    return;
+  }
+  Mobot_disconnect(it->second.get());
+}
+
+int MainWindow::move (const QString& address, double angle1, double angle2, double angle3, double angle4) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    return -1;
+  }
+  return Mobot_move(it->second.get(), angle1, angle2, angle3, angle4);
+}
+
+int MainWindow::moveNB (const QString& address, double angle1, double angle2, double angle3, double angle4) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    return -1;
+  }
+  return Mobot_moveNB(it->second.get(), angle1, angle2, angle3, angle4);
+}
+
+int MainWindow::moveTo (const QString& address, double angle1, double angle2, double angle3, double angle4) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    return -1;
+  }
+  return Mobot_moveTo(it->second.get(), angle1, angle2, angle3, angle4);
+}
+
+int MainWindow::moveToNB (const QString& address, double angle1, double angle2, double angle3, double angle4) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    return -1;
+  }
+  return Mobot_moveToNB(it->second.get(), angle1, angle2, angle3, angle4);
+}
+
+QString MainWindow::getJointAngles (const QString& address) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    qDebug() << "fuck 1\n";
+    return "[]";
+  }
+  double a1, a2, a3, a4;
+  if (-1 == Mobot_getJointAngles(it->second.get(), &a1, &a2, &a3, &a4)) {
+    qDebug() << "(barobolab) ERROR: Mobot_getJointAngles\n";
+    return "[]";
+  }
+
+  QString angles;
+  angles.sprintf("[ %f, %f, %f, %f ]", a1, a2, a3, a4);
+  qDebug() << angles << '\n';
+  return angles;
+}
 
 void MainWindow::populateJavaScriptWindowObject()
 {
-    JsInterface *interface = new JsInterface();
+    JsInterface *interface = new JsInterface(this);
     view->page()->mainFrame()->addToJavaScriptWindowObject("Robot", interface);
 }
 
