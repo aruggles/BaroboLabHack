@@ -337,7 +337,7 @@ int MainWindow::moveToNB (const QString& address, double angle1, double angle2, 
 QString MainWindow::getJointAngles (const QString& address) {
   auto it = m_connectedRobots.find(address);
   if (m_connectedRobots.end() == it) {
-    qDebug() << "fuck 1\n";
+    qDebug() << "(barobolab) ERROR: getJointAngles on disconnected " << address << '\n';
     return "[]";
   }
   double a1, a2, a3, a4;
@@ -350,6 +350,15 @@ QString MainWindow::getJointAngles (const QString& address) {
   angles.sprintf("[ %f, %f, %f, %f ]", a1, a2, a3, a4);
   qDebug() << angles << '\n';
   return angles;
+}
+
+int MainWindow::setJointSpeeds (const QString& address, double speeds1, double speeds2, double speeds3, double speeds4) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    qDebug() << "(barobolab) ERROR: setJointSpeeds on disconnected " << address << '\n';
+    return -1;
+  }
+  return Mobot_setJointSpeeds(it->second.get(), speeds1, speeds2, speeds3, speeds4);
 }
 
 void MainWindow::populateJavaScriptWindowObject()

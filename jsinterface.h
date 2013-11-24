@@ -30,8 +30,9 @@ public:
     Q_INVOKABLE int moveTo (const QString& address, double angle1, double angle2, double angle3, double angle4);
     Q_INVOKABLE int moveToNB (const QString& address, double angle1, double angle2, double angle3, double angle4);
     Q_INVOKABLE QString getJointAngles (const QString& address);
+    Q_INVOKABLE int setJointSpeeds (const QString& address, double speeds1, double speeds2, double speeds3, double speeds4);
 
-
+private:
     MainWindow* m_mainWindow;
 };
 #endif

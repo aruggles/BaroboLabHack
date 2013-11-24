@@ -54,3 +54,7 @@ int JsInterface::moveToNB (const QString& address, double angle1, double angle2,
 QString JsInterface::getJointAngles (const QString& address) {
   return m_mainWindow->getJointAngles(address);
 }
+
+int JsInterface::setJointSpeeds (const QString& address, double speeds1, double speeds2, double speeds3, double speeds4) {
+  return m_mainWindow->setJointSpeeds(address, speeds1, speeds2, speeds3, speeds4);
+}
