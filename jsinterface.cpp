@@ -50,3 +50,7 @@ int JsInterface::moveTo (const QString& address, double angle1, double angle2, d
 int JsInterface::moveToNB (const QString& address, double angle1, double angle2, double angle3, double angle4) {
   return m_mainWindow->moveToNB(address, angle1, angle2, angle3, angle4);
 }
+
+QString JsInterface::getJointAngles (const QString& address) {
+  return m_mainWindow->getJointAngles(address);
+}

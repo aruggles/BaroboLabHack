@@ -334,6 +334,24 @@ int MainWindow::moveToNB (const QString& address, double angle1, double angle2, 
   return Mobot_moveToNB(it->second.get(), angle1, angle2, angle3, angle4);
 }
 
+QString MainWindow::getJointAngles (const QString& address) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    qDebug() << "fuck 1\n";
+    return "[]";
+  }
+  double a1, a2, a3, a4;
+  if (-1 == Mobot_getJointAngles(it->second.get(), &a1, &a2, &a3, &a4)) {
+    qDebug() << "(barobolab) ERROR: Mobot_getJointAngles\n";
+    return "[]";
+  }
+
+  QString angles;
+  angles.sprintf("[ %f, %f, %f, %f ]", a1, a2, a3, a4);
+  qDebug() << angles << '\n';
+  return angles;
+}
+
 void MainWindow::populateJavaScriptWindowObject()
 {
     JsInterface *interface = new JsInterface(this);

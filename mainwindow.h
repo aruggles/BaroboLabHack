@@ -62,6 +62,7 @@ public:
     int moveNB (const QString& address, double angle1, double angle2, double angle3, double angle4);
     int moveTo (const QString& address, double angle1, double angle2, double angle3, double angle4);
     int moveToNB (const QString& address, double angle1, double angle2, double angle3, double angle4);
+    QString getJointAngles (const QString& address);
 
 protected slots:
 
