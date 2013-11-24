@@ -39,9 +39,32 @@
           <script>
             function runDemo() {
               if (typeof Robot !== 'undefined') {
-                Robot.printDbg();
-                var t = Robot.printMessage('Hello From Javascript');
-                $('#test').html('Message from the application: ' + t);
+		      var wheelradius = 1.75;   // inches
+		      var robotList = Robot.getRobotIDList();
+		      var red = "GZP1";
+		      var blue = "4V21";
+		      Robot.connectRobot(red);
+		      Robot.connectRobot(blue);
+
+		      var redfunc = function(x) {
+			      return 0.5 * x + 4;
+		      }
+
+		      var bluefunc = function(x) {
+			      return 2 * x - 2;
+		      }
+
+		      var xstart = 0;
+		      var xstop = 5;
+
+		      var reddist = redfunc(xstop) - redfunc(xstart);
+		      var bluedist = bluefunc(xstop) - bluefunc(xstart);
+
+		      var redradians = reddist / wheelradius;
+		      var blueradians = bluedist / wheelradius;
+
+		      Robot.moveNB(red, redradians, 0, -redradians, 0);
+		      Robot.moveNB(blue, blueradians, 0, -blueradians, 0);
               }
               
           		var d1 = [];
