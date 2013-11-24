@@ -63,6 +63,12 @@
 		      var redradians = reddist / wheelradius;
 		      var blueradians = bluedist / wheelradius;
 
+		      var redspeed = 0.5 / 1.75;
+		      var bluespeed = 2 / 1.75;
+
+		      Robot.setJointSpeeds(red, redspeed, redspeed, redspeed, redspeed);
+		      Robot.setJointSpeeds(blue, bluespeed, bluespeed, bluespeed, bluespeed);
+
 		      Robot.moveNB(red, redradians, 0, -redradians, 0);
 		      Robot.moveNB(blue, blueradians, 0, -blueradians, 0);
               }
