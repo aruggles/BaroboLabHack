@@ -37,6 +37,25 @@
           <script src="js/main.js"></script>
           <script src="js/flot/jquery.flot.js"></script>
           <script>
+            var iter = 0
+            var timeout = 200 // milliseconds
+            
+            function iterDemo() {
+              iter = iter + timeout/1000.0;
+          		var d1 = [];
+                d1.push([0, 4])
+                d1.push([iter, 0.5*iter+4])
+          		var d2 = [];
+                d2.push([0, -2])
+          			d2.push([iter, 2*iter-2]);
+      
+              var d3 = [];
+              d3.push([6, 10]) // Just to make sure the graph stays the right size
+          		$.plot("#placeholder", [ d1, d2, d3 ]);
+              if(iter < 5) {
+                setTimeout(iterDemo, timeout);
+              }
+            }
             function runDemo() {
               if (typeof Robot !== 'undefined') {
 		      var wheelradius = 1.75;   // inches
@@ -72,19 +91,7 @@
 		      Robot.moveNB(red, redradians, 0, -redradians, 0);
 		      Robot.moveNB(blue, blueradians, 0, -blueradians, 0);
               }
-              
-          		var d1 = [];
-          		for (var i = 0; i < 14; i += 0.5) {
-          			d1.push([i, Math.sin(i)]);
-          		}
-
-          		var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
-
-          		// A null signifies separate line segments
-
-          		var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
-
-          		$.plot("#placeholder", [ d1, d2, d3 ]);
+              iterDemo();
             }
           </script>
     </body>
