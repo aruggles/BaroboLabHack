@@ -231,10 +231,10 @@ void MainWindow::baroboInit () {
   Mobot_init(m_dongle.get());
   char tty[64];
   if (-1 == Mobot_dongleGetTTY(tty, sizeof(tty))) {
-    qFatal("(barobolab) ERROR: Mobot_dongleGetTTY failed\n");
+    qWarning("(barobolab) WARNING: Mobot_dongleGetTTY failed\n");
   }
   if (-1 == Mobot_connectWithTTY(m_dongle.get(), tty)) {
-    qFatal("(barobolab) ERROR: Mobot_connectWithTTY failed\n");
+    qWarning("(barobolab) WARNING: Mobot_connectWithTTY failed\n");
   }
   Mobot_setDongleMobot(m_dongle.get());
 }
