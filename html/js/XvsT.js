@@ -47,7 +47,7 @@ var iterDemo = (function() {
 })();
 
 function runDemo() {
-  var intersectGuess = parseInt($("#guess").val());
+  var intersectGuess = parseFloat($("#guess").val());
   if (!isNaN(intersectGuess)) {
     if (typeof Robot !== 'undefined' && Robot !== null) {
       var wheelradius = 1.75;   // inches
