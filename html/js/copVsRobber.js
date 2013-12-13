@@ -1,6 +1,7 @@
 /* jshint jquery: true */
 /* global Robot */
 /* exported runDemo */
+
 (function() {
 
 "use strict";
@@ -130,6 +131,9 @@ window.runDemo = function () {
       //var robotList = Robot.getRobotIDList();
       Robot.connectRobot(red);
       Robot.connectRobot(blue);
+
+      Robot.setColorRGB(red, 255, 0, 0);
+      Robot.setColorRGB(blue, 0, 0, 255);
 
       var redfunc = function(x) {
         return 0.5 * x + 4;
