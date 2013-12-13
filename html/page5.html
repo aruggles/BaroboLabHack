@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
-  <body>
+  <body class="container">
     <h1>BaroboLab</h1>
     <h2>Prediction</h2>
     <p>Suppose the <font color="blue">blue</font> Linkbot starts at position -3
@@ -16,9 +16,9 @@
     <br>
     Intersect after: <input id="guess" type="text" name="intersect"> seconds<br>
     <button type="button" onclick="runDemo()">Next</button>
-    <div class="demo-container">
-      <div id="xvst" class="demo-placeholder" style="width:680px; height:500px;"></div>
-      <div id="pos" class="demo-placeholder" style="width:680px; height:500px;"></div>
+    <div class="demo-container row">
+      <div id="xvst" class="col-md-8 demo-placeholder" style="width:680px; height:500px;"></div>
+      <div id="pos" class="col-md-4 demo-placeholder" style="width:200px; height:500px;"></div>
     </div>
     <script src="js/vendor/jquery-1.10.2.min.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>

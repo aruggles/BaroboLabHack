@@ -17,6 +17,13 @@ var xvstSeries = [
   Object.create(robber)
 ];
 
+var posSeries = [
+  Object.create(cop),
+  Object.create(robber)
+];
+posSeries[0].data = [[1, -4]];
+posSeries[1].data = [[1, 2]];
+
 var xvst = $.plot("#xvst", xvstSeries, {
   xaxis: {
     min: 0,
@@ -30,6 +37,20 @@ var xvst = $.plot("#xvst", xvstSeries, {
     tickSize: 2,
     tickDecimals: 0,
   },
+});
+
+var pos = $.plot("#pos", posSeries, {
+  xaxis: {
+    min: 0,
+    max: 2,
+  },
+  yaxis: {
+    min: -5,
+    max: 13,
+  },
+  series: {
+    points: { show: true }
+  }
 });
 
 //var pos = $.plot("#pos", posSeries);
@@ -66,12 +87,12 @@ var iterDemo = (function() {
 
     xvstSeries[0].data = d1;
     xvstSeries[1].data = d2;
-    //posSeries[0].data = [[1, y1]];
-    //posSeries[1].data = [[2, y2]];
+    posSeries[0].data = [[1, y1]];
+    posSeries[1].data = [[1, y2]];
     xvst.setData(xvstSeries);
-    //pos.setData(posSeries);
+    pos.setData(posSeries);
     xvst.draw();
-    //pos.draw();
+    pos.draw();
     if((xstop - iter) > (tolerance)) {
       setTimeout(iterDemo, timeout);
     }
