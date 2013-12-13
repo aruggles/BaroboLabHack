@@ -45,6 +45,7 @@ var iterDemo = (function() {
 
   function iterDemo(x) {
     var reset = false;
+    var y1, y2;
 
     if (typeof x !== "undefined" && x !== null) {
       reset = true;
@@ -53,18 +54,24 @@ var iterDemo = (function() {
     if (reset) {
       iter = 0;
       xstop = x;
-      d1 = [0, -2];
-      d2 = [0, 4];
+      d1 = [[0, -2]];
+      d2 = [[0, 4]];
     }
     iter = iter + step;
     Robot.printMessage(iter);
-    d1.push([iter, 2*iter-2]);
-    d2.push([iter, 0.5*iter+4]);
+    y1 = 2 * iter - 2;
+    y2 = 0.5 * iter + 4;
+    d1.push([iter, y1]);
+    d2.push([iter, y2]);
 
     xvstSeries[0].data = d1;
     xvstSeries[1].data = d2;
+    //posSeries[0].data = [[1, y1]];
+    //posSeries[1].data = [[2, y2]];
     xvst.setData(xvstSeries);
+    //pos.setData(posSeries);
     xvst.draw();
+    pos.draw();
     if((xstop - iter) > (tolerance)) {
       setTimeout(iterDemo, timeout);
     }
