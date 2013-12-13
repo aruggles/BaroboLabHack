@@ -4,10 +4,12 @@
 var cop = {
   color: "blue",
   label: "cop",
+  data: [],
 };
 var robber = {
   color: "red",
   label: "robber",
+  data: [],
 };
 
 var plot = $.plot("#placeholder", [cop, robber], {
@@ -15,14 +17,14 @@ var plot = $.plot("#placeholder", [cop, robber], {
     min: 0,
     max: 6,
     tickSize: 1,
-    tickDecimals: 0
+    tickDecimals: 0,
   },
   yaxis: {
     min: -4,
     max: 12,
     tickSize: 2,
-    tickDecimals: 0
-  }
+    tickDecimals: 0,
+  },
 });
 var iterDemo = (function() {
   "use strict";
