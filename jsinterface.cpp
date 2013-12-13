@@ -58,3 +58,8 @@ QString JsInterface::getJointAngles (const QString& address) {
 int JsInterface::setJointSpeeds (const QString& address, double speeds1, double speeds2, double speeds3, double speeds4) {
   return m_mainWindow->setJointSpeeds(address, speeds1, speeds2, speeds3, speeds4);
 }
+
+int JsInterface::setColorRGB(const QString& address, int r, int g, int b) {
+  return m_mainWindow->setColorRGB(address, r, g, b);
+}
+

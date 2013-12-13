@@ -361,6 +361,15 @@ int MainWindow::setJointSpeeds (const QString& address, double speeds1, double s
   return Mobot_setJointSpeeds(it->second.get(), speeds1, speeds2, speeds3, speeds4);
 }
 
+int MainWindow::setColorRGB (const QString& address, int r, int g, int b) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    qDebug() << "(barobolab) ERROR: setColorRGB on disconnected " << address << '\n';
+    return -1;
+  }
+  return Mobot_setColorRGB(it->second.get(), r, g, b);
+}
+
 void MainWindow::populateJavaScriptWindowObject()
 {
     JsInterface *interface = new JsInterface(this);
