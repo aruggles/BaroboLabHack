@@ -5,6 +5,14 @@
 
 "use strict";
 
+var red = "BKWT";
+var blue = "KCXS";
+
+function nighttime () {
+  Robot.disconnectRobot(red);
+  Robot.disconnectRobot(blue);
+}
+
 var cop = {
   color: "blue",
   label: "cop",
@@ -106,6 +114,9 @@ var iterDemo = (function() {
     if((xstop - iter) > (tolerance)) {
       setTimeout(iterDemo, timeout);
     }
+    else {
+      setTimeout(nighttime, timeout+500);
+    }
   }
 
   return iterDemo;
@@ -117,8 +128,6 @@ window.runDemo = function () {
     if (typeof Robot !== 'undefined' && Robot !== null) {
       var wheelradius = 1.75;   // inches
       //var robotList = Robot.getRobotIDList();
-      var red = "BKWT";
-      var blue = "KCXS";
       Robot.connectRobot(red);
       Robot.connectRobot(blue);
 
