@@ -22,7 +22,7 @@ var iterDemo = (function() {
   var step = timeout/1000.0;
   var tolerance = step / 2;
   var xstop;
-  var d1, d2, d3;
+  var d1, d2;
 
   function iterDemo(x) {
     var reset = false;
@@ -36,7 +36,6 @@ var iterDemo = (function() {
       xstop = x;
       d1 = [];
       d2 = [];
-      d3 = [];
     }
     iter = iter + step;
     Robot.printMessage(iter);
@@ -45,8 +44,7 @@ var iterDemo = (function() {
     d2.push([0, -2]);
     d2.push([iter, 2*iter-2]);
 
-    d3.push([6, 10]); // Just to make sure the graph stays the right size
-    plot.setData([d1, d2, d3]);
+    plot.setData([d1, d2]);
     plot.draw();
     if((xstop - iter) > (tolerance)) {
       setTimeout(iterDemo, timeout);
