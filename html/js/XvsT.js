@@ -1,4 +1,7 @@
+/* global Robot, $*/
+/* exported runDemo */
 var iterDemo = (function() {
+  "use strict";
   var iter = 0;
   var timeout = 200; // milliseconds
   var step = timeout/1000.0;
@@ -26,9 +29,9 @@ var iterDemo = (function() {
     }
     iter = iter + step;
     Robot.printMessage(iter);
-    d1.push([0, 4])
+    d1.push([0, 4]);
     d1.push([iter, 0.5*iter+4]);
-    d2.push([0, -2])
+    d2.push([0, -2]);
     d2.push([iter, 2*iter-2]);
 
     d3.push([6, 10]); // Just to make sure the graph stays the right size
@@ -47,11 +50,12 @@ var iterDemo = (function() {
 })();
 
 function runDemo() {
+  "use strict";
   var intersectGuess = parseFloat($("#guess").val());
   if (!isNaN(intersectGuess)) {
     if (typeof Robot !== 'undefined' && Robot !== null) {
       var wheelradius = 1.75;   // inches
-      var robotList = Robot.getRobotIDList();
+      //var robotList = Robot.getRobotIDList();
       var red = "BKWT";
       var blue = "KCXS";
       Robot.connectRobot(red);
@@ -59,11 +63,11 @@ function runDemo() {
 
       var redfunc = function(x) {
         return 0.5 * x + 4;
-      }
+      };
 
       var bluefunc = function(x) {
         return 2 * x - 2;
-      }
+      };
 
       var xstart = 0;
       var xstop = intersectGuess;
