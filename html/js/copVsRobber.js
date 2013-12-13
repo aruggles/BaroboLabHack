@@ -1,23 +1,21 @@
 /* jshint jquery: true */
 /* global Robot */
 /* exported runDemo */
-var series = [
-  {
-    color: "blue",
-    label: "cop",
-    data: [],
-  },
-  {
-    color: "red",
-    label: "robber",
-    data: [],
-  }
-];
+var cop = {
+  color: "blue",
+  label: "cop",
+  data: [],
+};
+var robber = {
+  color: "red",
+  label: "robber",
+  data: [],
+};
 
-var xvstSeries = Object.create(series);
-var posSeries = Object.create(series);
+var xvstCop = Object.create(cop);
+var xvstRobber = Object.create(robber);
 
-var xvst = $.plot("#xvst", xvstSeries, {
+var xvst = $.plot("#xvst", [xvstCop, xvstRobber], {
   xaxis: {
     min: 0,
     max: 6,
@@ -32,7 +30,7 @@ var xvst = $.plot("#xvst", xvstSeries, {
   },
 });
 
-var pos = $.plot("#pos", posSeries);
+//var pos = $.plot("#pos", posSeries);
 
 var iterDemo = (function() {
   "use strict";
@@ -64,14 +62,14 @@ var iterDemo = (function() {
     d1.push([iter, y1]);
     d2.push([iter, y2]);
 
-    xvstSeries[0].data = d1;
-    xvstSeries[1].data = d2;
+    xvstCop.data = d1;
+    xvstRobber.data = d2;
     //posSeries[0].data = [[1, y1]];
     //posSeries[1].data = [[2, y2]];
-    xvst.setData(xvstSeries);
+    xvst.setData([xvstCop, xvstRobber]);
     //pos.setData(posSeries);
     xvst.draw();
-    pos.draw();
+    //pos.draw();
     if((xstop - iter) > (tolerance)) {
       setTimeout(iterDemo, timeout);
     }
