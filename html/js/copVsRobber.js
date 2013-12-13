@@ -1,21 +1,22 @@
 /* jshint jquery: true */
 /* global Robot */
 /* exported runDemo */
-var cop = {
-  color: "blue",
-  label: "cop",
-  data: [],
-};
-var robber = {
-  color: "red",
-  label: "robber",
-  data: [],
-};
+var series = [
+  {
+    color: "blue",
+    label: "cop",
+    data: [],
+  },
+  {
+    color: "red",
+    label: "robber",
+    data: [],
+  }
+];
 
-var xvstCop = Object.create(cop);
-var xvstRobber = Object.create(robber);
+var xvstSeries = Object.create(series);
 
-var plot = $.plot("#placeholder", [xvstCop, xvstRobber], {
+var plot = $.plot("#placeholder", xvstSeries, {
   xaxis: {
     min: 0,
     max: 6,
@@ -29,6 +30,7 @@ var plot = $.plot("#placeholder", [xvstCop, xvstRobber], {
     tickDecimals: 0,
   },
 });
+
 var iterDemo = (function() {
   "use strict";
   var iter = 0;
@@ -59,9 +61,9 @@ var iterDemo = (function() {
     d2.push([0, 4]);
     d2.push([iter, 0.5*iter+4]);
 
-    xvstCop.data = d1;
-    xvstRobber.data = d2;
-    plot.setData([xvstCop, xvstRobber]);
+    xvstSeries[0].data = d1;
+    xvstSeries[1].data = d2;
+    plot.setData(xvstSeries);
     plot.draw();
     if((xstop - iter) > (tolerance)) {
       setTimeout(iterDemo, timeout);
