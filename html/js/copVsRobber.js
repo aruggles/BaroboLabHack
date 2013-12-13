@@ -15,8 +15,9 @@ var series = [
 ];
 
 var xvstSeries = Object.create(series);
+var posSeries = Object.create(series);
 
-var plot = $.plot("#placeholder", xvstSeries, {
+var xvst = $.plot("#xvst", xvstSeries, {
   xaxis: {
     min: 0,
     max: 6,
@@ -30,6 +31,8 @@ var plot = $.plot("#placeholder", xvstSeries, {
     tickDecimals: 0,
   },
 });
+
+var pos = $.plot("#pos", posSeries);
 
 var iterDemo = (function() {
   "use strict";
@@ -60,8 +63,8 @@ var iterDemo = (function() {
 
     xvstSeries[0].data = d1;
     xvstSeries[1].data = d2;
-    plot.setData(xvstSeries);
-    plot.draw();
+    xvst.setData(xvstSeries);
+    xvst.draw();
     if((xstop - iter) > (tolerance)) {
       setTimeout(iterDemo, timeout);
     }
