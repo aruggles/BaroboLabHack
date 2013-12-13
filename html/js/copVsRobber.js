@@ -12,10 +12,12 @@ var robber = {
   data: [],
 };
 
-var xvstCop = Object.create(cop);
-var xvstRobber = Object.create(robber);
+var xvstSeries = [
+  Object.create(cop),
+  Object.create(robber)
+];
 
-var xvst = $.plot("#xvst", [xvstCop, xvstRobber], {
+var xvst = $.plot("#xvst", xvstSeries, {
   xaxis: {
     min: 0,
     max: 6,
@@ -62,11 +64,11 @@ var iterDemo = (function() {
     d1.push([iter, y1]);
     d2.push([iter, y2]);
 
-    xvstCop.data = d1;
-    xvstRobber.data = d2;
+    xvstSeries[0].data = d1;
+    xvstSeries[1].data = d2;
     //posSeries[0].data = [[1, y1]];
     //posSeries[1].data = [[2, y2]];
-    xvst.setData([xvstCop, xvstRobber]);
+    xvst.setData(xvstSeries);
     //pos.setData(posSeries);
     xvst.draw();
     //pos.draw();
