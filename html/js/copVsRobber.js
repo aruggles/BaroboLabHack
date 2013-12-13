@@ -1,6 +1,10 @@
 /* jshint jquery: true */
 /* global Robot */
 /* exported runDemo */
+(function() {
+
+"use strict";
+
 var cop = {
   color: "blue",
   label: "cop",
@@ -107,8 +111,7 @@ var iterDemo = (function() {
   return iterDemo;
 })();
 
-function runDemo() {
-  "use strict";
+window.runDemo = function () {
   var intersectGuess = parseFloat($("#guess").val());
   if (!isNaN(intersectGuess)) {
     if (typeof Robot !== 'undefined' && Robot !== null) {
@@ -147,4 +150,6 @@ function runDemo() {
       iterDemo(intersectGuess);
     }
   }
-}
+};
+
+}());
