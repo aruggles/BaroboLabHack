@@ -1,7 +1,16 @@
 /* jshint jquery: true */
 /* global Robot */
 /* exported runDemo */
-var plot = $.plot("#placeholder", [[[0,4]],[[0,-2]]], {
+var cop = {
+  color: "blue",
+  label: "cop",
+};
+var robber = {
+  color: "red",
+  label: "robber",
+};
+
+var plot = $.plot("#placeholder", [cop, robber], {
   xaxis: {
     min: 0,
     max: 6,
