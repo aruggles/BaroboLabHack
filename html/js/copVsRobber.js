@@ -50,15 +50,12 @@ var iterDemo = (function() {
     if (reset) {
       iter = 0;
       xstop = x;
-      d1 = [];
-      d2 = [];
+      d1 = [0, -2];
+      d2 = [0, 4];
     }
     iter = iter + step;
     Robot.printMessage(iter);
-    // FIXME: Don't push start position every time
-    d1.push([0, -2]);
     d1.push([iter, 2*iter-2]);
-    d2.push([0, 4]);
     d2.push([iter, 0.5*iter+4]);
 
     xvstSeries[0].data = d1;
