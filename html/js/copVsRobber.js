@@ -1,12 +1,27 @@
-/* global Robot, $*/
+/* jshint jquery: true */
+/* global Robot */
 /* exported runDemo */
+var plot = $.plot("#placeholder", [[[0,4]],[[0,-2]]], {
+  xaxis: {
+    min: 0,
+    max: 6,
+    tickSize: 1,
+    tickDecimals: 0
+  },
+  yaxis: {
+    min: -4,
+    max: 12,
+    tickSize: 2,
+    tickDecimals: 0
+  }
+});
 var iterDemo = (function() {
   "use strict";
   var iter = 0;
   var timeout = 200; // milliseconds
   var step = timeout/1000.0;
   var tolerance = step / 2;
-  var xstop, plot;
+  var xstop;
   var d1, d2, d3;
 
   function iterDemo(x) {
@@ -36,7 +51,7 @@ var iterDemo = (function() {
 
     d3.push([6, 10]); // Just to make sure the graph stays the right size
     if (firstPlot) {
-      $.plot("#placeholder", [ d1, d2, d3 ]);
+      plot = $.plot("#placeholder", [ d1, d2, d3 ]);
     } else {
       plot.setData([d1, d2, d3]);
       plot.draw();
