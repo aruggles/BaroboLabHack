@@ -26,13 +26,9 @@ var iterDemo = (function() {
 
   function iterDemo(x) {
     var reset = false;
-    var firstPlot = true;
 
     if (typeof x !== "undefined" && x !== null) {
       reset = true;
-      if (typeof plot !== "undefined") {
-        firstPlot = false;
-      }
     }
 
     if (reset) {
@@ -50,12 +46,8 @@ var iterDemo = (function() {
     d2.push([iter, 2*iter-2]);
 
     d3.push([6, 10]); // Just to make sure the graph stays the right size
-    if (firstPlot) {
-      plot = $.plot("#placeholder", [ d1, d2, d3 ]);
-    } else {
-      plot.setData([d1, d2, d3]);
-      plot.draw();
-    }
+    plot.setData([d1, d2, d3]);
+    plot.draw();
     if((xstop - iter) > (tolerance)) {
       setTimeout(iterDemo, timeout);
     }
