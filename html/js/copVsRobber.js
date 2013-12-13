@@ -21,8 +21,8 @@ var posSeries = [
   Object.create(cop),
   Object.create(robber)
 ];
-posSeries[0].data = [[1, -4]];
-posSeries[1].data = [[1, 2]];
+posSeries[0].data = [[1, -2]];
+posSeries[1].data = [[1, 4]];
 
 var xvst = $.plot("#xvst", xvstSeries, {
   xaxis: {
@@ -41,12 +41,18 @@ var xvst = $.plot("#xvst", xvstSeries, {
 
 var pos = $.plot("#pos", posSeries, {
   xaxis: {
+    show: false,
+    reserveSpace: true,
     min: 0,
     max: 2,
+    tickSize: 1,
+    tickDecimals: 0,
   },
   yaxis: {
-    min: -5,
-    max: 13,
+    min: -4,
+    max: 12,
+    tickSize: 2,
+    tickDecimals: 0,
   },
   series: {
     points: { show: true }
