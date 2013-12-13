@@ -48,12 +48,14 @@ var iterDemo = (function() {
     }
     iter = iter + step;
     Robot.printMessage(iter);
-    d1.push([0, 4]);
-    d1.push([iter, 0.5*iter+4]);
-    d2.push([0, -2]);
-    d2.push([iter, 2*iter-2]);
+    d1.push([0, -2]);
+    d1.push([iter, 2*iter-2]);
+    d2.push([0, 4]);
+    d2.push([iter, 0.5*iter+4]);
 
-    plot.setData([d1, d2]);
+    cop.data = d1;
+    robber.data = d2;
+    plot.setData([cop, robber]);
     plot.draw();
     if((xstop - iter) > (tolerance)) {
       setTimeout(iterDemo, timeout);
