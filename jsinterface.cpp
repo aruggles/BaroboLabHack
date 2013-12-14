@@ -63,3 +63,7 @@ int JsInterface::setColorRGB(const QString& address, int r, int g, int b) {
   return m_mainWindow->setColorRGB(address, r, g, b);
 }
 
+int JsInterface::stop(const QString& address) {
+  return m_mainWindow->stop(address);
+}
+

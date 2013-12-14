@@ -65,6 +65,7 @@ public:
     QString getJointAngles (const QString& address);
     int setJointSpeeds (const QString& address, double speeds1, double speeds2, double speeds3, double speeds4);
     int setColorRGB(const QString& address, int r, int g, int b);
+    int stop(const QString& address);
 
 protected slots:
 

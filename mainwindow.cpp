@@ -370,6 +370,15 @@ int MainWindow::setColorRGB (const QString& address, int r, int g, int b) {
   return Mobot_setColorRGB(it->second.get(), r, g, b);
 }
 
+int MainWindow::stop (const QString& address) {
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    qDebug() << "(barobolab) ERROR: setColorRGB on disconnected " << address << '\n';
+    return -1;
+  }
+  return Mobot_stop(it->second.get());
+}
+
 void MainWindow::populateJavaScriptWindowObject()
 {
     JsInterface *interface = new JsInterface(this);

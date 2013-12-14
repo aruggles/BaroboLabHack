@@ -32,6 +32,7 @@ public:
     Q_INVOKABLE QString getJointAngles (const QString& address);
     Q_INVOKABLE int setJointSpeeds (const QString& address, double speeds1, double speeds2, double speeds3, double speeds4);
     Q_INVOKABLE int setColorRGB (const QString& address, int r, int g, int b);
+    Q_INVOKABLE int stop (const QString& address);
 
 private:
     MainWindow* m_mainWindow;
