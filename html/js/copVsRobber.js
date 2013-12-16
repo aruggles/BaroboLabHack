@@ -107,6 +107,7 @@ setTimeout(function() {
         tickDecimals: 0,
       },
       yaxis: {
+        show: false,
         min: -2,
         max: 14,
         tickSize: 2,
