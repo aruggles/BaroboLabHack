@@ -12,6 +12,8 @@ var blue = "KCXS";
 function nighttime () {
   Robot.disconnectRobot(red);
   Robot.disconnectRobot(blue);
+  Robot.stop(red);
+  Robot.stop(blue);
 }
 
 var cop = {
