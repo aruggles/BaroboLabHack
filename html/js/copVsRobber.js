@@ -55,7 +55,19 @@ var robber = {
 
 var xvstSeries = [
   Object.create(cop),
-  Object.create(robber)
+  Object.create(robber),
+  {
+    points: {
+      show: true
+    },
+    data: [[0, cop.start]]
+  },
+  {
+    points: {
+      show: true
+    },
+    data: [[0, robber.start]]
+  },
 ];
 
 var posSeries = [
