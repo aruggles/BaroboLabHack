@@ -138,7 +138,7 @@ var iterDemo = (function() {
 
     if (reset) {
       iter = 0;
-      xstop = x;
+      xstop = Math.abs(x);
       d1 = [[0, cop.start]];
       d2 = [[0, robber.start]];
     }
