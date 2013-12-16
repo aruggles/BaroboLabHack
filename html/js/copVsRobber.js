@@ -151,6 +151,8 @@ var iterDemo = (function() {
 
     xvstSeries[0].data = d1;
     xvstSeries[1].data = d2;
+    xvstSeries[2].data = [[iter,y1]];
+    xvstSeries[3].data = [[iter,y2]];
     posSeries[1].data = [[cop.pos, y1]];
     posSeries[0].data = [[robber.pos, y2]];
     xvst.setData(xvstSeries);
