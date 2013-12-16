@@ -84,13 +84,13 @@ var xvst, pos;
 setTimeout(function() {
     xvst = $.plot("#xvst", xvstSeries, {
       xaxis: {
-        min: -0.2,
+        min: 0,
         max: 10,
         tickSize: 1,
         tickDecimals: 0,
       },
       yaxis: {
-        min: -2,
+        min: 0,
         max: 14,
         tickSize: 2,
         tickDecimals: 0,
