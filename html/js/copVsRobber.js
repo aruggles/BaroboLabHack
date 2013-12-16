@@ -70,8 +70,8 @@ var xvst, pos;
 setTimeout(function() {
     xvst = $.plot("#xvst", xvstSeries, {
       xaxis: {
-        min: 0,
-        max: 6,
+        min: -0.2,
+        max: 10,
         tickSize: 1,
         tickDecimals: 0,
       },
