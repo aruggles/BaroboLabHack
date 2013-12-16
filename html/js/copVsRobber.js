@@ -6,6 +6,8 @@
 
 "use strict";
 
+var wheelRadius = 1.75;
+
 var blue = "KG3G";
 var red = "GZP1";
 
@@ -20,11 +22,15 @@ var cop = {
   color: "blue",
   label: "cop",
   data: [],
+  speed: 2,
+  start: 0,
 };
 var robber = {
   color: "red",
   label: "robber",
   data: [],
+  speed: 0.5,
+  start: 6,
 };
 
 var xvstSeries = [
@@ -36,8 +42,8 @@ var posSeries = [
   Object.create(cop),
   Object.create(robber)
 ];
-posSeries[0].data = [[1, -2]];
-posSeries[1].data = [[1, 4]];
+posSeries[0].data = [[1, cop.start]];
+posSeries[1].data = [[1, robber.start]];
 
 var xvst = $.plot("#xvst", xvstSeries, {
   xaxis: {
@@ -47,8 +53,8 @@ var xvst = $.plot("#xvst", xvstSeries, {
     tickDecimals: 0,
   },
   yaxis: {
-    min: -4,
-    max: 12,
+    min: -2,
+    max: 14,
     tickSize: 2,
     tickDecimals: 0,
   },
@@ -64,8 +70,8 @@ var pos = $.plot("#pos", posSeries, {
     tickDecimals: 0,
   },
   yaxis: {
-    min: -4,
-    max: 12,
+    min: -2,
+    max: 14,
     tickSize: 2,
     tickDecimals: 0,
   },
@@ -77,7 +83,6 @@ var pos = $.plot("#pos", posSeries, {
 //var pos = $.plot("#pos", posSeries);
 
 var iterDemo = (function() {
-  "use strict";
   var iter = 0;
   var timeout = 200; // milliseconds
   var step = timeout/1000.0;
@@ -96,13 +101,13 @@ var iterDemo = (function() {
     if (reset) {
       iter = 0;
       xstop = x;
-      d1 = [[0, -2]];
-      d2 = [[0, 4]];
+      d1 = [[0, cop.start]];
+      d2 = [[0, robber.start]];
     }
     iter = iter + step;
     Robot.printMessage(iter);
-    y1 = 2 * iter - 2;
-    y2 = 0.5 * iter + 4;
+    y1 = cop.speed * iter + cop.start;
+    y2 = robber.speed * iter + robber.start;
     d1.push([iter, y1]);
     d2.push([iter, y2]);
 
@@ -129,7 +134,6 @@ window.runDemo = function () {
   var intersectGuess = parseFloat($("#guess").val());
   if (!isNaN(intersectGuess)) {
     if (typeof Robot !== 'undefined' && Robot !== null) {
-      var wheelradius = 1.75;   // inches
       //var robotList = Robot.getRobotIDList();
       Robot.connectRobot(red);
       Robot.connectRobot(blue);
@@ -138,11 +142,11 @@ window.runDemo = function () {
       Robot.setColorRGB(blue, 0, 0, 255);
 
       var redfunc = function(x) {
-        return 0.5 * x + 4;
+        return robber.speed * x + robber.start;
       };
 
       var bluefunc = function(x) {
-        return 2 * x - 2;
+        return cop.speed * x + cop.start;
       };
 
       var xstart = 0;
@@ -151,11 +155,11 @@ window.runDemo = function () {
       var reddist = redfunc(xstop) - redfunc(xstart);
       var bluedist = bluefunc(xstop) - bluefunc(xstart);
 
-      var redradians = reddist / wheelradius;
-      var blueradians = bluedist / wheelradius;
+      var redradians = reddist / wheelRadius;
+      var blueradians = bluedist / wheelRadius;
 
-      var redspeed = 0.5 / 1.75;
-      var bluespeed = 2 / 1.75;
+      var redspeed = robber.speed / wheelRadius;
+      var bluespeed = cop.speed / wheelRadius;
 
       Robot.setJointSpeeds(red, redspeed, redspeed, redspeed, redspeed);
       Robot.setJointSpeeds(blue, bluespeed, bluespeed, bluespeed, bluespeed);
