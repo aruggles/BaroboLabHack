@@ -24,6 +24,16 @@ var cop = {
   data: [],
   speed: 2,
   start: 0,
+  img: (function () {
+    var x = new Image();
+    x.src = "img/cop.jpg";
+    return x;
+    }()),
+  points: {
+    symbol: function (ctx, x, y) {
+      ctx.drawImage(cop.img, x-20, y, 40, 30);
+    },
+  },
 };
 var robber = {
   color: "red",
@@ -31,6 +41,16 @@ var robber = {
   data: [],
   speed: 0.5,
   start: 6,
+  img: (function () {
+    var x = new Image();
+    x.src = "img/robber.jpg";
+    return x;
+    }()),
+  points: {
+    symbol: function (ctx, x, y) {
+      ctx.drawImage(robber.img, x-20, y, 40, 30);
+    },
+  },
 };
 
 var xvstSeries = [
@@ -45,40 +65,44 @@ var posSeries = [
 posSeries[0].data = [[1, cop.start]];
 posSeries[1].data = [[1, robber.start]];
 
-var xvst = $.plot("#xvst", xvstSeries, {
-  xaxis: {
-    min: 0,
-    max: 6,
-    tickSize: 1,
-    tickDecimals: 0,
-  },
-  yaxis: {
-    min: -2,
-    max: 14,
-    tickSize: 2,
-    tickDecimals: 0,
-  },
-});
+// wait for images to load.
+var xvst, pos;
+setTimeout(function() {
+    xvst = $.plot("#xvst", xvstSeries, {
+      xaxis: {
+        min: 0,
+        max: 6,
+        tickSize: 1,
+        tickDecimals: 0,
+      },
+      yaxis: {
+        min: -2,
+        max: 14,
+        tickSize: 2,
+        tickDecimals: 0,
+      },
+    });
 
-var pos = $.plot("#pos", posSeries, {
-  xaxis: {
-    show: false,
-    reserveSpace: true,
-    min: 0,
-    max: 2,
-    tickSize: 1,
-    tickDecimals: 0,
-  },
-  yaxis: {
-    min: -2,
-    max: 14,
-    tickSize: 2,
-    tickDecimals: 0,
-  },
-  series: {
-    points: { show: true }
-  }
-});
+    pos = $.plot("#pos", posSeries, {
+      xaxis: {
+        show: false,
+        reserveSpace: true,
+        min: 0,
+        max: 2,
+        tickSize: 1,
+        tickDecimals: 0,
+      },
+      yaxis: {
+        min: -2,
+        max: 14,
+        tickSize: 2,
+        tickDecimals: 0,
+      },
+      series: {
+        points: { show: true }
+      }
+    });
+}, 100);
 
 //var pos = $.plot("#pos", posSeries);
 
