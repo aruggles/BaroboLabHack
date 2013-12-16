@@ -6,8 +6,8 @@
 
 "use strict";
 
-var red = "BKWT";
-var blue = "KCXS";
+var blue = "KG3G";
+var red = "GZP1";
 
 function nighttime () {
   Robot.disconnectRobot(red);
