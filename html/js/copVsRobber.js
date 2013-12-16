@@ -34,6 +34,7 @@ var cop = {
       ctx.drawImage(cop.img, x-20, y, 40, 30);
     },
   },
+  pos: 1.3,
 };
 var robber = {
   color: "red",
@@ -51,6 +52,7 @@ var robber = {
       ctx.drawImage(robber.img, x-20, y, 40, 30);
     },
   },
+  pos: 0.7,
 };
 
 var xvstSeries = [
@@ -74,8 +76,8 @@ var posSeries = [
   Object.create(robber),
   Object.create(cop),
 ];
-posSeries[1].data = [[1, cop.start]];
-posSeries[0].data = [[1, robber.start]];
+posSeries[1].data = [[cop.pos, cop.start]];
+posSeries[0].data = [[robber.pos, robber.start]];
 
 // wait for images to load.
 var xvst, pos;
@@ -149,8 +151,8 @@ var iterDemo = (function() {
 
     xvstSeries[0].data = d1;
     xvstSeries[1].data = d2;
-    posSeries[1].data = [[1, y1]];
-    posSeries[0].data = [[1, y2]];
+    posSeries[1].data = [[cop.pos, y1]];
+    posSeries[0].data = [[robber.pos, y2]];
     xvst.setData(xvstSeries);
     pos.setData(posSeries);
     xvst.draw();
