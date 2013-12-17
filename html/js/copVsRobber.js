@@ -2,8 +2,7 @@
 /* -global Robot */
 /* exported runDemo */
 
-(function() {
-
+$(function() {
 "use strict";
 
 var Robot = {};
@@ -226,4 +225,4 @@ window.runDemo = function () {
   }
 };
 
-}());
+});
