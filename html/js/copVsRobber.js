@@ -91,11 +91,11 @@ var xvstSeries = [
 ];
 
 var posSeries = [
-  Object.create(robber),
   Object.create(cop),
+  Object.create(robber),
 ];
-posSeries[1].data = [[cop.pos, cop.start]];
-posSeries[0].data = [[robber.pos, robber.start]];
+posSeries[0].data = [[cop.pos, cop.start]];
+posSeries[1].data = [[robber.pos, robber.start]];
 
 // wait for images to load.
 var xvst, pos;
@@ -172,8 +172,8 @@ var iterDemo = (function() {
     xvstSeries[1].data = d2;
     xvstSeries[2].data = [[iter,y1]];
     xvstSeries[3].data = [[iter,y2]];
-    posSeries[1].data = [[cop.pos, y1]];
-    posSeries[0].data = [[robber.pos, y2]];
+    posSeries[0].data = [[cop.pos, y1]];
+    posSeries[1].data = [[robber.pos, y2]];
     xvst.setData(xvstSeries);
     pos.setData(posSeries);
     xvst.draw();
