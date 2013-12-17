@@ -46,11 +46,7 @@ var cop = {
   data: [],
   speed: 2,
   start: 0,
-  img: (function () {
-    var x = new Image();
-    x.src = "img/cop.jpg";
-    return x;
-    }()),
+  img: (new Image()).update({src: "img/cop.jpg"}),
   points: {
     symbol: function (ctx, x, y) {
       ctx.drawImage(cop.img, x-20, y, 40, 30);
@@ -64,11 +60,7 @@ var robber = {
   data: [],
   speed: 0.5,
   start: 6,
-  img: (function () {
-    var x = new Image();
-    x.src = "img/robber.jpg";
-    return x;
-    }()),
+  img: (new Image()).update({src: "img/robber.jpg"}),
   points: {
     symbol: function (ctx, x, y) {
       ctx.drawImage(robber.img, x-20, y, 40, 30);
@@ -80,18 +72,22 @@ var robber = {
 var xvstSeries = [
   Object.create(cop),
   Object.create(robber),
-  {
-    points: {
-      show: true
-    },
-    data: [[0, cop.start]]
-  },
-  {
-    points: {
-      show: true
-    },
-    data: [[0, robber.start]]
-  },
+  Object.create(cop).update(
+    {
+      points: {
+        show: true
+      },
+      label: null,
+      data: [[0, cop.start]]
+    }),
+  Object.create(robber).update(
+    {
+      points: {
+        show: true
+      },
+      label: null,
+      data: [[0, robber.start]]
+    }),
 ];
 
 var posSeries = [
