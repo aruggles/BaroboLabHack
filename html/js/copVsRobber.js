@@ -91,14 +91,21 @@ var xvstSeries = [
 ];
 
 var posSeries = [
-  Object.create(cop),
-  Object.create(robber),
+  Object.create(cop).update(
+    {
+      data: [[cop.pos, cop.start]],
+      label: null,
+    }),
+  Object.create(robber).update(
+    {
+      data: [[robber.pos, robber.start]],
+      label: null,
+    }),
 ];
-posSeries[0].data = [[cop.pos, cop.start]];
-posSeries[1].data = [[robber.pos, robber.start]];
 
 // wait for images to load.
-var xvst, pos;
+var xvst, pos, ymin = 0, ymax = 14;
+
 setTimeout(function() {
     xvst = $.plot("#xvst", xvstSeries, {
       xaxis: {
@@ -108,8 +115,8 @@ setTimeout(function() {
         tickDecimals: 0,
       },
       yaxis: {
-        min: 0,
-        max: 14,
+        min: ymin,
+        max: ymax,
         tickSize: 2,
         tickDecimals: 0,
       },
@@ -126,8 +133,8 @@ setTimeout(function() {
       },
       yaxis: {
         show: false,
-        min: -2,
-        max: 14,
+        min: ymin,
+        max: ymax,
         tickSize: 2,
         tickDecimals: 0,
       },
