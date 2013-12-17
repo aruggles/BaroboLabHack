@@ -1,10 +1,24 @@
 /* jshint jquery: true */
-/* global Robot */
+/* -global Robot */
 /* exported runDemo */
 
 (function() {
 
 "use strict";
+
+var Robot = {};
+[
+  "connectRobot",
+  "disconnectRobot",
+  "getRobotIDList",
+  "moveNB",
+  "printMessage",
+  "setColorRGB",
+  "setJointSpeeds",
+  "stop",
+].forEach(function (method) {
+  Robot[method] = function () {};
+});
 
 var wheelRadius = 1.75;
 
