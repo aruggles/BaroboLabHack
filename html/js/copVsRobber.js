@@ -5,6 +5,15 @@
 $(function() {
 "use strict";
 
+Object.defineProperty(Object.prototype, "update", {
+  value: function (o) {
+    var that = this;
+    Object.getOwnPropertyNames(o).map(function (k) {
+      that[k] = o[k];
+    });
+    return this;
+}});
+
 var Robot = {};
 [
   "connectRobot",
