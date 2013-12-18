@@ -277,5 +277,6 @@ setTimeout(resetCharts, 100);
 
 $("#demoBtn").click(runDemo);
 $("#resetBtn").click(resetCharts);
+$("#stopBtn").click(stopRobots);
 
 });
