@@ -199,7 +199,7 @@ var iterDemo = (function() {
   return iterDemo;
 })();
 
-window.runDemo = function () {
+var runDemo = function () {
   var intersectGuess = parseFloat($("#guess").val());
   if (!isNaN(intersectGuess)) {
     if (typeof Robot !== 'undefined' && Robot !== null) {
@@ -239,5 +239,7 @@ window.runDemo = function () {
     }
   }
 };
+
+$("#demoBtn").click(runDemo);
 
 });
