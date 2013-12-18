@@ -40,6 +40,8 @@ function nighttime () {
   Robot.stop(blue);
 }
 
+var imgH = 30, imgW = 40;
+
 var cop = {
   color: "blue",
   label: "cop",
@@ -49,7 +51,7 @@ var cop = {
   img: (new Image()).update({src: "img/cop.jpg"}),
   points: {
     symbol: function (ctx, x, y) {
-      ctx.drawImage(cop.img, x-20, y, 40, 30);
+      ctx.drawImage(cop.img, x - imgW/2, y - imgH/2, imgW, imgH);
     },
   },
   pos: 1.3,
@@ -63,7 +65,7 @@ var robber = {
   img: (new Image()).update({src: "img/robber.jpg"}),
   points: {
     symbol: function (ctx, x, y) {
-      ctx.drawImage(robber.img, x-20, y, 40, 30);
+      ctx.drawImage(robber.img, x - imgW/2, y - imgH/2, imgW, imgH);
     },
   },
   pos: 0.7,
