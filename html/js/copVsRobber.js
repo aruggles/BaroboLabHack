@@ -1,5 +1,5 @@
 /* jshint jquery: true */
-/* -global Robot */
+/* global Robot */
 /* exported runDemo */
 
 $(function() {
@@ -21,6 +21,7 @@ Object.defineProperty(Object.prototype, "update", {
 /* Mock Robot object for testing without any robots attached.
  */
 
+/*
 var Robot = {};
 [
   "connectRobot",
@@ -34,6 +35,7 @@ var Robot = {};
 ].forEach(function (method) {
   Robot[method] = function () {};
 });
+*/
 
 /* Declarations.
  */
@@ -41,8 +43,8 @@ var Robot = {};
 var
   /* Constants */
   wheelRadius = 1.75,
-  blue = "KG3G",
-  red = "GZP1",
+  blue = "487J",
+  red = "CZ98",
   imgH = 30, imgW = 40,
   ymin = 0, ymax = 14,
 
@@ -76,19 +78,33 @@ var
     pos: 0.7,
   },
 
-  /* Chart objects */
+  /* IOrefs (mutated globals) */
   xvst, pos,
   xvstSeries, posSeries,
+  loopID,
 
   /* Functions */
-  nighttime = function () {
-    Robot.disconnectRobot(red);
-    Robot.disconnectRobot(blue);
+  stopLoop = function () {
+    if (loopID !== null) {
+      clearTimeout(loopID);
+      loopID = null;
+    }
+  },
+
+  stopRobots = function () {
+    stopLoop();
     Robot.stop(red);
     Robot.stop(blue);
   },
 
+  nighttime = function () {
+    stopRobots();
+    Robot.disconnectRobot(red);
+    Robot.disconnectRobot(blue);
+  },
+
   resetCharts = function () {
+    stopRobots();
     xvstSeries = [
       Object.create(cop),
       Object.create(robber),
@@ -203,10 +219,10 @@ var
       xvst.draw();
       pos.draw();
       if((xstop - iter) > (tolerance)) {
-        setTimeout(iterDemo, timeout);
+        loopID = setTimeout(iterDemo, timeout);
       }
       else {
-        setTimeout(nighttime, timeout+500);
+        loopID = setTimeout(nighttime, timeout+500);
       }
     }
 
