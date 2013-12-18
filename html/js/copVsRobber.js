@@ -240,6 +240,10 @@ var runDemo = function () {
   }
 };
 
+var resetDemo = function () {
+  alert("Butts");
+};
 $("#demoBtn").click(runDemo);
+$("#resetBtn").click(resetDemo);
 
 });
