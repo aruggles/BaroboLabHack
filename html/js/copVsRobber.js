@@ -71,44 +71,46 @@ var robber = {
   pos: 0.7,
 };
 
-var xvstSeries = [
-  Object.create(cop),
-  Object.create(robber),
-  Object.create(cop).update(
-    {
-      points: {
-        show: true
-      },
-      label: null,
-      data: [[0, cop.start]]
-    }),
-  Object.create(robber).update(
-    {
-      points: {
-        show: true
-      },
-      label: null,
-      data: [[0, robber.start]]
-    }),
-];
+var
+  xvst, pos,
+  xvstSeries, posSeries,
+  ymin = 0, ymax = 14;
 
-var posSeries = [
-  Object.create(cop).update(
-    {
-      data: [[cop.pos, cop.start]],
-      label: null,
-    }),
-  Object.create(robber).update(
-    {
-      data: [[robber.pos, robber.start]],
-      label: null,
-    }),
-];
+function resetCharts () {
+    xvstSeries = [
+      Object.create(cop),
+      Object.create(robber),
+      Object.create(cop).update(
+        {
+          points: {
+            show: true
+          },
+          label: null,
+          data: [[0, cop.start]]
+        }),
+      Object.create(robber).update(
+        {
+          points: {
+            show: true
+          },
+          label: null,
+          data: [[0, robber.start]]
+        }),
+    ];
 
-// wait for images to load.
-var xvst, pos, ymin = 0, ymax = 14;
+    posSeries = [
+      Object.create(cop).update(
+        {
+          data: [[cop.pos, cop.start]],
+          label: null,
+        }),
+      Object.create(robber).update(
+        {
+          data: [[robber.pos, robber.start]],
+          label: null,
+        }),
+    ];
 
-setTimeout(function() {
     xvst = $.plot("#xvst", xvstSeries, {
       xaxis: {
         min: 0,
@@ -147,7 +149,7 @@ setTimeout(function() {
         points: { show: true }
       }
     });
-}, 100);
+}
 
 var iterDemo = (function() {
   var iter = 0;
@@ -240,10 +242,9 @@ var runDemo = function () {
   }
 };
 
-var resetDemo = function () {
-  alert("Butts");
-};
+setTimeout(resetCharts, 100);
+
 $("#demoBtn").click(runDemo);
-$("#resetBtn").click(resetDemo);
+$("#resetBtn").click(resetCharts);
 
 });
