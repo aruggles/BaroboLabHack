@@ -5,6 +5,10 @@
 $(function() {
 "use strict";
 
+/* Invasive, unrelated to Barobo, and probably ill-advised mucking with the
+ * global Object object! :D
+ */
+
 Object.defineProperty(Object.prototype, "update", {
   value: function (o) {
     var that = this;
@@ -13,6 +17,9 @@ Object.defineProperty(Object.prototype, "update", {
     });
     return this;
 }});
+
+/* Mock Robot object for testing without any robots attached.
+ */
 
 var Robot = {};
 [
@@ -28,20 +35,17 @@ var Robot = {};
   Robot[method] = function () {};
 });
 
-var wheelRadius = 1.75;
+/* Declarations.
+ */
 
+/* Constants */
+var wheelRadius = 1.75;
 var blue = "KG3G";
 var red = "GZP1";
-
-function nighttime () {
-  Robot.disconnectRobot(red);
-  Robot.disconnectRobot(blue);
-  Robot.stop(red);
-  Robot.stop(blue);
-}
-
 var imgH = 30, imgW = 40;
+var ymin = 0, ymax = 14;
 
+/* Prototype objects */
 var cop = {
   color: "blue",
   label: "cop",
@@ -71,10 +75,17 @@ var robber = {
   pos: 0.7,
 };
 
-var
-  xvst, pos,
-  xvstSeries, posSeries,
-  ymin = 0, ymax = 14;
+/* Chart objects */
+var xvst, pos;
+var xvstSeries, posSeries;
+
+/* Functions */
+function nighttime () {
+  Robot.disconnectRobot(red);
+  Robot.disconnectRobot(blue);
+  Robot.stop(red);
+  Robot.stop(blue);
+}
 
 function resetCharts () {
     xvstSeries = [
@@ -241,6 +252,9 @@ var runDemo = function () {
     }
   }
 };
+
+/* __main__
+ */
 
 setTimeout(resetCharts, 100);
 
