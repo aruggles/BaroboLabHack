@@ -134,19 +134,20 @@ setTimeout(function() {
         tickDecimals: 0,
       },
       yaxis: {
-        show: false,
+        show: true,
         min: ymin,
         max: ymax,
         tickSize: 2,
         tickDecimals: 0,
+        tickFormatter: function() {
+          return "";
+        },
       },
       series: {
         points: { show: true }
       }
     });
 }, 100);
-
-//var pos = $.plot("#pos", posSeries);
 
 var iterDemo = (function() {
   var iter = 0;

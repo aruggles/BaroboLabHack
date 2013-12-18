@@ -108,6 +108,16 @@ body {
   height: 500px;
 }
 
+.xtitle {
+  text-align: center;
+  color: hsl(0, 0%, 35%);
+  display: block;
+}
+
+.flot-y-axis .flot-tick-label {
+  left: -8% !important;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
