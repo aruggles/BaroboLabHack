@@ -50,7 +50,7 @@ var
   blue = "4V21",
   red = "CZ98",
   imgH = 30, imgW = 40,
-  ymin = 0, ymax = 14,
+  ymin = -2, ymax = 12,
 
   /* Prototype objects */
   cop = {
@@ -58,7 +58,7 @@ var
     label: "cop",
     data: [],
     speed: 2,
-    start: 0,
+    start: -2,
     img: (new Image()).update({src: "img/cop.jpg"}),
     points: {
       symbol: function (ctx, x, y) {
@@ -72,7 +72,7 @@ var
     label: "robber",
     data: [],
     speed: 0.5,
-    start: 6,
+    start: 4,
     img: (new Image()).update({src: "img/robber.jpg"}),
     points: {
       symbol: function (ctx, x, y) {
@@ -144,6 +144,9 @@ var
     ];
 
     xvst = $.plot("#xvst", xvstSeries, {
+      grid: {
+        markings: [ { linewidth: 1, yaxis: { from: 0, to: 0 }, color: "#8A8A8A" } ],
+      },
       xaxis: {
         min: 0,
         max: 10,
@@ -159,6 +162,9 @@ var
     });
 
     pos = $.plot("#pos", posSeries, {
+      grid: {
+        markings: [ { linewidth: 1, yaxis: { from: 0, to: 0 }, color: "#8A8A8A" } ],
+      },
       xaxis: {
         show: false,
         reserveSpace: true,
