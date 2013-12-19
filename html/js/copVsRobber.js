@@ -107,6 +107,53 @@ var
     Robot.disconnectRobot(blue);
   },
 
+  plotCharts = function (xvsts, poss) {
+    xvst = $.plot("#xvst", xvsts, {
+      grid: {
+        markings: [ { linewidth: 1, yaxis: { from: 0, to: 0 }, color: "#8A8A8A" } ],
+      },
+      xaxis: {
+        min: 0,
+        max: 10,
+        tickSize: 1,
+        tickDecimals: 0,
+      },
+      yaxis: {
+        min: ymin,
+        max: ymax,
+        tickSize: 2,
+        tickDecimals: 0,
+      },
+    });
+
+    pos = $.plot("#pos", poss, {
+      grid: {
+        markings: [ { linewidth: 1, yaxis: { from: 0, to: 0 }, color: "#8A8A8A" } ],
+      },
+      xaxis: {
+        show: false,
+        reserveSpace: true,
+        min: 0,
+        max: 2,
+        tickSize: 1,
+        tickDecimals: 0,
+      },
+      yaxis: {
+        show: true,
+        min: ymin,
+        max: ymax,
+        tickSize: 2,
+        tickDecimals: 0,
+        tickFormatter: function() {
+          return "";
+        },
+      },
+      series: {
+        points: { show: true }
+      }
+    });
+  },
+
   resetCharts = function () {
     stopRobots();
     xvstSeries = [
@@ -143,50 +190,7 @@ var
         }),
     ];
 
-    xvst = $.plot("#xvst", xvstSeries, {
-      grid: {
-        markings: [ { linewidth: 1, yaxis: { from: 0, to: 0 }, color: "#8A8A8A" } ],
-      },
-      xaxis: {
-        min: 0,
-        max: 10,
-        tickSize: 1,
-        tickDecimals: 0,
-      },
-      yaxis: {
-        min: ymin,
-        max: ymax,
-        tickSize: 2,
-        tickDecimals: 0,
-      },
-    });
-
-    pos = $.plot("#pos", posSeries, {
-      grid: {
-        markings: [ { linewidth: 1, yaxis: { from: 0, to: 0 }, color: "#8A8A8A" } ],
-      },
-      xaxis: {
-        show: false,
-        reserveSpace: true,
-        min: 0,
-        max: 2,
-        tickSize: 1,
-        tickDecimals: 0,
-      },
-      yaxis: {
-        show: true,
-        min: ymin,
-        max: ymax,
-        tickSize: 2,
-        tickDecimals: 0,
-        tickFormatter: function() {
-          return "";
-        },
-      },
-      series: {
-        points: { show: true }
-      }
-    });
+    plotCharts(xvstSeries, posSeries);
   },
 
   iterDemo = (function() {
@@ -288,5 +292,6 @@ setTimeout(resetCharts, 100);
 $("#demoBtn").click(runDemo);
 $("#resetBtn").click(resetCharts);
 $("#stopBtn").click(stopRobots);
+$(window).resize(function () { plotCharts(xvstSeries, posSeries); });
 
 });
