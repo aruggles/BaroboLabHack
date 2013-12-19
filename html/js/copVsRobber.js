@@ -47,8 +47,8 @@ else {
 var
   /* Constants */
   wheelRadius = 1.75,
-  blue = "487J",
-  red = "BKWT",
+  blue = "4V21",
+  red = "CZ98",
   imgH = 30, imgW = 40,
   ymin = 0, ymax = 14,
 
