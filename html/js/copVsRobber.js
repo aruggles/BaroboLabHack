@@ -1,5 +1,5 @@
 /* jshint jquery: true */
-/* global Robot */
+/* -global Robot */
 /* exported runDemo */
 
 $(function() {
@@ -21,7 +21,6 @@ Object.defineProperty(Object.prototype, "update", {
 /* Mock Robot object for testing without any robots attached.
  */
 
-/*
 var Robot = {};
 [
   "connectRobot",
@@ -35,7 +34,6 @@ var Robot = {};
 ].forEach(function (method) {
   Robot[method] = function () {};
 });
-*/
 
 /* Declarations.
  */
