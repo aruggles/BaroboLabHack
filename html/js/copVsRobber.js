@@ -21,19 +21,25 @@ Object.defineProperty(Object.prototype, "update", {
 /* Mock Robot object for testing without any robots attached.
  */
 
-var Robot = {};
-[
-  "connectRobot",
-  "disconnectRobot",
-  "getRobotIDList",
-  "moveNB",
-  "printMessage",
-  "setColorRGB",
-  "setJointSpeeds",
-  "stop",
-].forEach(function (method) {
-  Robot[method] = function () {};
-});
+var Robot;
+if (typeof window.Robot === "undefined") {
+  Robot = {};
+  [
+    "connectRobot",
+    "disconnectRobot",
+    "getRobotIDList",
+    "moveNB",
+    "printMessage",
+    "setColorRGB",
+    "setJointSpeeds",
+    "stop",
+  ].forEach(function (method) {
+    Robot[method] = function () {};
+  });
+}
+else {
+  Robot = window.Robot;
+}
 
 /* Declarations.
  */
@@ -42,7 +48,7 @@ var
   /* Constants */
   wheelRadius = 1.75,
   blue = "487J",
-  red = "CZ98",
+  red = "BKWT",
   imgH = 30, imgW = 40,
   ymin = 0, ymax = 14,
 
