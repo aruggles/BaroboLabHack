@@ -15,12 +15,10 @@
       <li><a href="page3.html">Section 6.1</a></li>
       <li><a href="copVsRobber.html">Cops vs. Robbers</a></li>
       <li><a href="page4.html">Lab Setup</a></li>
-      <li class="active">Prediction</li>
+      <li><a href="prediction.html">Prediction</a></li>
+      <li class="active">Try It Out</li>
     </ol>
-    <h2>Prediction</h2>
-    <p>Suppose the <font color="blue">cop</font> Linkbot starts at position
-    -2 and the <font color="red">robber</font> Linkbot starts at position 4.
-    </p>
+    <h2>Try it out</h2>
     <div class="row chartRow">
       <figure class="col-xs-3">
         <figcaption>Position</figcaption>
@@ -33,15 +31,10 @@
       </figure>
     </div>
 
-    <p>The cop Linkbot travels at two meters per second (2 m/s), and the
-    robber Linkbot travels at half a meter per second (0.5 m/s).
-    <i>When</i> does cop catch the robber?
-    </p>
-    <br>
     Intersect after: <input id="guess" type="text" name="intersect"> seconds<br>
-    <button type="button" id="demoBtn">Next</button>
-    <button type="button" id="resetBtn">Reset</button>
-    <button type="button" id="stopBtn">STOP!</button>
+    <button class="btn btn-default" type="button" id="demoBtn">Retry</button>
+    <button class="btn btn-info" type="button" id="resetBtn">Reset</button>
+    <button class="btn btn-danger" type="button" id="stopBtn">STOP!</button>
     <script src="js/vendor/jquery-1.10.2.min.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/flot/jquery.flot.js"></script>

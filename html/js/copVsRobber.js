@@ -52,6 +52,20 @@ var
   imgH = 30, imgW = 40,
   ymin = -2, ymax = 12,
 
+  /* Query parameters */
+
+  // Code courtesy Github: http://goo.gl/vtSdBK
+  qs = (function(a) {
+    if (a === "") { return {}; }
+    var b = {};
+    for (var i = 0; i < a.length; ++i) {
+      var p=a[i].split('=');
+      if (p.length !== 2) { continue; }
+      b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    return b;
+    })(window.location.search.substr(1).split('&')),
+
   /* Prototype objects */
   cop = {
     color: "blue",
@@ -289,6 +303,11 @@ var
 
 setTimeout(resetCharts, 100);
 
+if (parseInt(qs.intersect)) {
+  setTimeout(runDemo, 200);
+}
+
+$("#guess").val(qs.intersect);
 $("#demoBtn").click(runDemo);
 $("#resetBtn").click(resetCharts);
 $("#stopBtn").click(stopRobots);
