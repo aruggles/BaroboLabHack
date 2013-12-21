@@ -35,4 +35,5 @@ target_link_libraries(${TARGET} ${BAROBO})
 qt5_use_modules(${TARGET} Widgets Network WebKitWidgets)
 
 install(TARGETS ${TARGET} RUNTIME DESTINATION bin)
+install(DIRECTORY html DESTINATION share/BaroboLabHack)
 
