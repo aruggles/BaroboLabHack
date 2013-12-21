@@ -99,19 +99,36 @@ textarea {
 
 
 
+body {
+  /*font-size: 3ex;*/
+}
 
+.chart {
+  width: 100%;
+  height: 500px;
+}
 
+.xtitle {
+  text-align: center;
+  color: hsl(0, 0%, 35%);
+  display: block;
+}
 
+#xvst .flot-y-axis .flot-tick-label {
+  left: -8% !important;
+}
 
+.overviewPics img {
+  height: 240px;
+  width: 320px;
+}
 
+.overviewPics .stepDescr {
+}
 
-
-
-
-
-
-
-
+table img {
+  border: 1px solid black;
+}
 
 /* ==========================================================================
    Helper classes

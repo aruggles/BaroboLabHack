@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BaroboLab - DEMO</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <!-- Using 'lead' is a hack to make the text bigger without ruining
+  line-height etc. -->
+  <body class="container">
+    <h1>BaroboLab</h1>
+    <ol class="breadcrumb">
+      <li><a href="page2.html">Chapter 6</a></li>
+      <li><a href="page3.html">Section 6.1</a></li>
+      <li><a href="copVsRobber.html">Cops vs. Robbers</a></li>
+      <li><a href="page4.html">Lab Setup</a></li>
+      <li><a href="prediction.html">Prediction</a></li>
+      <li class="active">Charts</li>
+    </ol>
+    <h2>Charts</h2>
+    <div class="row chartRow">
+      <figure class="col-xs-3">
+        <figcaption>Position</figcaption>
+        <div id="pos" class="chart"></div>
+      </figure>
+      <figure class="col-xs-8 col-xs-offset-1">
+        <figcaption>Position vs. Time</figcaption>
+        <div id="xvst" class="chart"></div>
+        <small class="xtitle">time (s)</small>
+      </figure>
+    </div>
+
+    Intersect after: <input id="guess" type="text" name="intersect"> seconds<br>
+    <button class="btn btn-default" type="button" id="demoBtn">Retry</button>
+    <button class="btn btn-info" type="button" id="resetBtn">Reset</button>
+    <button class="btn btn-danger" type="button" id="stopBtn">STOP!</button>
+    <a href="equations.html" class="pull-right btn btn-primary btn-lg">Next</a>
+    <script src="js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/flot/jquery.flot.js"></script>
+    <script src="js/copVsRobber.js"></script>
+  </body>
+</html>
