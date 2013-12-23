@@ -6,3 +6,7 @@ Info.plist
 
 
 Makefile
+moc_jsinterface.cpp
+moc_mainwindow.cpp
+qrc_jquery.cpp
+fancybrowser
