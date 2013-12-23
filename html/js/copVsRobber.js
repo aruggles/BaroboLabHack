@@ -73,7 +73,7 @@ var
     data: [],
     speed: 2,
     start: -2,
-    img: (new Image()).update({src: "img/cop.jpg"}),
+    img: (new Image()).update({src: "img/cop.png"}),
     points: {
       symbol: function (ctx, x, y) {
         ctx.drawImage(cop.img, x - imgW/2, y - imgH/2, imgW, imgH);
@@ -87,7 +87,7 @@ var
     data: [],
     speed: 0.5,
     start: 4,
-    img: (new Image()).update({src: "img/robber.jpg"}),
+    img: (new Image()).update({src: "img/robber.png"}),
     points: {
       symbol: function (ctx, x, y) {
         ctx.drawImage(robber.img, x - imgW/2, y - imgH/2, imgW, imgH);
