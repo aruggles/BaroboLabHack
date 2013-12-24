@@ -238,7 +238,6 @@ var
         d2 = [[0, robber.start]];
       }
       iter = iter + step;
-      Robot.printMessage(iter);
       y1 = cop.speed * iter + cop.start;
       y2 = robber.speed * iter + robber.start;
       d1.push([iter, y1]);
