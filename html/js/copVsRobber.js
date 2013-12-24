@@ -205,6 +205,8 @@ var
     ];
 
     plotCharts(xvstSeries, posSeries);
+    $("#guess").attr("disabled", false);
+    $("#demoBtn").attr("disabled", false);
   },
 
   iterDemo = (function() {
@@ -296,6 +298,8 @@ var
         iterDemo(intersectGuess);
       }
     }
+    $("#guess").attr("disabled", true);
+    $("#demoBtn").attr("disabled", true);
   };
 
 /* __main__
