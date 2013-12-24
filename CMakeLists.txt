@@ -3,7 +3,29 @@
 
 cmake_minimum_required(VERSION 2.8.9)
 
-project(BAROBOLAB)
+project(BaroboLab)
+
+set(VERSION_MAJOR 0)
+set(VERSION_MINOR 0)
+set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR})
+
+if(CMAKE_HOST_WIN32)
+  set(DEF_INSTALL_BIN_DIR "${PROJECT_NAME} ${VERSION}")
+  set(DEF_INSTALL_SHARE_DIR ${DEF_INSTALL_BIN_DIR})
+else()
+  set(DEF_INSTALL_BIN_DIR bin)
+  set(DEF_INSTALL_SHARE_DIR share/${PROJECT_NAME})
+endif()
+
+set(INSTALL_BIN_DIR ${DEF_INSTALL_BIN_DIR}
+  CACHE PATH "binary installation directory")
+set(INSTALL_SHARE_DIR ${DEF_INSTALL_SHARE_DIR}
+  CACHE PATH "data installation directory")
+
+##############################################################################
+# Content
+
+install(DIRECTORY html DESTINATION ${INSTALL_SHARE_DIR})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -33,27 +55,27 @@ add_executable(${TARGET} ${SOURCES} ${RESOURCES})
 target_link_libraries(${TARGET} ${BAROBO})
 qt5_use_modules(${TARGET} Widgets Network WebKitWidgets)
 
-install(TARGETS ${TARGET} RUNTIME DESTINATION bin)
-install(DIRECTORY html DESTINATION share/BaroboLabHack)
+install(TARGETS ${TARGET} RUNTIME DESTINATION ${INSTALL_BIN_DIR})
 
-# Include required Qt libraries at install-time.
-set(APPS "\${CMAKE_INSTALL_PREFIX}/bin/${TARGET}")
-set(DIRS ${QT_LIBRARY_DIR})
-install(CODE "
-  include(BundleUtilities)
-  fixup_bundle(\"${APPS}\" \"\" \"${DIRS}\")")
+# Include required libraries at install-time. This is the Windows way.
+if(CMAKE_HOST_WIN32)
+  set(APPS "\${CMAKE_INSTALL_PREFIX}/${INSTALL_BIN_DIR}/${TARGET}")
+  set(DIRS ${QT_LIBRARY_DIR})
+  install(CODE "
+    include(BundleUtilities)
+    fixup_bundle(\"${APPS}\" \"\" \"${DIRS}\")")
+endif()
 
 ##############################################################################
 
-include(CPack)
 include(InstallRequiredSystemLibraries)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "BaroboLab")
 set(CPACK_PACKAGE_NAME "BaroboLab")
 set(CPACK_PACKAGE_VENDOR "Barobo, inc.")
 #set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt")
 #set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt")
-#set(CPACK_PACKAGE_VERSION_MAJOR "1")
-#set(CPACK_PACKAGE_VERSION_MINOR "3")
+set(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
 #set(CPACK_PACKAGE_VERSION_PATCH "2")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "BaroboLab")
 if(WIN32 AND NOT UNIX)
@@ -71,3 +93,4 @@ else(WIN32 AND NOT UNIX)
   #set(CPACK_SOURCE_STRIP_FILES "")
 endif(WIN32 AND NOT UNIX)
 set(CPACK_PACKAGE_EXECUTABLES "BaroboLab" "BaroboLab")
+include(CPack)
