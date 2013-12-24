@@ -270,12 +270,12 @@ var
         Robot.setColorRGB(red, 255, 0, 0);
         Robot.setColorRGB(blue, 0, 0, 255);
 
-        var redfunc = function(x) {
-          return robber.speed * x + robber.start;
+        var redfunc = function(t) {
+          return robber.speed * t + robber.start;
         };
 
-        var bluefunc = function(x) {
-          return cop.speed * x + cop.start;
+        var bluefunc = function(t) {
+          return cop.speed * t + cop.start;
         };
 
         var xstart = 0;
