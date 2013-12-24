@@ -67,7 +67,12 @@ var
     })(window.location.search.substr(1).split('&')),
 
   /* Prototype objects */
-  cop = {
+  robot = {
+    posFn: function(t) {
+      return this.speed * t + this.start;
+    },
+  },
+  cop = Object.create(robot).update({
     color: "blue",
     label: "cop",
     data: [],
@@ -80,8 +85,8 @@ var
       },
     },
     pos: 1.3,
-  },
-  robber = {
+  }),
+  robber = Object.create(robot).update({
     color: "red",
     label: "robber",
     data: [],
@@ -94,7 +99,8 @@ var
       },
     },
     pos: 0.7,
-  },
+
+  }),
 
   /* IOrefs (mutated globals) */
   xvst, pos,
@@ -270,19 +276,11 @@ var
         Robot.setColorRGB(red, 255, 0, 0);
         Robot.setColorRGB(blue, 0, 0, 255);
 
-        var redfunc = function(t) {
-          return robber.speed * t + robber.start;
-        };
-
-        var bluefunc = function(t) {
-          return cop.speed * t + cop.start;
-        };
-
         var xstart = 0;
         var xstop = intersectGuess;
 
-        var reddist = redfunc(xstop) - redfunc(xstart);
-        var bluedist = bluefunc(xstop) - bluefunc(xstart);
+        var reddist = robber.posFn(xstop) - robber.posFn(xstart);
+        var bluedist = cop.posFn(xstop) - cop.posFn(xstart);
 
         var redradians = reddist / wheelRadius;
         var blueradians = bluedist / wheelRadius;
