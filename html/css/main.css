@@ -130,7 +130,7 @@ table img {
   border: 1px solid black;
 }
 
-.index img {
+img.textbook {
   width: 400px;
   vertical-align: top;
 }
