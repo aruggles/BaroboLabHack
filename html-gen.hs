@@ -25,6 +25,8 @@ boilerplate navlist content = do
             script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
             script ! src "js/vendor/bootstrap.min.js" $ mempty
 
+genHtml (file, html) = writeFile file $ renderHtml html
+
 index = boilerplate
     (ol ! class_ "nav nav-stacked nav-pills"
         $ li ! class_ "active"
@@ -80,8 +82,9 @@ section6_1 = boilerplate
         li ! class_ "disabled" $ a ! href "#" $ "Slow Runners vs. Fast Runners"
     )
 
-main = do
-    writeFile "html/index.html" $ renderHtml index
-    writeFile "html/holt.html" $ renderHtml holt
-    writeFile "html/chap6.html" $ renderHtml chap6
-    writeFile "html/section6-1.html" $ renderHtml section6_1
+main = mapM_ genHtml [
+    ("html/index.html", index)
+    , ("html/holt.html", holt)
+    , ("html/chap6.html", chap6)
+    , ("html/section6-1.html", section6_1)
+    ]
