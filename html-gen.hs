@@ -33,4 +33,40 @@ index = do
             script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
             script ! src "js/vendor/bootstrap.min.js" $ mempty
 
-main = writeFile "html/index.html" $ renderHtml index
+
+holt :: Html
+holt = do
+    docType
+    -- [if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]
+    -- [if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]
+    -- [if IE 8]>         <html class="no-js lt-ie9"> <![endif]
+    -- [if gt IE 8]><!
+    html ! class_ "no-js" $ do
+        -- <![endif]
+        H.head $ do
+            meta ! charset "utf-8"
+            meta ! httpEquiv "X-UA-Compatible" ! content "IE=edge"
+            H.title "BaroboLab - DEMO"
+            meta ! name "description" ! content ""
+            meta ! name "viewport" ! content "width=device-width, initial-scale=1"
+            --  Place favicon.ico and apple-touch-icon.png in the root directory 
+            link ! rel "stylesheet" ! href "css/bootstrap.min.css"
+            link ! rel "stylesheet" ! href "css/main.css"
+            script ! src "js/vendor/modernizr-2.6.2.min.js" $ mempty
+        body $ do
+            header $ img ! src "img/barobo_logo.png"
+            nav $ ol ! class_ "nav nav-stacked nav-pills" $ do
+                li $ a ! href "index.html" $ "BaroboLab"
+                li ! class_ "active" $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+            section $ ul ! class_ "nav nav-stacked nav-pills" $ do
+                li ! class_ "disabled" $ a ! href "#" $ "Chapter 1"
+                li ! class_ "disabled" $ a ! href "#" $ "Chapter 2"
+                li ! class_ "disabled" $ a ! href "#" $ "Chapter 3"
+                li ! class_ "disabled" $ a ! href "#" $ "Chapter 4"
+                li ! class_ "disabled" $ a ! href "#" $ "Chapter 5"
+                li $ a ! href "chap6.html" $ "Chapter 6"
+
+
+main = do
+    writeFile "html/index.html" $ renderHtml index
+    writeFile "html/holt.html" $ renderHtml holt
