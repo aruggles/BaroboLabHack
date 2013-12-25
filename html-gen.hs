@@ -21,7 +21,7 @@ boilerplate navlist content = do
         body $ do
             header $ a ! href "index.html" $ img ! src "img/barobo_logo.png"
             nav navlist
-            section content
+            section ! class_ "container" $ content
             script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
             script ! src "js/vendor/bootstrap.min.js" $ mempty
 
