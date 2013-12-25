@@ -25,33 +25,33 @@ boilerplate navlist content = do
             script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
             script ! src "js/vendor/bootstrap.min.js" $ mempty
 
-indexNav = ol ! class_ "nav nav-stacked nav-pills"
-                $ li ! class_ "active"
-                $ a ! href "index.html" $ "BaroboLab"
-
-indexContent = do
-  a ! href "holt.html"
-      $ img ! class_ "textbook btn btn-default"
-            ! A.id "holt_img" ! src "img/holt_california.png"
-  a ! href "#"
-      $ img ! class_ "textbook btn btn-default disabled"
-            ! src "img/ca_common_core.png"
-
-index = boilerplate indexNav indexContent
+index = boilerplate
+    (ol ! class_ "nav nav-stacked nav-pills"
+        $ li ! class_ "active"
+        $ a ! href "index.html" $ "BaroboLab"
+    )
+    (do
+        a ! href "holt.html"
+            $ img ! class_ "textbook btn btn-default"
+                  ! A.id "holt_img" ! src "img/holt_california.png"
+        a ! href "#"
+            $ img ! class_ "textbook btn btn-default disabled"
+                  ! src "img/ca_common_core.png"
+    )
 
 holt = boilerplate
-            (ol ! class_ "nav nav-stacked nav-pills" $ do
-                li $ a ! href "index.html" $ "BaroboLab"
-                li ! class_ "active" $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-            )
-            (ol ! class_ "nav nav-stacked nav-pills" $ do
-                li ! class_ "disabled" $ a ! href "#" $ "Chapter 1"
-                li ! class_ "disabled" $ a ! href "#" $ "Chapter 2"
-                li ! class_ "disabled" $ a ! href "#" $ "Chapter 3"
-                li ! class_ "disabled" $ a ! href "#" $ "Chapter 4"
-                li ! class_ "disabled" $ a ! href "#" $ "Chapter 5"
-                li $ a ! href "chap6.html" $ "Chapter 6"
-            )
+    (ol ! class_ "nav nav-stacked nav-pills" $ do
+        li $ a ! href "index.html" $ "BaroboLab"
+        li ! class_ "active" $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    )
+    (ol ! class_ "nav nav-stacked nav-pills" $ do
+        li ! class_ "disabled" $ a ! href "#" $ "Chapter 1"
+        li ! class_ "disabled" $ a ! href "#" $ "Chapter 2"
+        li ! class_ "disabled" $ a ! href "#" $ "Chapter 3"
+        li ! class_ "disabled" $ a ! href "#" $ "Chapter 4"
+        li ! class_ "disabled" $ a ! href "#" $ "Chapter 5"
+        li $ a ! href "chap6.html" $ "Chapter 6"
+    )
 
 
 main = do
