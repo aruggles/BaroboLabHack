@@ -21,10 +21,15 @@ index = do
             link ! rel "stylesheet" ! href "css/main.css"
         body $ do
             header $ a ! href "index.html" $ img ! src "img/barobo_logo.png"
-            nav $ ol ! class_ "nav nav-stacked nav-pills" $ li ! class_ "active" $ a ! href "index.html" $ "BaroboLab"
+            nav $ ol ! class_ "nav nav-stacked nav-pills"
+                $ li ! class_ "active"
+                $ a ! href "index.html" $ "BaroboLab"
             section $ do
-                a ! href "holt.html" $ img ! class_ "textbook btn btn-default" ! A.id "holt_img" ! src "img/holt_california.png"
-                a ! href "#" $ img ! class_ "textbook btn btn-default disabled" ! src "img/ca_common_core.png"
+                a ! href "holt.html"
+                  $ img ! class_ "textbook btn btn-default"
+                        ! A.id "holt_img" ! src "img/holt_california.png"
+                a ! href "#" $ img ! class_ "textbook btn btn-default disabled"
+                  ! src "img/ca_common_core.png"
             script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
             script ! src "js/vendor/bootstrap.min.js" $ mempty
 
