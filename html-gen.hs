@@ -67,7 +67,38 @@ chap6 = boilerplate
         li ! class_ "disabled" $ a ! href "#" $ "6.5"
     )
 
+section6_1 = do
+    docType
+    -- [if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]
+    -- [if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]
+    -- [if IE 8]>         <html class="no-js lt-ie9"> <![endif]
+    -- [if gt IE 8]><!
+    html ! class_ "no-js" $ do
+        -- <![endif]
+        H.head $ do
+            meta ! charset "utf-8"
+            meta ! httpEquiv "X-UA-Compatible" ! content "IE=edge"
+            H.title "BaroboLab - DEMO"
+            meta ! name "description" ! content ""
+            meta ! name "viewport" ! content "width=device-width, initial-scale=1"
+            --  Place favicon.ico and apple-touch-icon.png in the root directory 
+            link ! rel "stylesheet" ! href "css/bootstrap.min.css"
+            link ! rel "stylesheet" ! href "css/main.css"
+            script ! src "js/vendor/modernizr-2.6.2.min.js" $ mempty
+        body $ do
+            header $ img ! src "img/barobo_logo.png"
+            nav $ ol ! class_ "nav nav-stacked nav-pills" $ do
+                li $ a ! href "index.html" $ "BaroboLab"
+                li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+                li $ a ! href "chap6.html" $ "Chapter 6"
+                li ! class_ "active" $ a ! href "#" $ "Section 6.1"
+            section $ ul ! class_ "nav nav-stacked nav-pills" $ do
+                li ! class_ "disabled" $ a ! href "#" $ "x vs. t"
+                li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+                li ! class_ "disabled" $ a ! href "#" $ "Slow Runners vs. Fast Runners"
+
 main = do
     writeFile "html/index.html" $ renderHtml index
     writeFile "html/holt.html" $ renderHtml holt
     writeFile "html/chap6.html" $ renderHtml chap6
+    writeFile "html/section6-1.html" $ renderHtml section6_1
