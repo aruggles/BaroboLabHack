@@ -82,24 +82,18 @@ section6_1 = boilerplate
         li ! class_ "disabled" $ a ! href "#" $ "Slow Runners vs. Fast Runners"
     )
 
-copVsRobber = do
-    docTypeHtml $ do
-        H.head $ do
-            H.title "BaroboLab - DEMO"
-            meta ! httpEquiv "Content-Type" ! content "text/html; charset=utf-8"
-            link ! rel "stylesheet" ! href "css/bootstrap.css"
-            link ! rel "stylesheet" ! href "css/main.css"
-        body $ do
-            header $ img ! src "img/barobo_logo.png"
-            nav $ ol ! class_ "nav nav-stacked nav-pills" $ do
-                li $ a ! href "index.html" $ "BaroboLab"
-                li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-                li $ a ! href "chap6.html" $ "Chapter 6"
-                li $ a ! href "section6-1.html" $ "Section 6.1"
-                li ! class_ "active" $ a ! href "#" $ "Cops vs. Robbers"
-            section ! class_ "container" $ do
-                a ! href "page4.html" ! class_ "btn btn-primary btn-block btn-lg" $ "Run Lab"
-                a ! href "lab_overview.html" ! class_ "btn btn-info btn-block" $ "View overview"
+copVsRobber = boilerplate
+    (ol ! class_ "nav nav-stacked nav-pills" $ do
+        li $ a ! href "index.html" $ "BaroboLab"
+        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+        li $ a ! href "chap6.html" $ "Chapter 6"
+        li $ a ! href "section6-1.html" $ "Section 6.1"
+        li ! class_ "active" $ a ! href "#" $ "Cops vs. Robbers"
+    )
+    (do
+        a ! href "page4.html" ! class_ "btn btn-primary btn-block btn-lg" $ "Run Lab"
+        a ! href "lab_overview.html" ! class_ "btn btn-info btn-block" $ "View overview"
+    )
 
 
 main = mapM_ genHtml [
