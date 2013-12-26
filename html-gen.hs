@@ -95,37 +95,30 @@ copVsRobber = boilerplate
         a ! href "lab_overview.html" ! class_ "btn btn-info btn-block" $ "View overview"
     )
 
-lab_overview = do
-    docTypeHtml $ do
-        H.head $ do
-            H.title "BaroboLab - DEMO"
-            meta ! httpEquiv "Content-Type" ! content "text/html; charset=utf-8"
-            link ! rel "stylesheet" ! href "css/bootstrap.css"
-            link ! rel "stylesheet" ! href "css/main.css"
-        body ! class_ "container" $ do
-            h1 "BaroboLab"
-            ol ! class_ "breadcrumb" $ do
-                li $ a ! href "chap6.html" $ "Chapter 6"
-                li $ a ! href "section6-1.html" $ "Section 6.1"
-                li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-                li ! class_ "active" $ "Overview"
-            h2 "Overview"
-            table ! class_ "table table-striped overviewPics" $ do
-                tr $ do
-                    td $ img ! src "img/labsetup.png"
-                    td $ H.div ! class_ "stepDescr" $ "Set up the lab."
-                tr $ do
-                    td $ img ! src "img/prediction.png"
-                    td $ H.div ! class_ "stepDescr" $ "Read the question and introduce the charts. After entering a guess, press Next."
-                tr $ do
-                    td $ img ! src "img/charts.png"
-                    td $ H.div ! class_ "stepDescr" $ "The robots will advance. The charts can be reset and students can\n          guess again!"
-                tr $ do
-                    td $ img ! src "img/equations.png"
-                    td $ H.div ! class_ "stepDescr" $ "Now you'll do things with equations, I guess."
-            a ! class_ "btn btn-default" ! href "page4.html" $ "Go to first step"
-            script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
-            script ! src "js/vendor/bootstrap.min.js" $ mempty
+lab_overview = boilerplate
+    (ol ! class_ "nav nav-stacked nav-pills" $ do
+        li $ a ! href "chap6.html" $ "Chapter 6"
+        li $ a ! href "section6-1.html" $ "Section 6.1"
+        li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+        li ! class_ "active" $ "Overview"
+    )
+    (do
+        h2 "Overview"
+        table ! class_ "table table-striped overviewPics" $ do
+            tr $ do
+                td $ img ! src "img/labsetup.png"
+                td $ H.div ! class_ "stepDescr" $ "Set up the lab."
+            tr $ do
+                td $ img ! src "img/prediction.png"
+                td $ H.div ! class_ "stepDescr" $ "Read the question and introduce the charts. After entering a guess, press Next."
+            tr $ do
+                td $ img ! src "img/charts.png"
+                td $ H.div ! class_ "stepDescr" $ "The robots will advance. The charts can be reset and students can\n          guess again!"
+            tr $ do
+                td $ img ! src "img/equations.png"
+                td $ H.div ! class_ "stepDescr" $ "Now you'll do things with equations, I guess."
+        a ! class_ "btn btn-default" ! href "page4.html" $ "Go to first step"
+    )
 
 main = mapM_ genHtml [
     ("html/index.html", index)
