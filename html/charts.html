@@ -1,86 +1,94 @@
 <!DOCTYPE HTML>
 
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>
             BaroboLab - DEMO
         </title>
-        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
-    <body class="container">
-        <h1>
-            BaroboLab
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <a href="chap6.html">
-                    Chapter 6
-                </a>
-            </li>
-            <li>
-                <a href="section6-1.html">
-                    Section 6.1
-                </a>
-            </li>
-            <li>
-                <a href="copVsRobber.html">
-                    Cops vs. Robbers
-                </a>
-            </li>
-            <li>
-                <a href="page4.html">
-                    Lab Setup
-                </a>
-            </li>
-            <li>
-                <a href="prediction.html">
-                    Prediction
-                </a>
-            </li>
-            <li class="active">
+    <body>
+        <header>
+            <a href="index.html">
+                <img src="img/barobo_logo.png">
+            </a>
+        </header>
+        <nav>
+            <ol class="nav nav-stacked nav-pills">
+                <li>
+                    <a href="index.html">
+                        BaroboLab
+                    </a>
+                </li>
+                <li>
+                    <a href="holt.html">
+                        <img src="img/holt_california.png">
+                    </a>
+                </li>
+                <li>
+                    <a href="chap6.html">
+                        Chapter 6
+                    </a>
+                </li>
+                <li>
+                    <a href="section6-1.html">
+                        Section 6.1
+                    </a>
+                </li>
+                <li>
+                    <a href="copVsRobber.html">
+                        Cops vs. Robbers
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">
+                        Charts
+                    </a>
+                </li>
+            </ol>
+        </nav>
+        <section class="container">
+            <h2>
                 Charts
-            </li>
-        </ol>
-        <h2>
-            Charts
-        </h2>
-        <div class="row chartRow">
-            <figure class="col-xs-3">
-                <figcaption>
-                    Position
-                </figcaption>
-                <div id="pos" class="chart">
-                </div>
-            </figure>
-            <figure class="col-xs-8 col-xs-offset-1">
-                <figcaption>
-                    Position vs. Time
-                </figcaption>
-                <div id="xvst" class="chart">
-                </div>
-                <small class="xtitle">
-                    time (s)
-                </small>
-            </figure>
-        </div>
-        Intersect after:
-        <input id="guess" type="text" name="intersect">
-        seconds
-        <br>
-        <button class="btn btn-default" type="button" id="demoBtn">
-            Retry
-        </button>
-        <button class="btn btn-info" type="button" id="resetBtn">
-            Reset
-        </button>
-        <button class="btn btn-danger" type="button" id="stopBtn">
-            STOP!
-        </button>
-        <a href="equations.html" class="pull-right btn btn-primary btn-lg">
-            Next
-        </a>
+            </h2>
+            <div class="row chartRow">
+                <figure class="col-xs-3">
+                    <figcaption>
+                        Position
+                    </figcaption>
+                    <div id="pos" class="chart">
+                    </div>
+                </figure>
+                <figure class="col-xs-8 col-xs-offset-1">
+                    <figcaption>
+                        Position vs. Time
+                    </figcaption>
+                    <div id="xvst" class="chart">
+                    </div>
+                    <small class="xtitle">
+                        time (s)
+                    </small>
+                </figure>
+            </div>
+            Intersect after:
+            <input id="guess" type="text" name="intersect">
+            seconds
+            <br>
+            <button class="btn btn-default" type="button" id="demoBtn">
+                Retry
+            </button>
+            <button class="btn btn-info" type="button" id="resetBtn">
+                Reset
+            </button>
+            <button class="btn btn-danger" type="button" id="stopBtn">
+                STOP!
+            </button>
+            <a href="equations.html" class="pull-right btn btn-primary btn-lg">
+                Next
+            </a>
+        </section>
         <script src="js/vendor/jquery-1.10.2.min.js">
         </script>
         <script src="js/vendor/bootstrap.min.js">
