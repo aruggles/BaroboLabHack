@@ -97,10 +97,12 @@ copVsRobber = boilerplate
 
 lab_overview = boilerplate
     (ol ! class_ "nav nav-stacked nav-pills" $ do
+        li $ a ! href "index.html" $ "BaroboLab"
+        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
         li $ a ! href "chap6.html" $ "Chapter 6"
         li $ a ! href "section6-1.html" $ "Section 6.1"
         li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-        li ! class_ "active" $ "Overview"
+        li ! class_ "active" $ a ! href "#" $ "Lab Overview"
     )
     (do
         h2 "Overview"
@@ -110,10 +112,14 @@ lab_overview = boilerplate
                 td $ H.div ! class_ "stepDescr" $ "Set up the lab."
             tr $ do
                 td $ img ! src "img/prediction.png"
-                td $ H.div ! class_ "stepDescr" $ "Read the question and introduce the charts. After entering a guess, press Next."
+                td $ H.div ! class_ "stepDescr"
+                    $ toHtml ("Read the question and introduce the charts. After "
+                        ++ "entering a guess, press Next." :: String)
             tr $ do
                 td $ img ! src "img/charts.png"
-                td $ H.div ! class_ "stepDescr" $ "The robots will advance. The charts can be reset and students can\n          guess again!"
+                td $ H.div ! class_ "stepDescr"
+                    $ toHtml ("The barfs robots will advance. The charts can be reset "
+                        ++ "and students can guess again!" :: String)
             tr $ do
                 td $ img ! src "img/equations.png"
                 td $ H.div ! class_ "stepDescr" $ "Now you'll do things with equations, I guess."
