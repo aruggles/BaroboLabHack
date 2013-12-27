@@ -126,6 +126,47 @@ lab_overview = boilerplate
         a ! class_ "btn btn-default" ! href "page4.html" $ "Go to first step"
     )
 
+charts = do
+    docTypeHtml $ do
+        H.head $ do
+            meta ! charset "utf-8"
+            H.title "BaroboLab - DEMO"
+            link ! rel "stylesheet" ! href "css/bootstrap.css"
+            link ! rel "stylesheet" ! href "css/main.css"
+        --  Using 'lead' is a hack to make the text bigger without ruining
+        --   line-height etc. 
+        body ! class_ "container" $ do
+            h1 "BaroboLab"
+            ol ! class_ "breadcrumb" $ do
+                li $ a ! href "chap6.html" $ "Chapter 6"
+                li $ a ! href "section6-1.html" $ "Section 6.1"
+                li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+                li $ a ! href "page4.html" $ "Lab Setup"
+                li $ a ! href "prediction.html" $ "Prediction"
+                li ! class_ "active" $ "Charts"
+            h2 "Charts"
+            H.div ! class_ "row chartRow" $ do
+                figure ! class_ "col-xs-3" $ do
+                    figcaption "Position"
+                    H.div ! A.id "pos" ! class_ "chart" $ mempty
+                figure ! class_ "col-xs-8 col-xs-offset-1" $ do
+                    figcaption "Position vs. Time"
+                    H.div ! A.id "xvst" ! class_ "chart" $ mempty
+                    small ! class_ "xtitle" $ "time (s)"
+            "Intersect after:"
+            input ! A.id "guess" ! type_ "text" ! name "intersect"
+            "seconds"
+            br
+            button ! class_ "btn btn-default" ! type_ "button" ! A.id "demoBtn" $ "Retry"
+            button ! class_ "btn btn-info" ! type_ "button" ! A.id "resetBtn" $ "Reset"
+            button ! class_ "btn btn-danger" ! type_ "button" ! A.id "stopBtn" $ "STOP!"
+            a ! href "equations.html" ! class_ "pull-right btn btn-primary btn-lg" $ "Next"
+            script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
+            script ! src "js/vendor/bootstrap.min.js" $ mempty
+            script ! src "js/flot/jquery.flot.js" $ mempty
+            script ! src "js/copVsRobber.js" $ mempty
+
+
 main = mapM_ genHtml [
     ("html/index.html", index)
     , ("html/holt.html", holt)
@@ -133,4 +174,5 @@ main = mapM_ genHtml [
     , ("html/section6-1.html", section6_1)
     , ("html/copVsRobber.html", copVsRobber)
     , ("html/lab_overview.html", lab_overview)
+    , ("html/charts.html", charts)
     ]
