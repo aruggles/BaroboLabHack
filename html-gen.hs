@@ -49,8 +49,7 @@ index = boilerplate'
     )
 
 holt = boilerplate'
-    [ li $ a ! href "index.html" $ "BaroboLab"
-    , li ! class_ "active" $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    [ li ! class_ "active" $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     ]
     (ol ! class_ "nav nav-stacked nav-pills" $ do
         li ! class_ "disabled" $ a ! href "#" $ "Chapter 1"
@@ -62,8 +61,7 @@ holt = boilerplate'
     )
 
 chap6 = boilerplate'
-    [ li $ a ! href "index.html" $ "BaroboLab"
-    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li ! class_ "active" $ a ! href "#" $ "Chapter 6"
     ]
     (ul ! class_ "nav nav-stacked nav-pills" $ do
@@ -75,8 +73,7 @@ chap6 = boilerplate'
     )
 
 section6_1 = boilerplate'
-    [ li $ a ! href "index.html" $ "BaroboLab"
-    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li ! class_ "active" $ a ! href "#" $ "Section 6.1"
     ]
@@ -87,8 +84,7 @@ section6_1 = boilerplate'
     )
 
 copVsRobber = boilerplate'
-    [ li $ a ! href "index.html" $ "BaroboLab"
-    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
     , li ! class_ "active" $ a ! href "#" $ "Cops vs. Robbers"
@@ -99,8 +95,7 @@ copVsRobber = boilerplate'
     )
 
 lab_overview = boilerplate'
-    [ li $ a ! href "index.html" $ "BaroboLab"
-    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
     , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
@@ -129,8 +124,7 @@ lab_overview = boilerplate'
     )
 
 charts = boilerplate
-    [ li $ a ! href "index.html" $ "BaroboLab"
-    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
     , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
@@ -157,8 +151,7 @@ charts = boilerplate
     ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
 
 page4 = boilerplate'
-    [ li $ a ! href "index.html" $ "BaroboLab"
-    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
     , hr
@@ -175,8 +168,7 @@ page4 = boilerplate'
     )
 
 prediction = boilerplate'
-    [ li $ a ! href "index.html" $ "BaroboLab"
-    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
     , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
@@ -204,8 +196,7 @@ prediction = boilerplate'
     )
 
 equations = boilerplate'
-    [ li $ a ! href "index.html" $ "BaroboLab"
-    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
     , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
