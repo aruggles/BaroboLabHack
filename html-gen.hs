@@ -212,6 +212,30 @@ prediction = boilerplate'
           input ! class_ "btn btn-primary" ! type_ "submit" ! value "Next"
     )
 
+equations = do
+    docTypeHtml $ do
+        H.head $ do
+            meta ! charset "utf-8"
+            H.title "BaroboLab - DEMO"
+            link ! rel "stylesheet" ! href "css/bootstrap.css"
+            link ! rel "stylesheet" ! href "css/main.css"
+        --  Using 'lead' is a hack to make the text bigger without ruining
+        --   line-height etc. 
+        body ! class_ "container" $ do
+            h1 "BaroboLab"
+            ol ! class_ "breadcrumb" $ do
+                li $ a ! href "chap6.html" $ "Chapter 6"
+                li $ a ! href "section6-1.html" $ "Section 6.1"
+                li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+                li $ a ! href "page4.html" $ "Lab Setup"
+                li $ a ! href "prediction.html" $ "Prediction"
+                li $ a ! href "charts.html" $ "Charts"
+                li ! class_ "active" $ "Equations"
+            h2 "Equations"
+            "Blah blah blah..."
+            script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
+            script ! src "js/vendor/bootstrap.min.js" $ mempty
+
 
 main = mapM_ genHtml [
     ("html/index.html", index)
@@ -223,4 +247,5 @@ main = mapM_ genHtml [
     , ("html/charts.html", charts)
     , ("html/page4.html", page4)
     , ("html/prediction.html", prediction)
+    , ("html/equations.html", equations)
     ]
