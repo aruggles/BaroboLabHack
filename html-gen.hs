@@ -179,6 +179,43 @@ page4 = boilerplate'
             img ! src "img/setup.png" ! A.style "width:1024px; height:768px;"
         )
 
+prediction = do
+    docTypeHtml $ do
+        H.head $ do
+            meta ! charset "utf-8"
+            H.title "BaroboLab - DEMO"
+            link ! rel "stylesheet" ! href "css/bootstrap.css"
+            link ! rel "stylesheet" ! href "css/main.css"
+        --  Using 'lead' is a hack to make the text bigger without ruining
+        --   line-height etc. 
+        body ! class_ "container" $ do
+            h1 "BaroboLab"
+            ol ! class_ "breadcrumb" $ do
+                li $ a ! href "chap6.html" $ "Chapter 6"
+                li $ a ! href "section6-1.html" $ "Section 6.1"
+                li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+                li $ a ! href "page4.html" $ "Lab Setup"
+                li ! class_ "active" $ "Prediction"
+            h2 "Prediction"
+            p $ do
+                "Suppose the"
+                H.span ! A.style "color: blue" $ "cop"
+                "Linkbot starts at position\n      -2 and the"
+                H.span ! A.style "color: red" $ "robber"
+                "Linkbot starts at position 4."
+            p $ do
+                "The cop Linkbot travels at two meters per second (2 m/s), and the\n      robber Linkbot travels at half a meter per second (0.5 m/s)."
+                i "When"
+                "does cop catch the robber?"
+            br
+            H.form ! action "charts.html" $ do
+                H.div ! class_ "form-group" $ do
+                    H.label ! for "guess" $ "Intersect at:"
+                    input ! class_ "form-control" ! type_ "text" ! name "intersect" ! placeholder "time in seconds"
+                input ! class_ "btn btn-primary" ! type_ "submit" ! value "Next"
+        script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
+        script ! src "js/vendor/bootstrap.min.js" $ mempty
+
 
 main = mapM_ genHtml [
     ("html/index.html", index)
@@ -189,4 +226,5 @@ main = mapM_ genHtml [
     , ("html/lab_overview.html", lab_overview)
     , ("html/charts.html", charts)
     , ("html/page4.html", page4)
+    , ("html/prediction.html", prediction)
     ]
