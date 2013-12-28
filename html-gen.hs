@@ -32,6 +32,9 @@ boilerplate' n c = boilerplate n c []
 
 genHtml (file, html) = writeFile file $ renderHtml html
 
+str :: String -> Html
+str = toHtml
+
 index = boilerplate'
     (ol ! class_ "nav nav-stacked nav-pills"
         $ li ! class_ "active"
@@ -118,13 +121,13 @@ lab_overview = boilerplate'
             tr $ do
                 td $ img ! src "img/prediction.png"
                 td $ H.div ! class_ "stepDescr"
-                    $ toHtml ("Read the question and introduce the charts. After "
-                        ++ "entering a guess, press Next." :: String)
+                    $ str $ "Read the question and introduce the charts. After "
+                        ++ "entering a guess, press Next."
             tr $ do
                 td $ img ! src "img/charts.png"
                 td $ H.div ! class_ "stepDescr"
-                    $ toHtml ("The barfs robots will advance. The charts can be reset "
-                        ++ "and students can guess again!" :: String)
+                    $ str $ "The barfs robots will advance. The charts can be reset "
+                        ++ "and students can guess again!"
             tr $ do
                 td $ img ! src "img/equations.png"
                 td $ H.div ! class_ "stepDescr" $ "Now you'll do things with equations, I guess."
@@ -161,60 +164,53 @@ charts = boilerplate
     ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
 
 page4 = boilerplate'
-        (ol ! class_ "nav nav-stacked nav-pills" $ do
-            li $ a ! href "index.html" $ "BaroboLab"
-            li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-            li $ a ! href "chap6.html" $ "Chapter 6"
-            li $ a ! href "section6-1.html" $ "Section 6.1"
-            hr
-            li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-            li ! class_ "active" $ a ! href "#" $ "Setup"
-            hr
-            li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
-        )
-        (section ! class_ "container" $ do
-            p "To run this curriculum application, please setup the robots according to the following image."
-            a ! href "prediction.html" ! class_ "btn btn-large btn-primary" $ "Next"
-            br
-            img ! src "img/setup.png" ! A.style "width:1024px; height:768px;"
-        )
+    (ol ! class_ "nav nav-stacked nav-pills" $ do
+        li $ a ! href "index.html" $ "BaroboLab"
+        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+        li $ a ! href "chap6.html" $ "Chapter 6"
+        li $ a ! href "section6-1.html" $ "Section 6.1"
+        hr
+        li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+        li ! class_ "active" $ a ! href "#" $ "Setup"
+        hr
+        li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
+    )
+    (do
+        p "To run this curriculum application, please setup the robots according to the following image."
+        a ! href "prediction.html" ! class_ "btn btn-large btn-primary" $ "Next"
+        br
+        img ! src "img/setup.png" ! A.style "width:1024px; height:768px;"
+    )
 
-prediction = do
-    docTypeHtml $ do
-        H.head $ do
-            meta ! charset "utf-8"
-            H.title "BaroboLab - DEMO"
-            link ! rel "stylesheet" ! href "css/bootstrap.css"
-            link ! rel "stylesheet" ! href "css/main.css"
-        --  Using 'lead' is a hack to make the text bigger without ruining
-        --   line-height etc. 
-        body ! class_ "container" $ do
-            h1 "BaroboLab"
-            ol ! class_ "breadcrumb" $ do
-                li $ a ! href "chap6.html" $ "Chapter 6"
-                li $ a ! href "section6-1.html" $ "Section 6.1"
-                li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-                li $ a ! href "page4.html" $ "Lab Setup"
-                li ! class_ "active" $ "Prediction"
-            h2 "Prediction"
-            p $ do
-                "Suppose the"
-                H.span ! A.style "color: blue" $ "cop"
-                "Linkbot starts at position\n      -2 and the"
-                H.span ! A.style "color: red" $ "robber"
-                "Linkbot starts at position 4."
-            p $ do
-                "The cop Linkbot travels at two meters per second (2 m/s), and the\n      robber Linkbot travels at half a meter per second (0.5 m/s)."
-                i "When"
-                "does cop catch the robber?"
-            br
-            H.form ! action "charts.html" $ do
-                H.div ! class_ "form-group" $ do
-                    H.label ! for "guess" $ "Intersect at:"
-                    input ! class_ "form-control" ! type_ "text" ! name "intersect" ! placeholder "time in seconds"
-                input ! class_ "btn btn-primary" ! type_ "submit" ! value "Next"
-        script ! src "js/vendor/jquery-1.10.2.min.js" $ mempty
-        script ! src "js/vendor/bootstrap.min.js" $ mempty
+prediction = boilerplate'
+    (ol ! class_ "nav nav-stacked nav-pills" $ do
+        li $ a ! href "index.html" $ "BaroboLab"
+        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+        li $ a ! href "chap6.html" $ "Chapter 6"
+        li $ a ! href "section6-1.html" $ "Section 6.1"
+        li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+        li ! class_ "active" $ a ! href "#" $ "Prediction"
+    )
+    (do
+      p $ do
+          "Suppose the"
+          H.span ! A.style "color: blue" $ "cop"
+          "Linkbot starts at position\n      -2 and the"
+          H.span ! A.style "color: red" $ "robber"
+          "Linkbot starts at position 4."
+      p $ do
+          str $ "The cop Linkbot travels at two meters per second (2 m/s), and "
+            ++ "the robber Linkbot travels at half a meter per second (0.5 "
+            ++ "m/s)."
+          i "When"
+          "does cop catch the robber?"
+      br
+      H.form ! action "charts.html" $ do
+          H.div ! class_ "form-group" $ do
+              H.label ! for "guess" $ "Intersect at:"
+              input ! class_ "form-control" ! type_ "text" ! name "intersect" ! placeholder "time in seconds"
+          input ! class_ "btn btn-primary" ! type_ "submit" ! value "Next"
+    )
 
 
 main = mapM_ genHtml [
