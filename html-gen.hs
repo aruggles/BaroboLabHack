@@ -24,7 +24,7 @@ boilerplate navlist content scripts =
             link ! rel "stylesheet" ! href "css/main.css"
         body $ do
             header $ a ! href "index.html" $ img ! src "img/barobo_logo.png"
-            nav navlist
+            nav $ ol ! class_ "nav nav-stacked nav-pills" $ sequence_ navlist
             section ! class_ "container" $ content
             scripts'
 
@@ -36,10 +36,9 @@ str :: String -> Html
 str = toHtml
 
 index = boilerplate'
-    (ol ! class_ "nav nav-stacked nav-pills"
-        $ li ! class_ "active"
+    [li ! class_ "active"
         $ a ! href "index.html" $ "BaroboLab"
-    )
+    ]
     (do
         a ! href "holt.html"
             $ img ! class_ "textbook btn btn-default"
@@ -50,10 +49,9 @@ index = boilerplate'
     )
 
 holt = boilerplate'
-    (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "index.html" $ "BaroboLab"
-        li ! class_ "active" $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-    )
+    [ li $ a ! href "index.html" $ "BaroboLab"
+    , li ! class_ "active" $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    ]
     (ol ! class_ "nav nav-stacked nav-pills" $ do
         li ! class_ "disabled" $ a ! href "#" $ "Chapter 1"
         li ! class_ "disabled" $ a ! href "#" $ "Chapter 2"
@@ -64,11 +62,10 @@ holt = boilerplate'
     )
 
 chap6 = boilerplate'
-    (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "index.html" $ "BaroboLab"
-        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-        li ! class_ "active" $ a ! href "#" $ "Chapter 6"
-    )
+    [ li $ a ! href "index.html" $ "BaroboLab"
+    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    , li ! class_ "active" $ a ! href "#" $ "Chapter 6"
+    ]
     (ul ! class_ "nav nav-stacked nav-pills" $ do
         li $ a ! href "section6-1.html" $ "6.1"
         li ! class_ "disabled" $ a ! href "#" $ "6.2"
@@ -78,12 +75,11 @@ chap6 = boilerplate'
     )
 
 section6_1 = boilerplate'
-    (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "index.html" $ "BaroboLab"
-        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-        li $ a ! href "chap6.html" $ "Chapter 6"
-        li ! class_ "active" $ a ! href "#" $ "Section 6.1"
-    )
+    [ li $ a ! href "index.html" $ "BaroboLab"
+    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    , li $ a ! href "chap6.html" $ "Chapter 6"
+    , li ! class_ "active" $ a ! href "#" $ "Section 6.1"
+    ]
     (ul ! class_ "nav nav-stacked nav-pills" $ do
         li ! class_ "disabled" $ a ! href "#" $ "x vs. t"
         li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
@@ -91,27 +87,25 @@ section6_1 = boilerplate'
     )
 
 copVsRobber = boilerplate'
-    (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "index.html" $ "BaroboLab"
-        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-        li $ a ! href "chap6.html" $ "Chapter 6"
-        li $ a ! href "section6-1.html" $ "Section 6.1"
-        li ! class_ "active" $ a ! href "#" $ "Cops vs. Robbers"
-    )
+    [ li $ a ! href "index.html" $ "BaroboLab"
+    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    , li $ a ! href "chap6.html" $ "Chapter 6"
+    , li $ a ! href "section6-1.html" $ "Section 6.1"
+    , li ! class_ "active" $ a ! href "#" $ "Cops vs. Robbers"
+    ]
     (do
         a ! href "page4.html" ! class_ "btn btn-primary btn-block btn-lg" $ "Run Lab"
         a ! href "lab_overview.html" ! class_ "btn btn-info btn-block" $ "View overview"
     )
 
 lab_overview = boilerplate'
-    (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "index.html" $ "BaroboLab"
-        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-        li $ a ! href "chap6.html" $ "Chapter 6"
-        li $ a ! href "section6-1.html" $ "Section 6.1"
-        li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-        li ! class_ "active" $ a ! href "#" $ "Lab Overview"
-    )
+    [ li $ a ! href "index.html" $ "BaroboLab"
+    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    , li $ a ! href "chap6.html" $ "Chapter 6"
+    , li $ a ! href "section6-1.html" $ "Section 6.1"
+    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li ! class_ "active" $ a ! href "#" $ "Lab Overview"
+    ]
     (do
         h2 "Overview"
         table ! class_ "table table-striped overviewPics" $ do
@@ -135,14 +129,13 @@ lab_overview = boilerplate'
     )
 
 charts = boilerplate
-    (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "index.html" $ "BaroboLab"
-        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-        li $ a ! href "chap6.html" $ "Chapter 6"
-        li $ a ! href "section6-1.html" $ "Section 6.1"
-        li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-        li ! class_ "active" $ a ! href "#" $ "Charts"
-    )
+    [ li $ a ! href "index.html" $ "BaroboLab"
+    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    , li $ a ! href "chap6.html" $ "Chapter 6"
+    , li $ a ! href "section6-1.html" $ "Section 6.1"
+    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li ! class_ "active" $ a ! href "#" $ "Charts"
+    ]
     (do
         H.div ! class_ "row chartRow" $ do
             figure ! class_ "col-xs-3" $ do
@@ -164,17 +157,16 @@ charts = boilerplate
     ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
 
 page4 = boilerplate'
-    (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "index.html" $ "BaroboLab"
-        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-        li $ a ! href "chap6.html" $ "Chapter 6"
-        li $ a ! href "section6-1.html" $ "Section 6.1"
-        hr
-        li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-        li ! class_ "active" $ a ! href "#" $ "Setup"
-        hr
-        li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
-    )
+    [ li $ a ! href "index.html" $ "BaroboLab"
+    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    , li $ a ! href "chap6.html" $ "Chapter 6"
+    , li $ a ! href "section6-1.html" $ "Section 6.1"
+    , hr
+    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li ! class_ "active" $ a ! href "#" $ "Setup"
+    , hr
+    , li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
+    ]
     (do
         p "To run this curriculum application, please setup the robots according to the following image."
         a ! href "prediction.html" ! class_ "btn btn-large btn-primary" $ "Next"
@@ -183,14 +175,13 @@ page4 = boilerplate'
     )
 
 prediction = boilerplate'
-    (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "index.html" $ "BaroboLab"
-        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-        li $ a ! href "chap6.html" $ "Chapter 6"
-        li $ a ! href "section6-1.html" $ "Section 6.1"
-        li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-        li ! class_ "active" $ a ! href "#" $ "Prediction"
-    )
+    [ li $ a ! href "index.html" $ "BaroboLab"
+    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    , li $ a ! href "chap6.html" $ "Chapter 6"
+    , li $ a ! href "section6-1.html" $ "Section 6.1"
+    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li ! class_ "active" $ a ! href "#" $ "Prediction"
+    ]
     (do
       p $ do
           "Suppose the"
@@ -213,14 +204,13 @@ prediction = boilerplate'
     )
 
 equations = boilerplate'
-    (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "index.html" $ "BaroboLab"
-        li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-        li $ a ! href "chap6.html" $ "Chapter 6"
-        li $ a ! href "section6-1.html" $ "Section 6.1"
-        li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-        li ! class_ "active" $ a ! href "#" $ "Equations"
-    )
+    [ li $ a ! href "index.html" $ "BaroboLab"
+    , li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    , li $ a ! href "chap6.html" $ "Chapter 6"
+    , li $ a ! href "section6-1.html" $ "Section 6.1"
+    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li ! class_ "active" $ a ! href "#" $ "Equations"
+    ]
     ("Blah blah blah...")
 
 
