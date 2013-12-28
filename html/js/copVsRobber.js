@@ -78,7 +78,7 @@ var
     data: [],
     speed: 2,
     start: -2,
-    img: (new Image()).update({src: "img/cop.png"}),
+    imgSrc: "img/cop.png",
     points: {
       symbol: function (ctx, x, y) {
         ctx.drawImage(cop.img, x - imgW/2, y - imgH/2, imgW, imgH);
@@ -92,7 +92,7 @@ var
     data: [],
     speed: 0.5,
     start: 4,
-    img: (new Image()).update({src: "img/robber.png"}),
+    imgSrc: "img/robber.png",
     points: {
       symbol: function (ctx, x, y) {
         ctx.drawImage(robber.img, x - imgW/2, y - imgH/2, imgW, imgH);
@@ -300,13 +300,18 @@ var
   };
 
 /* __main__
+ *
+ * eff yeah, cps
  */
 
-setTimeout(resetCharts, 100);
-
-if (parseInt(qs.intersect)) {
-  setTimeout(runDemo, 200);
-}
+cop.img = $("<img />").attr('src', cop.imgSrc).load( function () {
+    robber.img = $("<img />").attr('src', robber.imgSrc).load( function () {
+      resetCharts();
+      if (parseInt(qs.intersect)) {
+        runDemo();
+      }
+    })[0];
+  })[0];
 
 $("#guess").val(qs.intersect);
 $("#demoBtn").click(runDemo);
