@@ -160,43 +160,24 @@ charts = boilerplate
     )
     ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
 
-page4 = do
-    docType
-    -- [if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]
-    -- [if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]
-    -- [if IE 8]>         <html class="no-js lt-ie9"> <![endif]
-    -- [if gt IE 8]><!
-    html ! class_ "no-js" $ do
-        -- <![endif]
-        H.head $ do
-            meta ! charset "utf-8"
-            meta ! httpEquiv "X-UA-Compatible" ! content "IE=edge"
-            H.title "BaroboLab - DEMO"
-            meta ! name "description" ! content ""
-            meta ! name "viewport" ! content "width=device-width, initial-scale=1"
-            --  Place favicon.ico and apple-touch-icon.png in the root directory 
-            link ! rel "stylesheet" ! href "css/bootstrap.min.css"
-            link ! rel "stylesheet" ! href "css/main.css"
-            script ! src "js/vendor/modernizr-2.6.2.min.js" $ mempty
-        body $ do
-            nav $ do
-                header $ img ! src "img/barobo_logo.png"
-                ol ! class_ "nav nav-stacked nav-pills" $ do
-                    li $ a ! href "index.html" $ "BaroboLab"
-                    li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-                    li $ a ! href "chap6.html" $ "Chapter 6"
-                    li $ a ! href "section6-1.html" $ "Section 6.1"
-                    hr
-                    li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
-                    li ! class_ "active" $ a ! href "#" $ "Setup"
-                    hr
-                    li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
-            section ! class_ "container" $ do
-                h2 "Lab Setup"
-                p "To run this curriculum application, please setup the robots according to the following image."
-                a ! href "prediction.html" ! class_ "btn btn-large btn-primary" $ "Next"
-                br
-                img ! src "img/setup.png" ! A.style "width:1024px; height:768px;"
+page4 = boilerplate'
+        (ol ! class_ "nav nav-stacked nav-pills" $ do
+            li $ a ! href "index.html" $ "BaroboLab"
+            li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+            li $ a ! href "chap6.html" $ "Chapter 6"
+            li $ a ! href "section6-1.html" $ "Section 6.1"
+            hr
+            li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+            li ! class_ "active" $ a ! href "#" $ "Setup"
+            hr
+            li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
+        )
+        (section ! class_ "container" $ do
+            p "To run this curriculum application, please setup the robots according to the following image."
+            a ! href "prediction.html" ! class_ "btn btn-large btn-primary" $ "Next"
+            br
+            img ! src "img/setup.png" ! A.style "width:1024px; height:768px;"
+        )
 
 
 main = mapM_ genHtml [
