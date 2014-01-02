@@ -32,13 +32,8 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt5Core)
 
-find_path(BAROBO_INC mobot.h HINTS ${LIBBAROBO_INCLUDE_DIRS})
-include_directories(${BAROBO_INC})
-if(TARGET barobo)
-  set(BAROBO barobo)
-else()
-  find_library(BAROBO barobo)
-endif()
+find_package(LIBBAROBO)
+include_directories(${LIBBAROBO_INCLUDE_DIRS})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -52,7 +47,7 @@ qt5_add_resources(RESOURCES jquery.qrc)
 set(SOURCES main.cpp mainwindow.cpp jsinterface.cpp)
 
 add_executable(${TARGET} ${SOURCES} ${RESOURCES})
-target_link_libraries(${TARGET} ${BAROBO})
+target_link_libraries(${TARGET} ${LIBBAROBO_LIBRARIES})
 qt5_use_modules(${TARGET} Widgets Network WebKitWidgets)
 
 install(TARGETS ${TARGET} RUNTIME DESTINATION ${INSTALL_BIN_DIR})
