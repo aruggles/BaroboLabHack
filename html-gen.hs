@@ -32,8 +32,35 @@ boilerplate' n c = boilerplate n c []
 
 genHtml (file, html) = writeFile file $ renderHtml html
 
+-- | Coerce that squirrely string literal
 str :: String -> Html
 str = toHtml
+
+labNavHdr =
+    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
+    , li $ a ! href "chap6.html" $ "Chapter 6"
+    , li $ a ! href "section6-1.html" $ "Section 6.1"
+    , hr
+    ]
+
+labNavFtr =
+    [ hr
+    , li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
+    ]
+
+labNav, labNavInner :: String -> [Html]
+
+labNavInner title =
+    [ li $ a ! href "setup.html" $ "Cops vs. Robbers"
+    , li ! class_ "active" $ a ! href "#" $ toHtml title
+    ]
+
+labNav title =
+    labNavHdr ++
+    (labNavInner title) ++
+    labNavFtr
+
+labOverviewNav = labNavHdr ++ (labNavInner "Overview")
 
 index = boilerplate'
     -- Keep space for the nav on other pages
@@ -83,7 +110,7 @@ section6_1 = boilerplate'
     )
 
 lab_overview = boilerplate'
-    (labNav "Lab Overview")
+    labOverviewNav
     (do
         h2 "Overview"
         table ! class_ "table table-striped overviewPics" $ do
@@ -127,18 +154,6 @@ charts = boilerplate
         a ! href "equations.html" ! class_ "pull-right btn btn-primary btn-lg" $ "Next"
     )
     ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
-
-labNav :: String -> [Html]
-labNav title =
-    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-    , li $ a ! href "chap6.html" $ "Chapter 6"
-    , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , hr
-    , li $ a ! href "#" $ "Cops vs. Robbers"
-    , li ! class_ "active" $ a ! href "#" $ toHtml title
-    , hr
-    , li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
-    ]
 
 setup = boilerplate'
     (labNav "Setup")
