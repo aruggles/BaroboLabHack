@@ -92,7 +92,9 @@ chap6 = boilerplate'
     , li ! class_ "active" $ a ! href "#" $ "Chapter 6"
     ]
     (ul ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "section6-1.html" $ "6.1"
+        li $ a ! href "section6-1.html" $ do
+            "6.1"
+            small $ "(Common Core 5.1)"
         li ! class_ "disabled" $ a ! href "#" $ "6.2"
         li ! class_ "disabled" $ a ! href "#" $ "6.3"
         li ! class_ "disabled" $ a ! href "#" $ "6.4"
