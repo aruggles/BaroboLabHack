@@ -194,11 +194,6 @@ prediction = boilerplate'
       a ! href "setup.html" ! class_ "btn btn-default" $ "Back"
     )
 
-equations = boilerplate'
-    (labNav "Equations")
-    ("Blah blah blah...")
-
-
 main = mapM_ genHtml [
     ("html/index.html", index)
     , ("html/holt.html", holt)
@@ -208,5 +203,4 @@ main = mapM_ genHtml [
     , ("html/charts.html", charts)
     , ("html/setup.html", setup)
     , ("html/prediction.html", prediction)
-    , ("html/equations.html", equations)
     ]
