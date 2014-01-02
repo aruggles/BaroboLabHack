@@ -246,7 +246,11 @@ QString MainWindow::getRobotIDList () {
     qFatal("(barobolab) ERROR: Mobot_queryAddresses failed\n");
   }
 
+#ifdef _WIN32
+  Sleep(1000);
+#else
   sleep(1);
+#endif
 
   mobotInfo_t* mobotInfo = nullptr;
   int numScanned = 0;
