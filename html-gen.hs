@@ -145,16 +145,18 @@ charts = boilerplate
                 figcaption "Position vs. Time"
                 H.div ! A.id "xvst" ! class_ "chart" $ mempty
                 small ! class_ "xtitle" $ "time (s)"
-        "Intersect after:"
-        input ! A.id "guess" ! type_ "text" ! name "intersect"
-        "seconds"
-        H.div $ do
-            button ! class_ "btn btn-default" ! type_ "button" ! A.id "demoBtn" $ "Retry"
-            button ! class_ "btn btn-info" ! type_ "button" ! A.id "resetBtn" $ "Reset"
-            button ! class_ "btn btn-danger" ! type_ "button" ! A.id "stopBtn" $ "STOP!"
-        H.div $ do
-            a ! class_ "btn btn-default" ! href "prediction.html" $ "Back"
-            a ! href "equations.html" ! class_ "pull-right btn btn-primary" $ "Next"
+        H.form $ do
+          H.div ! class_ "form-group" $ do
+              H.label ! for "intersect" $ "Intersect after:"
+              input ! A.id "guess" ! type_ "text" ! name "intersect"
+              "seconds"
+          H.div ! class_ "form-group" $ do
+              button ! class_ "btn btn-default" ! type_ "button" ! A.id "demoBtn" $ "Retry"
+              button ! class_ "btn btn-info" ! type_ "button" ! A.id "resetBtn" $ "Reset"
+              button ! class_ "btn btn-danger" ! type_ "button" ! A.id "stopBtn" $ "STOP!"
+          H.div $ do
+              a ! class_ "btn btn-default" ! href "prediction.html" $ "Back"
+              a ! href "equations.html" ! class_ "pull-right btn btn-primary" $ "Next"
     )
     ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
 
