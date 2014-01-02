@@ -162,7 +162,8 @@ img.fullContent {
 }
 
 nav + section.container {
-  width: 85%;
+  width: 80%;
+  float: right;
 }
 
 nav.app > a > img {
@@ -175,9 +176,8 @@ nav hr.hdr {
 }
 
 nav hr.ftr {
-  margin-bottom: 0px;
+  margin-bottom: -5px;
 }
-
 
 /* ==========================================================================
    Helper classes

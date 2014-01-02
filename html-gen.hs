@@ -135,7 +135,7 @@ lab_overview = boilerplate'
     )
 
 charts = boilerplate
-    (labNav "Charts")
+    (labNav "Guess")
     (do
         H.div ! class_ "row chartRow" $ do
             figure ! class_ "col-xs-3" $ do
@@ -148,11 +148,13 @@ charts = boilerplate
         "Intersect after:"
         input ! A.id "guess" ! type_ "text" ! name "intersect"
         "seconds"
-        br
-        button ! class_ "btn btn-default" ! type_ "button" ! A.id "demoBtn" $ "Retry"
-        button ! class_ "btn btn-info" ! type_ "button" ! A.id "resetBtn" $ "Reset"
-        button ! class_ "btn btn-danger" ! type_ "button" ! A.id "stopBtn" $ "STOP!"
-        a ! href "equations.html" ! class_ "pull-right btn btn-primary btn-lg" $ "Next"
+        H.div $ do
+            button ! class_ "btn btn-default" ! type_ "button" ! A.id "demoBtn" $ "Retry"
+            button ! class_ "btn btn-info" ! type_ "button" ! A.id "resetBtn" $ "Reset"
+            button ! class_ "btn btn-danger" ! type_ "button" ! A.id "stopBtn" $ "STOP!"
+        H.div $ do
+            a ! class_ "btn btn-default" ! href "prediction.html" $ "Back"
+            a ! href "equations.html" ! class_ "pull-right btn btn-primary" $ "Next"
     )
     ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
 
@@ -161,9 +163,9 @@ setup = boilerplate'
     (do
         p $ str $ "To run this curriculum application, please setup the "
             ++ "robots according to the following image."
-        a ! href "prediction.html" ! class_ "btn btn-large btn-primary" $ "Next"
-        br
         img ! src "img/setup.png" ! class_ "center-block fullContent"
+        a ! href "prediction.html"
+          ! class_ "pull-right btn btn-large btn-primary" $ "Next"
     )
 
 prediction = boilerplate'
@@ -179,14 +181,15 @@ prediction = boilerplate'
           str $ "The cop Linkbot travels at two meters per second (2 m/s), and "
             ++ "the robber Linkbot travels at half a meter per second (0.5 "
             ++ "m/s)."
-          i "When"
-          "does cop catch the robber?"
-      br
       H.form ! action "charts.html" $ do
           H.div ! class_ "form-group" $ do
-              H.label ! for "guess" $ "Intersect at:"
-              input ! class_ "form-control" ! type_ "text" ! name "intersect" ! placeholder "time in seconds"
-          input ! class_ "btn btn-primary" ! type_ "submit" ! value "Next"
+              H.label ! for "guess" $
+                  "How long does it take the cop to catch the robber?"
+              input ! class_ "form-control" ! type_ "text" ! name "intersect"
+                    ! placeholder "time in seconds"
+          input ! class_ "btn btn-primary pull-right" ! type_ "submit"
+                ! value "Next"
+      a ! href "setup.html" ! class_ "btn btn-default" $ "Back"
     )
 
 equations = boilerplate'
