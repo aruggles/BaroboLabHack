@@ -119,8 +119,8 @@ body {
 }
 
 .overviewPics img {
-  height: 240px;
-  width: 320px;
+  height: 225px;
+  width: 400px;
 }
 
 .overviewPics .stepDescr {
@@ -181,6 +181,10 @@ nav hr.ftr {
 
 div.fwdBack {
   padding-top: 10px;
+}
+
+.overviewPics + a {
+  margin-bottom: 30px;
 }
 
 /* ==========================================================================

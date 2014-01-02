@@ -113,7 +113,6 @@ section6_1 = boilerplate'
 lab_overview = boilerplate'
     labOverviewNav
     (do
-        h2 "Overview"
         table ! class_ "table table-striped overviewPics" $ do
             tr $ do
                 td $ img ! src "img/labsetup.png"
@@ -126,12 +125,9 @@ lab_overview = boilerplate'
             tr $ do
                 td $ img ! src "img/charts.png"
                 td $ H.div ! class_ "stepDescr"
-                    $ str $ "The barfs robots will advance. The charts can be reset "
+                    $ str $ "The robots will advance. The charts can be reset "
                         ++ "and students can guess again!"
-            tr $ do
-                td $ img ! src "img/equations.png"
-                td $ H.div ! class_ "stepDescr" $ "Now you'll do things with equations, I guess."
-        a ! class_ "btn btn-default" ! href "setup.html" $ "Go to first step"
+        a ! class_ "pull-right btn btn-primary" ! href "setup.html" $ "Go to first step"
     )
 
 charts = boilerplate
