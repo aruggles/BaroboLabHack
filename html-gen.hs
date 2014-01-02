@@ -83,12 +83,7 @@ section6_1 = boilerplate'
     )
 
 lab_overview = boilerplate'
-    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-    , li $ a ! href "chap6.html" $ "Chapter 6"
-    , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , li $ a ! href "setup.html" $ "Cops vs. Robbers"
-    , li ! class_ "active" $ a ! href "#" $ "Lab Overview"
-    ]
+    (labNav "Lab Overview")
     (do
         h2 "Overview"
         table ! class_ "table table-striped overviewPics" $ do
@@ -112,12 +107,7 @@ lab_overview = boilerplate'
     )
 
 charts = boilerplate
-    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-    , li $ a ! href "chap6.html" $ "Chapter 6"
-    , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , li $ a ! href "setup.html" $ "Cops vs. Robbers"
-    , li ! class_ "active" $ a ! href "#" $ "Charts"
-    ]
+    (labNav "Charts")
     (do
         H.div ! class_ "row chartRow" $ do
             figure ! class_ "col-xs-3" $ do
@@ -160,12 +150,7 @@ setup = boilerplate'
     )
 
 prediction = boilerplate'
-    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-    , li $ a ! href "chap6.html" $ "Chapter 6"
-    , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , li $ a ! href "setup.html" $ "Cops vs. Robbers"
-    , li ! class_ "active" $ a ! href "#" $ "Prediction"
-    ]
+    (labNav "Prediction")
     (do
       p $ do
           "Suppose the"
@@ -188,12 +173,7 @@ prediction = boilerplate'
     )
 
 equations = boilerplate'
-    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-    , li $ a ! href "chap6.html" $ "Chapter 6"
-    , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , li $ a ! href "setup.html" $ "Cops vs. Robbers"
-    , li ! class_ "active" $ a ! href "#" $ "Equations"
-    ]
+    (labNav "Equations")
     ("Blah blah blah...")
 
 
