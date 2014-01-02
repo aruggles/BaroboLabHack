@@ -54,7 +54,7 @@ install(TARGETS ${TARGET} RUNTIME DESTINATION ${INSTALL_BIN_DIR})
 
 # Include required libraries at install-time. This is the Windows way.
 if(CMAKE_HOST_WIN32)
-  set(APPS "\${CMAKE_INSTALL_PREFIX}/${INSTALL_BIN_DIR}/${TARGET}")
+  set(APPS "\${CMAKE_INSTALL_PREFIX}/${INSTALL_BIN_DIR}/${TARGET}${CMAKE_EXECUTABLE_SUFFIX}")
   set(DIRS ${QT_LIBRARY_DIR})
   install(CODE "
     include(BundleUtilities)
