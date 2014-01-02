@@ -23,8 +23,9 @@ boilerplate navlist content scripts =
             link ! rel "stylesheet" ! href "css/bootstrap.min.css"
             link ! rel "stylesheet" ! href "css/main.css"
         body $ do
-            header $ a ! href "index.html" $ img ! src "img/barobo_logo.png"
-            nav $ ol ! class_ "nav nav-stacked nav-pills" $ sequence_ navlist
+            nav ! class_ "app" $ do
+                a ! href "index.html" $ img ! src "img/barobo_logo.png"
+                ol ! class_ "nav nav-stacked nav-pills" $ sequence_ navlist
             section ! class_ "container" $ content
             scripts'
 
@@ -158,10 +159,11 @@ charts = boilerplate
 setup = boilerplate'
     (labNav "Setup")
     (do
-        p "To run this curriculum application, please setup the robots according to the following image."
+        p $ str $ "To run this curriculum application, please setup the "
+            ++ "robots according to the following image."
         a ! href "prediction.html" ! class_ "btn btn-large btn-primary" $ "Next"
         br
-        img ! src "img/setup.png" ! A.style "width:1024px; height:768px;"
+        img ! src "img/setup.png" ! class_ "center-block fullContent"
     )
 
 prediction = boilerplate'

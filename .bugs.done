@@ -1,6 +1,7 @@
 lab overview shouldn't list lab overview in nav | id:04b33ae7e81b6fb331141b82bd7662ef95fb27c3
 renormalize left nav | id:35be074c4c929f8e7548b62164738ab522e3c623
 Remove BaroboLab link from index | id:564ba9fb9b77c0be3841e8e8ca80df88cf2de307
+fix setup pic dimensions | id:712418f21a9403ff6994d64eb8e1bffa30b6e0c8
 rename page4 to setup | id:df8d0eb4430c2e628e2f82381485ee274a48e91f
 remove barobolab elemen from nav | id:e1813c3daa4f473ed7508114bf21ea4dc9ac6260
 images don't show on load of chart.html | id:fbdbb98d2871c468e2c46e85f813312597c71821

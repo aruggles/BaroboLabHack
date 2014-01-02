@@ -146,7 +146,7 @@ body {
 
 nav {
   float: left;
-  width: 10%;
+  width: 15%;
 }
 
 nav + section {
@@ -156,6 +156,19 @@ nav + section {
 nav img {
   width: 100%;
 }
+
+img.fullContent {
+  width: 65%;
+}
+
+nav + section.container {
+  width: 85%;
+}
+
+nav.app > a > img {
+  margin-bottom: 20px;
+}
+
 
 /* ==========================================================================
    Helper classes
