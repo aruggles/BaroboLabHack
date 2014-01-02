@@ -138,16 +138,20 @@ charts = boilerplate
     )
     ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
 
-setup = boilerplate'
+labNav :: String -> [Html]
+labNav title =
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
     , hr
     , li $ a ! href "#" $ "Cops vs. Robbers"
-    , li ! class_ "active" $ a ! href "#" $ "Setup"
+    , li ! class_ "active" $ a ! href "#" $ toHtml title
     , hr
     , li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
     ]
+
+setup = boilerplate'
+    (labNav "Setup")
     (do
         p "To run this curriculum application, please setup the robots according to the following image."
         a ! href "prediction.html" ! class_ "btn btn-large btn-primary" $ "Next"
