@@ -79,26 +79,15 @@ section6_1 = boilerplate'
     ]
     (ul ! class_ "nav nav-stacked nav-pills" $ do
         li ! class_ "disabled" $ a ! href "#" $ "x vs. t"
-        li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+        li $ a ! href "setup.html" $ "Cops vs. Robbers"
         li ! class_ "disabled" $ a ! href "#" $ "Slow Runners vs. Fast Runners"
-    )
-
-copVsRobber = boilerplate'
-    [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
-    , li $ a ! href "chap6.html" $ "Chapter 6"
-    , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , li ! class_ "active" $ a ! href "#" $ "Cops vs. Robbers"
-    ]
-    (do
-        a ! href "page4.html" ! class_ "btn btn-primary btn-block btn-lg" $ "Run Lab"
-        a ! href "lab_overview.html" ! class_ "btn btn-info btn-block" $ "View overview"
     )
 
 lab_overview = boilerplate'
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li $ a ! href "setup.html" $ "Cops vs. Robbers"
     , li ! class_ "active" $ a ! href "#" $ "Lab Overview"
     ]
     (do
@@ -120,14 +109,14 @@ lab_overview = boilerplate'
             tr $ do
                 td $ img ! src "img/equations.png"
                 td $ H.div ! class_ "stepDescr" $ "Now you'll do things with equations, I guess."
-        a ! class_ "btn btn-default" ! href "page4.html" $ "Go to first step"
+        a ! class_ "btn btn-default" ! href "setup.html" $ "Go to first step"
     )
 
 charts = boilerplate
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li $ a ! href "setup.html" $ "Cops vs. Robbers"
     , li ! class_ "active" $ a ! href "#" $ "Charts"
     ]
     (do
@@ -150,12 +139,12 @@ charts = boilerplate
     )
     ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
 
-page4 = boilerplate'
+setup = boilerplate'
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
     , hr
-    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li $ a ! href "#" $ "Cops vs. Robbers"
     , li ! class_ "active" $ a ! href "#" $ "Setup"
     , hr
     , li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
@@ -171,7 +160,7 @@ prediction = boilerplate'
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li $ a ! href "setup.html" $ "Cops vs. Robbers"
     , li ! class_ "active" $ a ! href "#" $ "Prediction"
     ]
     (do
@@ -199,7 +188,7 @@ equations = boilerplate'
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , li $ a ! href "copVsRobber.html" $ "Cops vs. Robbers"
+    , li $ a ! href "setup.html" $ "Cops vs. Robbers"
     , li ! class_ "active" $ a ! href "#" $ "Equations"
     ]
     ("Blah blah blah...")
@@ -210,10 +199,9 @@ main = mapM_ genHtml [
     , ("html/holt.html", holt)
     , ("html/chap6.html", chap6)
     , ("html/section6-1.html", section6_1)
-    , ("html/copVsRobber.html", copVsRobber)
     , ("html/lab_overview.html", lab_overview)
     , ("html/charts.html", charts)
-    , ("html/page4.html", page4)
+    , ("html/setup.html", setup)
     , ("html/prediction.html", prediction)
     , ("html/equations.html", equations)
     ]
