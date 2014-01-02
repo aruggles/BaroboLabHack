@@ -41,11 +41,11 @@ labNavHdr =
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
     , li $ a ! href "section6-1.html" $ "Section 6.1"
-    , hr
+    , hr ! class_ "hdr"
     ]
 
 labNavFtr =
-    [ hr
+    [ hr ! class_ "ftr"
     , li $ a ! href "lab_overview.html" $ small ! class_ "text-muted" $ "Overview"
     ]
 

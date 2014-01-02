@@ -169,6 +169,15 @@ nav.app > a > img {
   margin-bottom: 20px;
 }
 
+nav hr.hdr {
+  margin-top: 0;
+  margin-bottom: -1px;
+}
+
+nav hr.ftr {
+  margin-bottom: 0px;
+}
+
 
 /* ==========================================================================
    Helper classes
