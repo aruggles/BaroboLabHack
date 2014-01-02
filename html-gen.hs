@@ -36,9 +36,8 @@ str :: String -> Html
 str = toHtml
 
 index = boilerplate'
-    [li ! class_ "active"
-        $ a ! href "index.html" $ "BaroboLab"
-    ]
+    -- Keep space for the nav on other pages
+    [ li ! class_ "invisible" $ "foo" ]
     (do
         a ! href "holt.html"
             $ img ! class_ "textbook btn btn-default"
