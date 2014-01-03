@@ -156,7 +156,7 @@ charts = boilerplate
               a ! class_ "btn btn-default" ! href "prediction.html" $ "Back"
               a ! href "equations.html" ! class_ "disabled pull-right btn btn-primary" $ "Next"
     )
-    ["js/flot/jquery.flot.js", "js/copVsRobber.js"]
+    ["js/flot/jquery.flot.js", "js/vendor/bootbox.min.js", "js/copVsRobber.js"]
 
 setup = boilerplate'
     (labNav "Setup")
