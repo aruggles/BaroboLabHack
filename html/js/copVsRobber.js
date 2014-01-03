@@ -1,6 +1,4 @@
 /* jshint jquery: true */
-/* -global Robot */
-/* exported runDemo */
 
 $(function() {
 "use strict";
@@ -135,7 +133,7 @@ var
       xaxis: {
         min: 0,
         max: 10,
-        tickSize: 1,
+        tickSize: 2,
         tickDecimals: 0,
       },
       yaxis: {
