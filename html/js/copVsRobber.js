@@ -235,6 +235,7 @@ var
     else {
       var dist = parseFloat($("#guess").val());
       iterDemo(-dist);
+      runRobots(-dist);
     }
     //$("#guess").attr("disabled", false);
     //$("#demoBtn").attr("disabled", false);
