@@ -20,6 +20,15 @@ class JsInterface : public QObject
 public:
     JsInterface (MainWindow* mainWindow);
 
+    Q_PROPERTY(bool buttonA READ buttonA);
+    bool buttonA() const { return buttonA_; }
+
+    Q_PROPERTY(bool buttonB READ buttonB);
+    bool buttonB() const { return buttonB_; }
+
+    Q_PROPERTY(bool buttonPwr READ buttonPwr);
+    bool buttonPwr() const { return buttonPwr_; }
+
     Q_INVOKABLE void printDbg();
     Q_INVOKABLE QString printMessage(const QString &param);
     Q_INVOKABLE QString getRobotIDList ();
@@ -34,7 +43,16 @@ public:
     Q_INVOKABLE int setColorRGB (const QString& address, int r, int g, int b);
     Q_INVOKABLE int stop (const QString& address);
 
+    void robotButtonCallbackWrapper(int button, int buttondown);
+    static void robotButtonCallback(void* data, int button, int buttondown);
+
+signals:
+    void buttonChanged(int button);
+
 private:
     MainWindow* m_mainWindow;
+    bool buttonA_;
+    bool buttonB_;
+    bool buttonPwr_;
 };
 #endif

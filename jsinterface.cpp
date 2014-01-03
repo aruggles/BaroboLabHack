@@ -11,7 +11,14 @@
 
 #include <stdio.h>
 
-JsInterface::JsInterface (MainWindow* mainWindow) : m_mainWindow(mainWindow) { }
+JsInterface *g_jsinterface = NULL;
+
+JsInterface::JsInterface (MainWindow* mainWindow) : m_mainWindow(mainWindow) 
+{ 
+  if(NULL == g_jsinterface) {
+    g_jsinterface = this;
+  }
+}
 
 void JsInterface::printDbg()
 {
@@ -65,5 +72,18 @@ int JsInterface::setColorRGB(const QString& address, int r, int g, int b) {
 
 int JsInterface::stop(const QString& address) {
   return m_mainWindow->stop(address);
+}
+
+void JsInterface::robotButtonCallbackWrapper(int button, int buttondown)
+{
+  buttonA_ = buttondown & 0x01;
+  buttonB_ = (buttondown>>1) & 0x01;
+  buttonPwr_ = (buttondown>>2) & 0x01;
+  emit buttonChanged(button);
+}
+
+void JsInterface::robotButtonCallback(void* data, int button, int buttondown)
+{
+  g_jsinterface->robotButtonCallbackWrapper(button, buttondown);
 }
 
