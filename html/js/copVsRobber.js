@@ -339,6 +339,12 @@ var
 cop.img = $("<img />").attr('src', cop.imgSrc).load( function () {
     robber.img = $("<img />").attr('src', robber.imgSrc).load( function () {
       initializeCharts();
+      if (qs.hasOwnProperty('red')) {
+        red = qs.red;
+      }
+      if (qs.hasOwnProperty('blue')) {
+        blue = qs.blue;
+      }
       if (parseInt(qs.intersect)) {
         runDemo();
       }

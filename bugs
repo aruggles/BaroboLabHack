@@ -2,6 +2,5 @@ use set_interval instead of set_timeout | id:0121e827fdf906099ada5db85c3d7823532
 fix en/disable of all buttons | id:261ec7fe47fc45a6f039f4ef42917d6f24a108bd
 find robots and color them | id:8cb217aec674368f5c22caa22a1c927ca0ef4712
 scale down images | id:9838be76e8b31654f90642dfd5de5ea132a0dd70
-use getvars for red/blue | id:bd5a2dfba757917ec2114880922d241623d733a8
 js dialog for choosing robots | id:d45b0489aed84985a536560701c7b5c776275a80
 position or distance vernacular | id:f1bb1c614361adc9ab0f01827d530625ac1049c5
