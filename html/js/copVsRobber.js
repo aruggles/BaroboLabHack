@@ -179,14 +179,7 @@ var
     });
   },
 
-  resetCharts = function () {
-    if (emergencyStopped) {
-      bootbox.alert(
-        "You'll have to move the robots back yourself, " +
-        "since the stop button was pressed.");
-      emergencyStopped = false;
-    }
-    stopRobots();
+  initializeCharts = function () {
     xvstSeries = [
       Object.create(cop),
       Object.create(robber),
@@ -222,6 +215,17 @@ var
     ];
 
     plotCharts(xvstSeries, posSeries);
+  },
+
+  resetCharts = function () {
+    if (emergencyStopped) {
+      bootbox.alert(
+        "You'll have to move the robots back yourself, " +
+        "since the stop button was pressed.");
+      emergencyStopped = false;
+    }
+    stopRobots();
+    initializeCharts();
     $("#guess").attr("disabled", false);
     $("#demoBtn").attr("disabled", false);
   },
