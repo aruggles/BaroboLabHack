@@ -233,7 +233,7 @@ var
 
   iterDemo = (function() {
     var iter = 0;
-    var timeout = 200; // milliseconds
+    var timeout = 100; // milliseconds
     var step = timeout/1000.0;
     var tolerance = step / 2;
     var xstop;
