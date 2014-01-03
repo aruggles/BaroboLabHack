@@ -181,8 +181,14 @@ var
 
   initializeCharts = function () {
     xvstSeries = [
-      Object.create(cop),
-      Object.create(robber),
+      Object.create(cop).update(
+        {
+          data: [[0, cop.start]]
+        }),
+      Object.create(robber).update(
+        {
+          data: [[0, robber.start]]
+        }),
       Object.create(cop).update(
         {
           points: {
@@ -233,34 +239,24 @@ var
 
   iterDemo = (function() {
     var iter = 0;
-    var timeout = 100; // milliseconds
+    var timeout = (1000/24); // milliseconds
     var step = timeout/1000.0;
     var tolerance = step / 2;
     var xstop;
-    var d1, d2;
 
     function iterDemo(x) {
-      var reset = false;
       var y1, y2;
 
       if (typeof x !== "undefined" && x !== null) {
-        reset = true;
-      }
-
-      if (reset) {
         iter = 0;
         xstop = Math.abs(x);
-        d1 = [[0, cop.start]];
-        d2 = [[0, robber.start]];
       }
       iter = iter + step;
       y1 = cop.speed * iter + cop.start;
       y2 = robber.speed * iter + robber.start;
-      d1.push([iter, y1]);
-      d2.push([iter, y2]);
 
-      xvstSeries[0].data = d1;
-      xvstSeries[1].data = d2;
+      xvstSeries[0].data.push([iter, y1]);
+      xvstSeries[1].data.push([iter, y2]);
       xvstSeries[2].data = [[iter,y1]];
       xvstSeries[3].data = [[iter,y2]];
       posSeries[0].data = [[cop.pos, y1]];
