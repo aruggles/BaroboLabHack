@@ -5,6 +5,7 @@ Remove BaroboLab link from index | id:564ba9fb9b77c0be3841e8e8ca80df88cf2de307
 get rid of 'equations' | id:5994a19daf5c28bbde19e2902edc77271f623cdf
 nav overflows the page | id:6899c28337b28421327cd141f83616e4238668b1
 fix setup pic dimensions | id:712418f21a9403ff6994d64eb8e1bffa30b6e0c8
+dont disable retry if input is empty | id:9f44c07957f599fee025c1d1c84e0d78090a2e70
 rename page4 to setup | id:df8d0eb4430c2e628e2f82381485ee274a48e91f
 remove barobolab elemen from nav | id:e1813c3daa4f473ed7508114bf21ea4dc9ac6260
 images don't show on load of chart.html | id:fbdbb98d2871c468e2c46e85f813312597c71821

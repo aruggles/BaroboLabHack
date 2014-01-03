@@ -228,6 +228,7 @@ var
     initializeCharts();
     $("#guess").attr("disabled", false);
     $("#demoBtn").attr("disabled", false);
+    $("#guess").val(null);
   },
 
   iterDemo = (function() {
@@ -309,9 +310,9 @@ var
         Robot.moveNB(blue, blueradians, 0, -blueradians, 0);
         iterDemo(intersectGuess);
       }
+      $("#guess").attr("disabled", true);
+      $("#demoBtn").attr("disabled", true);
     }
-    $("#guess").attr("disabled", true);
-    $("#demoBtn").attr("disabled", true);
   };
 
 /* __main__
