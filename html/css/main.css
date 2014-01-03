@@ -99,10 +99,6 @@ textarea {
 
 
 
-body {
-  /*font-size: 3ex;*/
-}
-
 .chart {
   width: 100%;
   height: 450px;
@@ -121,9 +117,6 @@ body {
 .overviewPics img {
   height: 225px;
   width: 400px;
-}
-
-.overviewPics .stepDescr {
 }
 
 table img {
