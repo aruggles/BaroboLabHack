@@ -280,36 +280,38 @@ var
     return iterDemo;
   })(),
 
+  runRobots = function (dist) {
+    //var robotList = Robot.getRobotIDList();
+    Robot.connectRobot(red);
+    Robot.connectRobot(blue);
+
+    Robot.setColorRGB(red, 255, 0, 0);
+    Robot.setColorRGB(blue, 0, 0, 255);
+
+    var xstart = 0;
+    var xstop = dist;
+
+    var reddist = robber.posFn(xstop) - robber.posFn(xstart);
+    var bluedist = cop.posFn(xstop) - cop.posFn(xstart);
+
+    var redradians = reddist / wheelRadius;
+    var blueradians = bluedist / wheelRadius;
+
+    var redspeed = robber.speed / wheelRadius;
+    var bluespeed = cop.speed / wheelRadius;
+
+    Robot.setJointSpeeds(red, redspeed, redspeed, redspeed, redspeed);
+    Robot.setJointSpeeds(blue, bluespeed, bluespeed, bluespeed, bluespeed);
+
+    Robot.moveNB(red, redradians, 0, -redradians, 0);
+    Robot.moveNB(blue, blueradians, 0, -blueradians, 0);
+  },
+
   runDemo = function () {
     var intersectGuess = parseFloat($("#guess").val());
     if (!isNaN(intersectGuess)) {
-      if (typeof Robot !== 'undefined' && Robot !== null) {
-        //var robotList = Robot.getRobotIDList();
-        Robot.connectRobot(red);
-        Robot.connectRobot(blue);
-
-        Robot.setColorRGB(red, 255, 0, 0);
-        Robot.setColorRGB(blue, 0, 0, 255);
-
-        var xstart = 0;
-        var xstop = intersectGuess;
-
-        var reddist = robber.posFn(xstop) - robber.posFn(xstart);
-        var bluedist = cop.posFn(xstop) - cop.posFn(xstart);
-
-        var redradians = reddist / wheelRadius;
-        var blueradians = bluedist / wheelRadius;
-
-        var redspeed = robber.speed / wheelRadius;
-        var bluespeed = cop.speed / wheelRadius;
-
-        Robot.setJointSpeeds(red, redspeed, redspeed, redspeed, redspeed);
-        Robot.setJointSpeeds(blue, bluespeed, bluespeed, bluespeed, bluespeed);
-
-        Robot.moveNB(red, redradians, 0, -redradians, 0);
-        Robot.moveNB(blue, blueradians, 0, -blueradians, 0);
-        iterDemo(intersectGuess);
-      }
+      runRobots(intersectGuess);
+      iterDemo(intersectGuess);
       $("#guess").attr("disabled", true);
       $("#demoBtn").attr("disabled", true);
     }
