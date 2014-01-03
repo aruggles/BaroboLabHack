@@ -54,11 +54,30 @@ install(TARGETS ${TARGET} RUNTIME DESTINATION ${INSTALL_BIN_DIR})
 
 # Include required libraries at install-time. This is the Windows way.
 if(CMAKE_HOST_WIN32)
-  set(APPS "\${CMAKE_INSTALL_PREFIX}/${INSTALL_BIN_DIR}/${TARGET}${CMAKE_EXECUTABLE_SUFFIX}")
-  set(DIRS ${QT_LIBRARY_DIR})
-  install(CODE "
-    include(BundleUtilities)
-    fixup_bundle(\"${APPS}\" \"\" \"${DIRS}\")")
+  find_package(Qt5Gui)
+  find_package(Qt5WebKitWidgets)
+  find_package(Qt5Widgets)
+  find_package(Qt5Network)
+  get_target_property(QtCore_LOCATION Qt5::Core LOCATION)
+  get_target_property(QtGui_LOCATION Qt5::Gui LOCATION)
+  get_target_property(QtWebKitWidgets_LOCATION Qt5::WebKitWidgets LOCATION)
+  get_target_property(QtWidgets_LOCATION Qt5::Widgets LOCATION)
+  get_target_property(QtNetwork_LOCATION Qt5::Network LOCATION)
+  find_library(LIBBAROBO_LOCATION barobo)
+  find_library(LIBSFP_LOCATION sfp)
+  find_library(PTHREAD_LOCATION pthreadGC2)
+
+  install(FILES ${QtCore_LOCATION} ${QtGui_LOCATION}
+    ${QtWebKitWidgets_LOCATION} ${QtWidgets_LOCATION} ${QtNetwork_LOCATION}
+    ${LIBBAROBO_LOCATION} ${LIBSFP_LOCATION} ${PTHREAD_LOCATION}
+    DESTINATION ${INSTALL_BIN_DIR})
+
+#  set(APPS "\${CMAKE_INSTALL_PREFIX}/${INSTALL_BIN_DIR}/${TARGET}${CMAKE_EXECUTABLE_SUFFIX}")
+#  set(DIRS)
+#  #set(DIRS ${QT_LIBRARY_DIR})
+#  install(CODE "
+#    include(BundleUtilities)
+#    fixup_bundle(\"${APPS}\" \"\" \"${DIRS}\")")
 endif()
 
 ##############################################################################
