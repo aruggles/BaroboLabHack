@@ -321,7 +321,7 @@ var
 
 cop.img = $("<img />").attr('src', cop.imgSrc).load( function () {
     robber.img = $("<img />").attr('src', robber.imgSrc).load( function () {
-      resetCharts();
+      initializeCharts();
       if (parseInt(qs.intersect)) {
         runDemo();
       }
