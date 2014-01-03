@@ -42,8 +42,5 @@ signals:
 
 private:
     MainWindow* m_mainWindow;
-    bool buttonA_;
-    bool buttonB_;
-    bool buttonPwr_;
 };
 #endif

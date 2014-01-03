@@ -15,9 +15,7 @@ JsInterface *g_jsinterface = NULL;
 
 JsInterface::JsInterface (MainWindow* mainWindow) : m_mainWindow(mainWindow) 
 { 
-  if(NULL == g_jsinterface) {
-    g_jsinterface = this;
-  }
+  g_jsinterface = this;
 }
 
 void JsInterface::printDbg()
@@ -76,7 +74,7 @@ int JsInterface::stop(const QString& address) {
 
 void JsInterface::robotButtonCallbackWrapper(const char* serialID, int button, int buttondown)
 {
-  emit buttonChanged(QString(serialID), button, buttondown);
+  emit buttonChanged(serialID, button, buttondown);
 }
 
 void JsInterface::robotButtonCallback(void* data, int button, int buttondown)
