@@ -74,16 +74,13 @@ int JsInterface::stop(const QString& address) {
   return m_mainWindow->stop(address);
 }
 
-void JsInterface::robotButtonCallbackWrapper(int button, int buttondown)
+void JsInterface::robotButtonCallbackWrapper(const char* serialID, int button, int buttondown)
 {
-  buttonA_ = buttondown & 0x01;
-  buttonB_ = (buttondown>>1) & 0x01;
-  buttonPwr_ = (buttondown>>2) & 0x01;
-  emit buttonChanged(button);
+  emit buttonChanged(QString(serialID), button, buttondown);
 }
 
 void JsInterface::robotButtonCallback(void* data, int button, int buttondown)
 {
-  g_jsinterface->robotButtonCallbackWrapper(button, buttondown);
+  g_jsinterface->robotButtonCallbackWrapper(static_cast<const char*>(data), button, buttondown);
 }
 

@@ -294,6 +294,7 @@ bool MainWindow::connectRobot (const QString& address) {
     return false;
   }
 
+  Mobot_enableButtonCallback(newrobot, strdup(baAddress.data()), JsInterface::robotButtonCallback);
   m_connectedRobots.insert(std::make_pair(address, RobotPtr(newrobot)));
   return true;
 }
