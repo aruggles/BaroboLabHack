@@ -1,4 +1,5 @@
 /* jshint jquery: true */
+/* global bootbox */
 
 $(function() {
 "use strict";
@@ -104,6 +105,7 @@ var
   xvst, pos,
   xvstSeries, posSeries,
   loopID,
+  emergencyStopped = false,
 
   /* Functions */
   stopLoop = function () {
@@ -111,6 +113,11 @@ var
       clearTimeout(loopID);
       loopID = null;
     }
+  },
+
+  emergencyStop = function () {
+    stopRobots();
+    emergencyStopped = true;
   },
 
   stopRobots = function () {
@@ -173,6 +180,12 @@ var
   },
 
   resetCharts = function () {
+    if (emergencyStopped) {
+      bootbox.alert(
+        "You'll have to move the robots back yourself, " +
+        "since the stop button was pressed.");
+      emergencyStopped = false;
+    }
     stopRobots();
     xvstSeries = [
       Object.create(cop),
@@ -314,7 +327,7 @@ cop.img = $("<img />").attr('src', cop.imgSrc).load( function () {
 $("#guess").val(qs.intersect);
 $("#demoBtn").click(runDemo);
 $("#resetBtn").click(resetCharts);
-$("#stopBtn").click(stopRobots);
+$("#stopBtn").click(emergencyStop);
 $(window).resize(function () { plotCharts(xvstSeries, posSeries); });
 
 });
