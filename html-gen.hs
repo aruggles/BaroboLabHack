@@ -6,7 +6,7 @@ import Data.Monoid (mempty)
 
 import Text.Blaze.Html5
 import qualified Text.Blaze.Html5 as H
-import Text.Blaze.Html5.Attributes
+import Text.Blaze.Html5.Attributes hiding (challenge)
 import qualified Text.Blaze.Html5.Attributes as A
 
 import Text.Blaze.Html.Renderer.Pretty (renderHtml)
@@ -154,7 +154,7 @@ charts = boilerplate
               button ! class_ "btn btn-danger" ! type_ "button" ! A.id "stopBtn" $ "STOP!"
           H.div ! class_ "fwdBack" $ do
               a ! class_ "btn btn-default" ! href "prediction.html" $ "Back"
-              a ! href "equations.html" ! class_ "disabled pull-right btn btn-primary" $ "Next"
+              a ! href "challenge.html" ! class_ "pull-right btn btn-primary" $ "Next"
     )
     ["js/flot/jquery.flot.js", "js/vendor/bootbox.min.js", "js/copVsRobber.js"]
 
@@ -192,6 +192,16 @@ prediction = boilerplate'
       a ! href "setup.html" ! class_ "btn btn-default" $ "Back"
     )
 
+challenge = boilerplate'
+    (labNav "Challenge")
+    (do
+      h2 $ "Factoring Game"
+      H.div ! A.id "topNumber" $ "{{ topNumber }}"
+      H.div $ "Two lines"
+      H.div $ do
+        input ! A.id "factor1" ! type_ "text"
+        input ! A.id "factor2" ! type_ "text"
+    )
 main = mapM_ genHtml [
     ("html/index.html", index)
     , ("html/holt.html", holt)
@@ -201,4 +211,5 @@ main = mapM_ genHtml [
     , ("html/charts.html", charts)
     , ("html/setup.html", setup)
     , ("html/prediction.html", prediction)
+    , ("html/challenge.html", challenge)
     ]
