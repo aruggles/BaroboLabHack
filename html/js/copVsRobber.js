@@ -227,14 +227,18 @@ var
     if (emergencyStopped) {
       bootbox.alert(
         "You'll have to move the robots back yourself, " +
-        "since the stop button was pressed.");
+        "since the stop button was pressed."
+      );
       emergencyStopped = false;
+      initializeCharts();
     }
-    stopRobots();
-    initializeCharts();
-    $("#guess").attr("disabled", false);
-    $("#demoBtn").attr("disabled", false);
-    $("#guess").val(null);
+    else {
+      var dist = parseFloat($("#guess").val());
+      iterDemo(-dist);
+    }
+    //$("#guess").attr("disabled", false);
+    //$("#demoBtn").attr("disabled", false);
+    //$("#guess").val(null);
   },
 
   iterDemo = (function() {
@@ -243,6 +247,7 @@ var
     var step = timeout/1000.0;
     var tolerance = step / 2;
     var xstop;
+    var reverse;
 
     function iterDemo(x) {
       var y1, y2;
@@ -250,17 +255,29 @@ var
       if (typeof x !== "undefined" && x !== null) {
         iter = 0;
         xstop = Math.abs(x);
+        reverse = x < 0;
       }
       iter = iter + step;
-      y1 = cop.speed * iter + cop.start;
-      y2 = robber.speed * iter + robber.start;
+      if (!reverse) {
+        y1 = cop.speed * iter + cop.start;
+        y2 = robber.speed * iter + robber.start;
 
-      xvstSeries[0].data.push([iter, y1]);
-      xvstSeries[1].data.push([iter, y2]);
-      xvstSeries[2].data = [[iter,y1]];
-      xvstSeries[3].data = [[iter,y2]];
-      posSeries[0].data = [[cop.pos, y1]];
-      posSeries[1].data = [[robber.pos, y2]];
+        xvstSeries[0].data.push([iter, y1]);
+        xvstSeries[1].data.push([iter, y2]);
+        xvstSeries[2].data = [[iter,y1]];
+        xvstSeries[3].data = [[iter,y2]];
+        posSeries[0].data = [[cop.pos, y1]];
+        posSeries[1].data = [[robber.pos, y2]];
+      }
+      else { // reverse
+        xvstSeries[0].data.pop();
+        xvstSeries[1].data.pop();
+        xvstSeries[2].data = xvstSeries[0].data.slice(-1);
+        xvstSeries[3].data = xvstSeries[1].data.slice(-1);
+        posSeries[0].data[0][1] = xvstSeries[2].data[0][1];
+        posSeries[1].data[0][1] = xvstSeries[3].data[0][1];
+      }
+
       xvst.setData(xvstSeries);
       pos.setData(posSeries);
       xvst.draw();
@@ -308,8 +325,8 @@ var
     if (!isNaN(intersectGuess)) {
       runRobots(intersectGuess);
       iterDemo(intersectGuess);
-      $("#guess").attr("disabled", true);
-      $("#demoBtn").attr("disabled", true);
+      //$("#guess").attr("disabled", true);
+      //$("#demoBtn").attr("disabled", true);
     }
   };
 
