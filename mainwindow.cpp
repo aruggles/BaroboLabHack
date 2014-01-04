@@ -310,6 +310,7 @@ bool MainWindow::connectRobot (const QString& address) {
 void MainWindow::disconnectRobot (const QString& address) {
   auto it2 = m_robotListeners.find(address);
   if (m_robotListeners.end() != it2) {
+    delete it2->second;
     m_robotListeners.erase(it2);
   }
 
@@ -318,6 +319,7 @@ void MainWindow::disconnectRobot (const QString& address) {
     return;
   }
   Mobot_disconnect(it->second);
+  delete it->second;
   m_connectedRobots.erase(it);
 }
 

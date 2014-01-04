@@ -1,5 +1,6 @@
 #include "robotlistener.h"
 #include <QDebug>
+#include <QThread>
 
 RobotListener::RobotListener(mobot_t* robot, QString addr)
 {
@@ -32,7 +33,8 @@ void RobotListener::doWork()
  
   double a[4]; 
 
-  double delta = 10.0*M_PI/180.0;
+  double delta = 20.0*M_PI/180.0;
+  qDebug() << "Delta: " << delta;
 
   int rc;
 
@@ -43,6 +45,7 @@ void RobotListener::doWork()
         &curJoint3Angle,
         &curJoint4Angle);
     if(rc) return;
+    initialized = true;
   }
 
   rc = Mobot_getJointAngles(m_robot,
@@ -60,4 +63,5 @@ void RobotListener::doWork()
     curJoint1Angle = a[0];
     emit scrollDown(m_addr);
   }
+  QThread::yieldCurrentThread();
 }
