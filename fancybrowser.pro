@@ -1,9 +1,11 @@
 QT      +=  webkitwidgets network widgets
 HEADERS =   mainwindow.h \
-            jsinterface.h
+            jsinterface.h \
+            robotlistener.h
 SOURCES =   main.cpp \
             mainwindow.cpp \
-            jsinterface.cpp
+            jsinterface.cpp \
+            robotlistener.cpp
 RESOURCES = jquery.qrc
 
 INCLUDEPATH += libbarobo
