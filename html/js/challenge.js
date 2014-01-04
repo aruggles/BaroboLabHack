@@ -1,5 +1,51 @@
+/* global Robot */
 function ChallengeControl ($scope) {
   "use strict";
+  $scope.connect = function () {
+    Robot.connectRobot("T3VV");
+    Robot.connectRobot("X769");
+  };
+
+  $scope.discon = function () {
+    Robot.disconnectRobot("T3VV");
+    Robot.disconnectRobot("X769");
+  };
+
+  Robot.buttonChanged.connect(function(robID, btn) {
+    if (robID === "T3VV") {
+      $scope.check($scope.number1);
+    }
+    else {
+      $scope.check($scope.number2);
+    }
+  });
+
+  Robot.scrollUp.connect(function(robID) {
+    alert(robID);
+    if (robID === "T3VV") {
+      $scope.number1.val = 3;
+    }
+    else {
+      $scope.number2.val = 5;
+    }
+  });
+
+  Robot.scrollDown.connect(function(robID) {
+    alert("Yes");
+    if (robID === "T3VV") {
+      $scope.number1.val--;
+      if ($scope.number1.val <= 1) {
+        $scope.number1.val = 1;
+      }
+    }
+    else {
+      $scope.number2.val--;
+      if ($scope.number2.val <= 1) {
+        $scope.number2.val = 1;
+      }
+    }
+  });
+
   function isPrime (n) {
       var i;
       if (n <= 1) {
@@ -33,11 +79,13 @@ function ChallengeControl ($scope) {
     id: 1,
     sibling: 2,
     disabled: false,
+    val: 1,
   };
   $scope.number2 = {
     id: 2,
     sibling: 1,
     disabled: false,
+    val: 1,
   };
 
   $scope.check = function (num) {
@@ -73,5 +121,7 @@ function ChallengeControl ($scope) {
       return "disabled";
     }
   };
+
+  $scope.connect();
 
 }
