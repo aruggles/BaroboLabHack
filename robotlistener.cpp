@@ -6,6 +6,7 @@ RobotListener::RobotListener(mobot_t* robot, QString addr)
   m_robot = robot;
   m_addr = addr;
   m_timer = new QTimer(this);
+  initialized = false;
 }
 
 RobotListener::~RobotListener()
@@ -26,7 +27,6 @@ void RobotListener::stopWork()
 
 void RobotListener::doWork()
 {
-  static bool initialized = 0;
   double curJoint2Angle;
   double curJoint4Angle;
  

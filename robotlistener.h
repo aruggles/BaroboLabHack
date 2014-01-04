@@ -27,6 +27,7 @@ private:
     QTimer* m_timer;
     double curJoint1Angle;
     double curJoint3Angle;
+    bool initialized;
 };
 
 #endif
