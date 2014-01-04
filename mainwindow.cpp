@@ -62,6 +62,7 @@ MainWindow::MainWindow(const QUrl& url) : m_dongle(new mobot_t)
 
     QNetworkProxyFactory::setUseSystemConfiguration(true);
 
+    m_interface = new JsInterface(this);
 //! [2]
     view = new QWebView(this);
     view->load(url);
@@ -293,7 +294,6 @@ bool MainWindow::connectRobot (const QString& address) {
     qDebug() << "(barobolab) ERROR: Mobot_connectWithTTY failed\n";
     return false;
   }
-
   Mobot_enableButtonCallback(newrobot, strdup(baAddress.data()), JsInterface::robotButtonCallback);
   m_connectedRobots.insert(std::make_pair(address, RobotPtr(newrobot)));
   return true;
@@ -305,6 +305,7 @@ void MainWindow::disconnectRobot (const QString& address) {
     return;
   }
   Mobot_disconnect(it->second.get());
+  m_connectedRobots.erase(it);
 }
 
 int MainWindow::move (const QString& address, double angle1, double angle2, double angle3, double angle4) {
@@ -386,7 +387,6 @@ int MainWindow::stop (const QString& address) {
 
 void MainWindow::populateJavaScriptWindowObject()
 {
-    JsInterface *interface = new JsInterface(this);
-    view->page()->mainFrame()->addToJavaScriptWindowObject("Robot", interface);
+    view->page()->mainFrame()->addToJavaScriptWindowObject("Robot", m_interface);
 }
 

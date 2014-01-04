@@ -39,6 +39,7 @@
 ****************************************************************************/
 
 #include "mobot.h"
+#include "jsinterface.h"
 #include <QtWidgets>
 #include <memory>
 
@@ -95,6 +96,7 @@ private:
     QLineEdit *locationEdit;
     QAction *rotateAction;
     int progress;
+    JsInterface *m_interface;
 
     using RobotPtr = std::unique_ptr<mobot_t>;
 
