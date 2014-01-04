@@ -192,16 +192,6 @@ prediction = boilerplate'
       a ! href "setup.html" ! class_ "btn btn-default" $ "Back"
     )
 
-challenge = boilerplate'
-    (labNav "Challenge")
-    (do
-      h2 $ "Factoring Game"
-      H.div ! A.id "topNumber" $ "{{ topNumber }}"
-      H.div $ "Two lines"
-      H.div $ do
-        input ! A.id "factor1" ! type_ "text"
-        input ! A.id "factor2" ! type_ "text"
-    )
 main = mapM_ genHtml [
     ("html/index.html", index)
     , ("html/holt.html", holt)
@@ -211,5 +201,4 @@ main = mapM_ genHtml [
     , ("html/charts.html", charts)
     , ("html/setup.html", setup)
     , ("html/prediction.html", prediction)
-    , ("html/challenge.html", challenge)
     ]
