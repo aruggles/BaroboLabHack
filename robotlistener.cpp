@@ -34,7 +34,6 @@ void RobotListener::doWork()
   double a[4]; 
 
   double delta = 20.0*M_PI/180.0;
-  qDebug() << "Delta: " << delta;
 
   int rc;
 
