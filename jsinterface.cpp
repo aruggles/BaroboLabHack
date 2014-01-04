@@ -83,3 +83,12 @@ void JsInterface::robotButtonCallback(void* data, int button, int buttondown)
   g_jsinterface->robotButtonCallbackWrapper(static_cast<const char*>(data), button, buttondown);
 }
 
+void JsInterface::scrollUpSlot(QString robot)
+{
+  emit scrollUp(robot);
+}
+
+void JsInterface::scrollDownSlot(QString robot)
+{
+  emit scrollDown(robot);
+}

@@ -295,16 +295,29 @@ bool MainWindow::connectRobot (const QString& address) {
     return false;
   }
   Mobot_enableButtonCallback(newrobot, strdup(baAddress.data()), JsInterface::robotButtonCallback);
-  m_connectedRobots.insert(std::make_pair(address, RobotPtr(newrobot)));
+  auto l = new RobotListener(newrobot, address);
+  QObject::connect(l, SIGNAL(scrollUp(QString)), m_interface, SLOT(scrollUpSlot(QString)));
+  QObject::connect(l, SIGNAL(scrollDown(QString)), m_interface, SLOT(scrollDownSlot(QString)));
+  QThread *thread = new QThread(this);
+  l->moveToThread(thread);
+  thread->start();
+  QMetaObject::invokeMethod(l, "startWork", Qt::QueuedConnection);
+  m_connectedRobots.insert(std::make_pair(address, newrobot));
+  m_robotListeners.insert(std::make_pair(address, RobotListenerPtr(l)));
   return true;
 }
 
 void MainWindow::disconnectRobot (const QString& address) {
+  auto it2 = m_robotListeners.find(address);
+  if (m_robotListeners.end() != it2) {
+    m_robotListeners.erase(it2);
+  }
+
   auto it = m_connectedRobots.find(address);
   if (m_connectedRobots.end() == it) {
     return;
   }
-  Mobot_disconnect(it->second.get());
+  Mobot_disconnect(it->second);
   m_connectedRobots.erase(it);
 }
 
@@ -313,7 +326,7 @@ int MainWindow::move (const QString& address, double angle1, double angle2, doub
   if (m_connectedRobots.end() == it) {
     return -1;
   }
-  return Mobot_move(it->second.get(), angle1, angle2, angle3, angle4);
+  return Mobot_move(it->second, angle1, angle2, angle3, angle4);
 }
 
 int MainWindow::moveNB (const QString& address, double angle1, double angle2, double angle3, double angle4) {
@@ -321,7 +334,7 @@ int MainWindow::moveNB (const QString& address, double angle1, double angle2, do
   if (m_connectedRobots.end() == it) {
     return -1;
   }
-  return Mobot_moveNB(it->second.get(), angle1, angle2, angle3, angle4);
+  return Mobot_moveNB(it->second, angle1, angle2, angle3, angle4);
 }
 
 int MainWindow::moveTo (const QString& address, double angle1, double angle2, double angle3, double angle4) {
@@ -329,7 +342,7 @@ int MainWindow::moveTo (const QString& address, double angle1, double angle2, do
   if (m_connectedRobots.end() == it) {
     return -1;
   }
-  return Mobot_moveTo(it->second.get(), angle1, angle2, angle3, angle4);
+  return Mobot_moveTo(it->second, angle1, angle2, angle3, angle4);
 }
 
 int MainWindow::moveToNB (const QString& address, double angle1, double angle2, double angle3, double angle4) {
@@ -337,7 +350,7 @@ int MainWindow::moveToNB (const QString& address, double angle1, double angle2, 
   if (m_connectedRobots.end() == it) {
     return -1;
   }
-  return Mobot_moveToNB(it->second.get(), angle1, angle2, angle3, angle4);
+  return Mobot_moveToNB(it->second, angle1, angle2, angle3, angle4);
 }
 
 QString MainWindow::getJointAngles (const QString& address) {
@@ -347,7 +360,7 @@ QString MainWindow::getJointAngles (const QString& address) {
     return "[]";
   }
   double a1, a2, a3, a4;
-  if (-1 == Mobot_getJointAngles(it->second.get(), &a1, &a2, &a3, &a4)) {
+  if (-1 == Mobot_getJointAngles(it->second, &a1, &a2, &a3, &a4)) {
     qDebug() << "(barobolab) ERROR: Mobot_getJointAngles\n";
     return "[]";
   }
@@ -364,7 +377,7 @@ int MainWindow::setJointSpeeds (const QString& address, double speeds1, double s
     qDebug() << "(barobolab) ERROR: setJointSpeeds on disconnected " << address << '\n';
     return -1;
   }
-  return Mobot_setJointSpeeds(it->second.get(), speeds1, speeds2, speeds3, speeds4);
+  return Mobot_setJointSpeeds(it->second, speeds1, speeds2, speeds3, speeds4);
 }
 
 int MainWindow::setColorRGB (const QString& address, int r, int g, int b) {
@@ -373,7 +386,7 @@ int MainWindow::setColorRGB (const QString& address, int r, int g, int b) {
     qDebug() << "(barobolab) ERROR: setColorRGB on disconnected " << address << '\n';
     return -1;
   }
-  return Mobot_setColorRGB(it->second.get(), r, g, b);
+  return Mobot_setColorRGB(it->second, r, g, b);
 }
 
 int MainWindow::stop (const QString& address) {
@@ -382,7 +395,7 @@ int MainWindow::stop (const QString& address) {
     qDebug() << "(barobolab) ERROR: setColorRGB on disconnected " << address << '\n';
     return -1;
   }
-  return Mobot_stop(it->second.get());
+  return Mobot_stop(it->second);
 }
 
 void MainWindow::populateJavaScriptWindowObject()
