@@ -105,6 +105,6 @@ private:
     RobotPtr m_dongle;
     /* serial ID to connected robot map */
     std::map<QString, mobot_t*> m_connectedRobots;
-    std::map<QString, RobotListenerPtr> m_robotListeners;
+    std::map<QString, RobotListener*> m_robotListeners;
 //! [1]
 };
