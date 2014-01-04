@@ -74,7 +74,8 @@ int JsInterface::stop(const QString& address) {
 
 void JsInterface::robotButtonCallbackWrapper(const char* serialID, int button, int buttondown)
 {
-  emit buttonChanged(serialID, button, buttondown);
+  if(buttondown)
+    emit buttonChanged(serialID, button, buttondown);
 }
 
 void JsInterface::robotButtonCallback(void* data, int button, int buttondown)
