@@ -1,5 +1,6 @@
 #include "robotlistener.h"
 #include <QDebug>
+#include <QThread>
 
 RobotListener::RobotListener(mobot_t* robot, QString addr)
 {
@@ -60,4 +61,5 @@ void RobotListener::doWork()
     curJoint1Angle = a[0];
     emit scrollDown(m_addr);
   }
+  QThread::yieldCurrentThread();
 }

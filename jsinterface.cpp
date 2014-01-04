@@ -80,6 +80,7 @@ void JsInterface::robotButtonCallbackWrapper(const char* serialID, int button, i
 
 void JsInterface::robotButtonCallback(void* data, int button, int buttondown)
 {
+  qDebug() << "Callback";
   g_jsinterface->robotButtonCallbackWrapper(static_cast<const char*>(data), button, buttondown);
 }
 
