@@ -17,7 +17,7 @@ RobotListener::~RobotListener()
 void RobotListener::startWork()
 {
   QObject::connect(m_timer, SIGNAL(timeout()), this, SLOT(doWork()));
-  m_timer->start(100);
+  m_timer->start(150);
 }
 
 void RobotListener::stopWork()

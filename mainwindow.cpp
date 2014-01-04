@@ -303,7 +303,7 @@ bool MainWindow::connectRobot (const QString& address) {
   thread->start();
   QMetaObject::invokeMethod(l, "startWork", Qt::QueuedConnection);
   m_connectedRobots.insert(std::make_pair(address, newrobot));
-  m_robotListeners.insert(std::make_pair(address, RobotListenerPtr(l)));
+  m_robotListeners.insert(std::make_pair(address, l));
   return true;
 }
 
