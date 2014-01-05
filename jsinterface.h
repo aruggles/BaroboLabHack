@@ -35,6 +35,18 @@ public:
     Q_INVOKABLE int setColorRGB (const QString& address, int r, int g, int b);
     Q_INVOKABLE int stop (const QString& address);
 
+    void robotButtonCallbackWrapper(const char* serialID, int button, int buttondown);
+    static void robotButtonCallback(void* data, int button, int buttondown);
+
+public slots:
+    void scrollUpSlot(QString robot);
+    void scrollDownSlot(QString robot);
+
+signals:
+    void buttonChanged(QString robot, int button, int event);
+    void scrollUp(QString robot);
+    void scrollDown(QString robot);
+
 private:
     MainWindow* m_mainWindow;
 };

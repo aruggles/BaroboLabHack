@@ -39,6 +39,8 @@
 ****************************************************************************/
 
 #include "mobot.h"
+#include "jsinterface.h"
+#include "robotlistener.h"
 #include <QtWidgets>
 #include <memory>
 
@@ -95,11 +97,14 @@ private:
     QLineEdit *locationEdit;
     QAction *rotateAction;
     int progress;
+    JsInterface *m_interface;
 
     using RobotPtr = std::unique_ptr<mobot_t>;
+    using RobotListenerPtr = std::unique_ptr<RobotListener>;
 
     RobotPtr m_dongle;
     /* serial ID to connected robot map */
-    std::map<QString, RobotPtr> m_connectedRobots;
+    std::map<QString, mobot_t*> m_connectedRobots;
+    std::map<QString, RobotListener*> m_robotListeners;
 //! [1]
 };

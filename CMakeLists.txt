@@ -55,7 +55,7 @@ set(TARGET fancybrowser)
 
 qt5_add_resources(RESOURCES jquery.qrc)
 
-set(SOURCES main.cpp mainwindow.cpp jsinterface.cpp)
+set(SOURCES main.cpp mainwindow.cpp jsinterface.cpp robotlistener.cpp)
 
 add_executable(${TARGET} ${SOURCES} ${RESOURCES})
 

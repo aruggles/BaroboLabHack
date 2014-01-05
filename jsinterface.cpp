@@ -11,7 +11,12 @@
 
 #include <stdio.h>
 
-JsInterface::JsInterface (MainWindow* mainWindow) : m_mainWindow(mainWindow) { }
+JsInterface *g_jsinterface = NULL;
+
+JsInterface::JsInterface (MainWindow* mainWindow) : m_mainWindow(mainWindow) 
+{ 
+  g_jsinterface = this;
+}
 
 void JsInterface::printDbg()
 {
@@ -67,3 +72,24 @@ int JsInterface::stop(const QString& address) {
   return m_mainWindow->stop(address);
 }
 
+void JsInterface::robotButtonCallbackWrapper(const char* serialID, int button, int buttondown)
+{
+  if(buttondown)
+    emit buttonChanged(serialID, button, buttondown);
+}
+
+void JsInterface::robotButtonCallback(void* data, int button, int buttondown)
+{
+  qDebug() << "Callback";
+  g_jsinterface->robotButtonCallbackWrapper(static_cast<const char*>(data), button, buttondown);
+}
+
+void JsInterface::scrollUpSlot(QString robot)
+{
+  emit scrollUp(robot);
+}
+
+void JsInterface::scrollDownSlot(QString robot)
+{
+  emit scrollDown(robot);
+}
