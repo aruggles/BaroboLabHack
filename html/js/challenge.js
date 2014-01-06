@@ -1,18 +1,25 @@
 /* global Robot */
+/* exported ChallengeControl */
+
 function ChallengeControl ($scope) {
   "use strict";
+
+  var red = "X769",
+      blue = "4PMN"
+      ;
+
   $scope.connect = function () {
-    Robot.connectRobot("T3VV");
-    Robot.connectRobot("X769");
+    Robot.connectRobot(red);
+    Robot.connectRobot(blue);
   };
 
   $scope.discon = function () {
-    Robot.disconnectRobot("T3VV");
-    Robot.disconnectRobot("X769");
+    Robot.disconnectRobot(red);
+    Robot.disconnectRobot(blue);
   };
 
-  Robot.buttonChanged.connect(function(robID, btn) {
-    if (robID === "T3VV") {
+  Robot.buttonChanged.connect(function(robID) {
+    if (robID === red) {
       $scope.check($scope.number1);
     }
     else {
@@ -20,31 +27,36 @@ function ChallengeControl ($scope) {
     }
   });
 
-  Robot.scrollUp.connect(function(robID) {
-    alert(robID);
-    if (robID === "T3VV") {
-      $scope.number1.val = 3;
-    }
-    else {
-      $scope.number2.val = 5;
-    }
-  });
+  var scrollUp = function (robID) {
+    $scope.$apply(function () {
+      if (robID === red) {
+        $scope.number1.val++;
+      }
+      else {
+        $scope.number2.val++;
+      }
+    });
+  };
 
-  Robot.scrollDown.connect(function(robID) {
-    alert("Yes");
-    if (robID === "T3VV") {
-      $scope.number1.val--;
-      if ($scope.number1.val <= 1) {
-        $scope.number1.val = 1;
+  $scope.scrollDown = function (robID) {
+    $scope.$apply(function() {
+      if (robID === red) {
+        $scope.number1.val--;
+        if ($scope.number1.val <= 1) {
+          $scope.number1.val = 1;
+        }
       }
-    }
-    else {
-      $scope.number2.val--;
-      if ($scope.number2.val <= 1) {
-        $scope.number2.val = 1;
+      else {
+        $scope.number2.val--;
+        if ($scope.number2.val <= 1) {
+          $scope.number2.val = 1;
+        }
       }
-    }
-  });
+    });
+  };
+
+  Robot.scrollDown.connect($scope.scrollDown);
+  Robot.scrollUp.connect(scrollUp);
 
   function isPrime (n) {
       var i;
