@@ -40,6 +40,7 @@
 
 #include "mobot.h"
 
+#include "qtbugworkaround.h"
 #include <QtWidgets>
 #include "mainwindow.h"
 

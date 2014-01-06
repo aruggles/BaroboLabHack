@@ -9,6 +9,7 @@
 #ifndef fancybrowser_jsinterface_h
 #define fancybrowser_jsinterface_h
 
+#include "qtbugworkaround.h"
 #include <QtWidgets>
 
 class MainWindow;

@@ -40,6 +40,7 @@
 
 #include <unistd.h>
 
+#include "qtbugworkaround.h"
 #include <QtWidgets>
 #include <QtNetwork>
 #include <QtWebKitWidgets>
