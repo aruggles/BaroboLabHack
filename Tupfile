@@ -1,0 +1,3 @@
+export HOME
+
+run ./Tup-gen-html-rules.sh
