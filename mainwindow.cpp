@@ -402,6 +402,7 @@ int MainWindow::stop (const QString& address) {
 
 void MainWindow::populateJavaScriptWindowObject()
 {
-    view->page()->mainFrame()->addToJavaScriptWindowObject("Robot", m_interface);
+  m_interface->disconnect();
+  view->page()->mainFrame()->addToJavaScriptWindowObject("Robot", m_interface);
 }
 
