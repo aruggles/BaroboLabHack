@@ -132,10 +132,12 @@ $(function () {
                 model[disabled] = true;
                 if (halfDone) {
                     model.totalSuccess = true;
+                    setTimeout(function () { ctrl.startOver(null, model); }, 1500);
                 }
             }
             else {
                 model[fail] = true;
+                setTimeout(function () { model[fail] = false; }, 1000);
             }
         }
     });
