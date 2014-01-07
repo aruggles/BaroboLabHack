@@ -192,6 +192,14 @@ prediction = boilerplate'
       a ! href "setup.html" ! class_ "btn btn-default" $ "Back"
     )
 
+challenge = boilerplate
+    (labNav "Challenge")
+    (do
+      h2 $ "Factoring Game"
+      H.div ! A.id "challengeApp" $ mempty
+    )
+    ["js/vendor/serenade.0.5.0.js", "js/challenge/sr-view-app.js", "js/challenge.js"]
+
 main = mapM_ genHtml [
     ("html/index.html", index)
     , ("html/holt.html", holt)
@@ -201,4 +209,5 @@ main = mapM_ genHtml [
     , ("html/charts.html", charts)
     , ("html/setup.html", setup)
     , ("html/prediction.html", prediction)
+    , ("html/challenge.html", challenge)
     ]

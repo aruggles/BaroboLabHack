@@ -1,0 +1,19 @@
+div
+  @topNumber
+  br
+  "//Two lines\\\\"
+
+div
+  input[binding=@leftVal type="text" disabled=@leftDisabled class:disabled=@leftDisabled]
+  input[binding=@rightVal type="text" disabled=@rightDisabled class:disabled=@rightDisabled]
+  br
+  button.btn.btn-default[event:click=checkLeft disabled=@leftDisabled class:disabled=@leftDisabled]
+    "Robot 1"
+  button.btn.btn-default[event:click=checkRight disabled=@rightDisabled class:disabled=@rightDisabled]
+    "Robot 2"
+  button[event:click=discon]
+    "Disconnect"
+  button[event:click=connect]
+    "Connect"
+  button[event:click=startOver]
+    "Start Over"

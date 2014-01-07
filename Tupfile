@@ -1,3 +1,7 @@
 export HOME
 
 run ./Tup-gen-html-rules.sh
+
+outdir = html/js/challenge
+
+: app.serenade | gen-sr-view.sh |> ./gen-sr-view.sh %f $(outdir) |> $(outdir)/sr-view-app.js

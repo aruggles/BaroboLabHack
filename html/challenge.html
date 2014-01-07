@@ -8,10 +8,8 @@
         </title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/angular.min.js"></script>
-        <script src="js/challenge.js"></script>
     </head>
-    <body ng-app>
+    <body>
         <nav class="app">
             <a href="index.html">
                 <img src="img/barobo_logo.png">
@@ -53,37 +51,22 @@
                 </li>
             </ol>
         </nav>
-        <section class="container" ng-controller="ChallengeControl">
+        <section class="container">
             <h2>
                 Factoring Game
             </h2>
-            <div id="topNumber">
-                {{topNumber.val}}
-            </div>
-            <div>
-                //Two lines\\
-            </div>
-            <div>
-                <input ng-model="number1.val" type="text">
-                <input ng-model="number2.val" type="text">
-                <br>
-                <button ng-click="check(number1)" ng-disabled="number1.disabled" class="btn" ng-class="disClass(number1)">
-                    Robot 1
-                </button>
-                <button ng-click="check(number2)" ng-disabled="number2.disabled" class="btn" ng-class="disClass(number2)">
-                    Robot 2
-                </button>
-                <button ng-click="discon()">
-                   Disconnect
-                </button>
-                <button ng-click="connect()">
-                   Connect
-                </button>
+            <div id="challengeApp">
             </div>
         </section>
         <script src="js/vendor/jquery-1.10.2.min.js">
         </script>
         <script src="js/vendor/bootstrap.min.js">
+        </script>
+        <script src="js/vendor/serenade.0.5.0.js">
+        </script>
+        <script src="js/challenge/sr-view-app.js">
+        </script>
+        <script src="js/challenge.js">
         </script>
     </body>
 </html>
