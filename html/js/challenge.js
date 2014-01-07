@@ -61,7 +61,7 @@ $(function () {
                 Robot.connectRobot(blue);
             },
             startOver: function (_, o) {
-                o.topNumber = giveMeNumber(10,96);
+                o.topNumber = giveMeNumber(10,10);
                 o.leftVal = quotient(o.topNumber, 2) - 1;
                 o.rightVal = quotient(o.topNumber, 2) + 1;
                 o.leftDisabled = false;
@@ -109,25 +109,27 @@ $(function () {
         if (robID === left) {
             val = 'leftVal';
             disabled = 'leftDisabled';
-            halfDone = model.rightVal !== null;
+            halfDone = model.rightDisabled;
         }
         else {
             val = 'rightVal';
             disabled = 'rightDisabled';
-            halfDone = model.leftVal !== null;
+            halfDone = model.leftDisabled;
         }
-        if (model.topNumber % model[val] === 0) {
-            if (halfDone) {
-                alert("YES");
+        if (!model[disabled]) {
+            if (model.topNumber % model[val] === 0) {
+                if (halfDone) {
+                    alert("YES");
+                    model[disabled] = true;
+                }
+                else {
+                    alert("Success -- now waiting for teammate");
+                    model[disabled] = true;
+                }
             }
             else {
-                alert("Success -- now waiting for teammate");
-                model.set("leftDisabled", true);
-                model.set("rightDisabled", true);
+                alert("Guess again!");
             }
-        }
-        else {
-            alert("Guess again!");
         }
     });
 
