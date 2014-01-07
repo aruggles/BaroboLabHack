@@ -5,12 +5,13 @@ div
 
 div
   input[binding=@leftVal type="text" disabled=@leftDisabled class:disabled=@leftDisabled]
-  input[binding=@rightVal type="text" disabled=@rightDisabled class:disabled=@rightDisabled]
-  br
   button.btn.btn-default[event:click=checkLeft disabled=@leftDisabled class:disabled=@leftDisabled]
     "Robot 1"
+  br
+  input[binding=@rightVal type="text" disabled=@rightDisabled class:disabled=@rightDisabled]
   button.btn.btn-default[event:click=checkRight disabled=@rightDisabled class:disabled=@rightDisabled]
     "Robot 2"
+  br
   button[event:click=discon]
     "Disconnect"
   button[event:click=connect]

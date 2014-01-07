@@ -2327,6 +2327,8 @@ Property = {
         return assignUnlessEqual(node.element, "value", value || '');
       } else if (node.ast.name === 'input' && ast.name === 'checked') {
         return assignUnlessEqual(node.element, "checked", !!value);
+      } else if (ast.name === 'disabled') {
+        return assignUnlessEqual(node.element, "disabled", !!value);
       } else if (ast.name === 'class') {
         return node.setAttributeClasses(ast.value, value);
       } else if (value === void 0) {

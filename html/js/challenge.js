@@ -1,8 +1,40 @@
-/* global Robot, Serenade, $ */
+/* global Serenade, $ */
 /* jshint  newcap: false */
 
 $(function () {
     "use strict";
+
+    /* Mock Robot object for testing without any robots attached.
+     */
+
+    var Robot;
+    if (typeof window.Robot === "undefined") {
+      Robot = {};
+      [
+        "connectRobot",
+        "disconnectRobot",
+        "getRobotIDList",
+        "moveNB",
+        "printMessage",
+        "setColorRGB",
+        "setJointSpeeds",
+        "stop",
+      ].forEach(function (method) {
+        Robot[method] = function () {};
+      });
+      [
+        "scrollUp",
+        "scrollDown",
+        "buttonChanged",
+      ].forEach(function (event) {
+        Robot[event] = {
+            connect: function () {}
+        };
+      });
+    }
+    else {
+      Robot = window.Robot;
+    }
 
     function giveMeNumber (min, max) {
         return Math.floor(Math.random() * (max - min) + min);
@@ -30,10 +62,10 @@ $(function () {
             },
             startOver: function (_, o) {
                 o.topNumber = giveMeNumber(10,96);
-                o.leftVal = quotient(model.topNumber, 2) - 1;
-                o.rightVal = quotient(model.topNumber, 2) + 1;
-                o.leftDisabled = null;
-                o.rightDisabled = null;
+                o.leftVal = quotient(o.topNumber, 2) - 1;
+                o.rightVal = quotient(o.topNumber, 2) + 1;
+                o.leftDisabled = false;
+                o.rightDisabled = false;
             },
         },
 
@@ -41,32 +73,32 @@ $(function () {
             topNumber: giveMeNumber(4, 96),
             rightVal: null,
             leftVal: null,
-            leftDisabled: null,
-            rightDisabled: null,
+            leftDisabled: false,
+            rightDisabled: false,
         });
         model.rightVal = giveMeNumber(1, model.topNumber);
         model.leftVal = giveMeNumber(1, model.topNumber);
 
     Robot.scrollUp.connect(function (robID) {
         if (robID === left) {
-          if (model.leftDisabled === null) {
+          if (!model.leftDisabled) {
               model.leftVal++;
           }
         }
         else {
-          if (model.rightDisabled === null) {
+          if (!model.rightDisabled) {
               model.rightVal++;
           }
         }
     });
     Robot.scrollDown.connect(function (robID) {
         if (robID === left) {
-            if (model.leftDisabled === null && model.leftVal > 1.1) {
+            if (!model.leftDisabled) {
                 model.leftVal--;
             }
         }
         else {
-            if (model.rightDisabled === null && model.rightVal > 1.1) {
+            if (!model.rightDisabled) {
                 model.rightVal--;
             }
         }
@@ -90,7 +122,8 @@ $(function () {
             }
             else {
                 alert("Success -- now waiting for teammate");
-                model[disabled] = true;
+                model.set("leftDisabled", true);
+                model.set("rightDisabled", true);
             }
         }
         else {
