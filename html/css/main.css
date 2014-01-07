@@ -137,6 +137,14 @@ body {
 }
 
 
+.response {
+    display: none;
+}
+
+.show_ {
+    display: inline !important;
+}
+
 nav {
   float: left;
   width: 15%;

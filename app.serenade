@@ -1,16 +1,24 @@
 div
-  @topNumber
-  br
-  "//Two lines\\\\"
-
+  h2
+    @topNumber
+    span.text-success.response[class:show_=@totalSuccess]
+      "YES"
 div
-  input[binding=@leftVal type="text" disabled=@leftDisabled class:disabled=@leftDisabled]
-  button.btn.btn-default[event:click=checkLeft disabled=@leftDisabled class:disabled=@leftDisabled]
+  label[for="left"]
     "Robot 1"
+  input[name="left" binding=@leftVal type="text" disabled=@leftDisabled class:disabled=@leftDisabled]
+  span.text-warning.response[class:show_=@leftFailed]
+    "Guess again!"
+  span.text-success.response[class:show_=@leftDisabled]
+    "Success!"
   br
-  input[binding=@rightVal type="text" disabled=@rightDisabled class:disabled=@rightDisabled]
-  button.btn.btn-default[event:click=checkRight disabled=@rightDisabled class:disabled=@rightDisabled]
+  label[for="right"]
     "Robot 2"
+  input[name="right" binding=@rightVal type="text" disabled=@rightDisabled class:disabled=@rightDisabled]
+  span.text-warning.response[class:show_=@rightFailed]
+    "Guess again!"
+  span.text-success.response[class:show_=@rightDisabled]
+    "Success!"
   br
   button[event:click=discon]
     "Disconnect"
@@ -18,3 +26,4 @@ div
     "Connect"
   button[event:click=startOver]
     "Start Over"
+

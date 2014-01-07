@@ -66,6 +66,7 @@ $(function () {
                 o.rightVal = quotient(o.topNumber, 2) + 1;
                 o.leftDisabled = false;
                 o.rightDisabled = false;
+                o.totalSuccess = false;
             },
         },
 
@@ -75,6 +76,9 @@ $(function () {
             leftVal: null,
             leftDisabled: false,
             rightDisabled: false,
+            leftFailed: false,
+            rightFailed: false,
+            totalSuccess: false,
         });
         model.rightVal = giveMeNumber(1, model.topNumber);
         model.leftVal = giveMeNumber(1, model.topNumber);
@@ -94,41 +98,44 @@ $(function () {
     Robot.scrollDown.connect(function (robID) {
         if (robID === left) {
             if (!model.leftDisabled) {
-                model.leftVal--;
+                if (model.leftVal > 1.5) {
+                    model.leftVal--;
+                }
             }
         }
         else {
             if (!model.rightDisabled) {
-                model.rightVal--;
+                if (model.rightVal > 1.5) {
+                    model.rightVal--;
+                }
             }
         }
     });
 
     Robot.buttonChanged.connect(function (robID) {
-        var val, disabled, halfDone;
+        var val, disabled, halfDone, fail;
         if (robID === left) {
             val = 'leftVal';
             disabled = 'leftDisabled';
             halfDone = model.rightDisabled;
+            fail = 'leftFailed';
         }
         else {
             val = 'rightVal';
             disabled = 'rightDisabled';
             halfDone = model.leftDisabled;
+            fail = 'rightFailed';
         }
         if (!model[disabled]) {
             if (model.topNumber % model[val] === 0) {
+                model[fail] = false;
+                model[disabled] = true;
                 if (halfDone) {
-                    alert("YES");
-                    model[disabled] = true;
-                }
-                else {
-                    alert("Success -- now waiting for teammate");
-                    model[disabled] = true;
+                    model.totalSuccess = true;
                 }
             }
             else {
-                alert("Guess again!");
+                model[fail] = true;
             }
         }
     });
