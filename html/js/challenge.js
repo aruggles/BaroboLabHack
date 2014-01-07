@@ -71,7 +71,7 @@ $(function () {
         },
 
         model = Serenade({
-            topNumber: giveMeNumber(4, 96),
+            topNumber: null,
             rightVal: null,
             leftVal: null,
             leftDisabled: false,
@@ -80,8 +80,6 @@ $(function () {
             rightFailed: false,
             totalSuccess: false,
         });
-        model.rightVal = giveMeNumber(1, model.topNumber);
-        model.leftVal = giveMeNumber(1, model.topNumber);
 
     Robot.scrollUp.connect(function (robID) {
         if (robID === left) {
