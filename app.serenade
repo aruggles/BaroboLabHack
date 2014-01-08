@@ -1,6 +1,7 @@
 div
   h2
-    @topNumber
+    - collection @topNumbers
+      @
     span.text-success.response[class:show_=@totalSuccess]
       "YES"
 div

@@ -45,6 +45,26 @@ $(function () {
         return (num - (num % div)) / div;
     }
 
+    function proceed (o) {
+        var next;
+        if (Math.random() >= 0.5) {
+            next = o.leftVal;
+        }
+        else {
+            next = o.rightVal;
+        }
+        o.topNumbers.push(next);
+        resetGame(o, next);
+    }
+
+    function resetGame (o, n) {
+        o.leftVal = quotient(n, 2) - 1;
+        o.rightVal = quotient(n, 2) + 1;
+        o.leftDisabled = false;
+        o.rightDisabled = false;
+        o.totalSuccess = false;
+    }
+
     var
         red = "X769",
         left = red,
@@ -61,17 +81,14 @@ $(function () {
                 Robot.connectRobot(blue);
             },
             startOver: function (_, o) {
-                o.topNumber = giveMeNumber(10,10);
-                o.leftVal = quotient(o.topNumber, 2) - 1;
-                o.rightVal = quotient(o.topNumber, 2) + 1;
-                o.leftDisabled = false;
-                o.rightDisabled = false;
-                o.totalSuccess = false;
+                var newNumber = giveMeNumber(10,10);
+                o.topNumbers.update([newNumber]);
+                resetGame(o, newNumber);
             },
         },
 
         model = Serenade({
-            topNumber: null,
+            topNumbers: new Serenade.Collection(["foo","bar"]),
             rightVal: null,
             leftVal: null,
             leftDisabled: false,
@@ -125,12 +142,12 @@ $(function () {
             fail = 'rightFailed';
         }
         if (!model[disabled]) {
-            if (model.topNumber % model[val] === 0) {
+            if (model.topNumbers.last % model[val] === 0) {
                 model[fail] = false;
                 model[disabled] = true;
                 if (halfDone) {
                     model.totalSuccess = true;
-                    setTimeout(function () { ctrl.startOver(null, model); }, 1500);
+                    setTimeout(function () { proceed(model); }, 1500);
                 }
             }
             else {
