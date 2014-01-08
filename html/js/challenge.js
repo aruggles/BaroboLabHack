@@ -4,6 +4,52 @@
 $(function () {
     "use strict";
 
+    var
+        red = "X769",
+        left = red,
+        blue = "4PMN",
+        right = blue,
+
+        ctrl = {
+            leftClick: function () {
+                zeClicken(left);
+            },
+            rightClick: function () {
+                zeClicken(right);
+            },
+            discon: function () {
+                Robot.disconnectRobot(red);
+                Robot.disconnectRobot(blue);
+            },
+            connect: function () {
+                Robot.connectRobot(red);
+                Robot.connectRobot(blue);
+            },
+            startOver: function (_, o) {
+                var newNumber = giveMeNumber(10,10);
+                o.topNumbers.update([newNumber]);
+                resetGame(o, newNumber);
+            },
+        },
+
+        model = Serenade({
+            topNumbers: new Serenade.Collection([]),
+            rightVal: null,
+            leftVal: null,
+            leftDisabled: false,
+            rightDisabled: false,
+            leftFailed: false,
+            rightFailed: false,
+            totalSuccess: false,
+            hasRobots: true,
+        });
+        Serenade.defineProperty(model, "topNumber", {
+            get: function () {
+                return this.topNumbers.join(" -> ");
+            },
+            dependsOn: "topNumbers",
+        });
+
     /* Mock Robot object for testing without any robots attached.
      */
 
@@ -31,6 +77,7 @@ $(function () {
             connect: function () {}
         };
       });
+      model.hasRobots = false;
     }
     else {
       Robot = window.Robot;
@@ -65,38 +112,6 @@ $(function () {
         o.totalSuccess = false;
     }
 
-    var
-        red = "X769",
-        left = red,
-        blue = "4PMN",
-        //right = blue,
-
-        ctrl = {
-            discon: function () {
-                Robot.disconnectRobot(red);
-                Robot.disconnectRobot(blue);
-            },
-            connect: function () {
-                Robot.connectRobot(red);
-                Robot.connectRobot(blue);
-            },
-            startOver: function (_, o) {
-                var newNumber = giveMeNumber(10,10);
-                o.topNumbers.update([newNumber]);
-                resetGame(o, newNumber);
-            },
-        },
-
-        model = Serenade({
-            topNumbers: new Serenade.Collection(["foo","bar"]),
-            rightVal: null,
-            leftVal: null,
-            leftDisabled: false,
-            rightDisabled: false,
-            leftFailed: false,
-            rightFailed: false,
-            totalSuccess: false,
-        });
 
     Robot.scrollUp.connect(function (robID) {
         if (robID === left) {
@@ -127,7 +142,7 @@ $(function () {
         }
     });
 
-    Robot.buttonChanged.connect(function (robID) {
+    function zeClicken (robID) {
         var val, disabled, halfDone, fail;
         if (robID === left) {
             val = 'leftVal';
@@ -155,7 +170,10 @@ $(function () {
                 setTimeout(function () { model[fail] = false; }, 1000);
             }
         }
-    });
+    }
+
+
+    Robot.buttonChanged.connect(zeClicken);
 
     ctrl.startOver(null, model);
     $("#challengeApp").replaceWith(Serenade.render('app', model, ctrl));

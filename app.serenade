@@ -1,13 +1,14 @@
 div
   h2
-    - collection @topNumbers
-      @
+    @topNumber
     span.text-success.response[class:show_=@totalSuccess]
       "YES"
 div
   label[for="left"]
     "Robot 1"
-  input[name="left" binding=@leftVal type="text" disabled=@leftDisabled class:disabled=@leftDisabled]
+  input[name="left" binding:change=@leftVal type="text" disabled=@leftDisabled class:disabled=@leftDisabled]
+  button[event:click=leftClick! class:hidden=@hasRobots]
+    "Left Robot"
   span.text-warning.response[class:show_=@leftFailed]
     "Guess again!"
   span.text-success.response[class:show_=@leftDisabled]
@@ -15,7 +16,9 @@ div
   br
   label[for="right"]
     "Robot 2"
-  input[name="right" binding=@rightVal type="text" disabled=@rightDisabled class:disabled=@rightDisabled]
+  input[name="right" binding:change=@rightVal type="text" disabled=@rightDisabled class:disabled=@rightDisabled]
+  button[event:click=rightClick! class:hidden=@hasRobots]
+    "Right Robot"
   span.text-warning.response[class:show_=@rightFailed]
     "Guess again!"
   span.text-success.response[class:show_=@rightDisabled]
