@@ -28,12 +28,14 @@ $(function () {
             startOver: function (_, o) {
                 var newNumber = giveMeNumber(10,10);
                 o.topNumbers.update([newNumber]);
+                o.topNumber = newNumber;
                 resetGame(o, newNumber);
             },
         },
 
         model = Serenade({
             topNumbers: new Serenade.Collection([]),
+            topNumber: '',
             rightVal: null,
             leftVal: null,
             leftDisabled: false,
@@ -42,12 +44,6 @@ $(function () {
             rightFailed: false,
             totalSuccess: false,
             hasRobots: true,
-        });
-        Serenade.defineProperty(model, "topNumber", {
-            get: function () {
-                return this.topNumbers.join(" -> ");
-            },
-            dependsOn: "topNumbers",
         });
 
     /* Mock Robot object for testing without any robots attached.
@@ -101,6 +97,7 @@ $(function () {
             next = o.rightVal;
         }
         o.topNumbers.push(next);
+        o.topNumber = o.topNumbers.join(' -> ');
         resetGame(o, next);
     }
 
@@ -177,4 +174,5 @@ $(function () {
 
     ctrl.startOver(null, model);
     $("#challengeApp").replaceWith(Serenade.render('app', model, ctrl));
+
 });
