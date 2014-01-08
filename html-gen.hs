@@ -195,7 +195,7 @@ prediction = boilerplate'
 challenge = boilerplate
     (labNav "Challenge")
     (do
-      h2 $ "Factoring Game"
+      h2 $ "Factoring Challenge"
       H.div ! A.id "challengeApp" $ mempty
     )
     ["js/vendor/serenade.0.5.0.js", "js/challenge/sr-view-app.js", "js/challenge.js"]

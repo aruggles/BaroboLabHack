@@ -7,6 +7,7 @@ nav overflows the page | id:6899c28337b28421327cd141f83616e4238668b1
 fix setup pic dimensions | id:712418f21a9403ff6994d64eb8e1bffa30b6e0c8
 scale down images | id:9838be76e8b31654f90642dfd5de5ea132a0dd70
 dont disable retry if input is empty | id:9f44c07957f599fee025c1d1c84e0d78090a2e70
+-1 starting number | id:a696eb228ad7fcc31dd64d1f3f2e70b4592956c8
 use getvars for red/blue | id:bd5a2dfba757917ec2114880922d241623d733a8
 rename page4 to setup | id:df8d0eb4430c2e628e2f82381485ee274a48e91f
 remove barobolab elemen from nav | id:e1813c3daa4f473ed7508114bf21ea4dc9ac6260

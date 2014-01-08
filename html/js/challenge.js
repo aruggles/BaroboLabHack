@@ -26,7 +26,7 @@ $(function () {
                 Robot.connectRobot(blue);
             },
             startOver: function (_, o) {
-                var newNumber = giveMeNumber(10,10);
+                var newNumber = giveMeNumber(4,100);
                 o.topNumbers.update([newNumber]);
                 o.topNumber = newNumber;
                 resetGame(o, newNumber);
@@ -42,6 +42,8 @@ $(function () {
             rightDisabled: false,
             leftFailed: false,
             rightFailed: false,
+            leftSuccess: false,
+            rightSuccess: false,
             totalSuccess: false,
             hasRobots: true,
         });
@@ -51,32 +53,32 @@ $(function () {
 
     var Robot;
     if (typeof window.Robot === "undefined") {
-      Robot = {};
-      [
-        "connectRobot",
-        "disconnectRobot",
-        "getRobotIDList",
-        "moveNB",
-        "printMessage",
-        "setColorRGB",
-        "setJointSpeeds",
-        "stop",
-      ].forEach(function (method) {
-        Robot[method] = function () {};
-      });
-      [
-        "scrollUp",
-        "scrollDown",
-        "buttonChanged",
-      ].forEach(function (event) {
-        Robot[event] = {
-            connect: function () {}
-        };
-      });
-      model.hasRobots = false;
+        Robot = {};
+        [
+            "connectRobot",
+            "disconnectRobot",
+            "getRobotIDList",
+            "moveNB",
+            "printMessage",
+            "setColorRGB",
+            "setJointSpeeds",
+            "stop",
+        ].forEach(function (method) {
+            Robot[method] = function () {};
+        });
+        [
+            "scrollUp",
+            "scrollDown",
+            "buttonChanged",
+        ].forEach(function (event) {
+            Robot[event] = {
+                connect: function () {}
+            };
+        });
+        model.hasRobots = false;
     }
     else {
-      Robot = window.Robot;
+        Robot = window.Robot;
     }
 
     function giveMeNumber (min, max) {
@@ -84,28 +86,54 @@ $(function () {
     }
 
     // integer division, i.e. quotient
-    function quotient (num, div) {
-        return (num - (num % div)) / div;
+    //function quotient (num, div) {
+        //return (num - (num % div)) / div;
+    //}
+
+    function isPrime (n) {
+        var i;
+        for (i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i === 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     function proceed (o) {
-        var next;
-        if (Math.random() >= 0.5) {
-            next = o.leftVal;
+        var min, max, next;
+        if (o.leftVal <= o.rightVal) {
+            min = o.leftVal;
+            max = o.rightVal;
         }
         else {
-            next = o.rightVal;
+            min = o.rightVal;
+            max = o.leftVal;
         }
+
+        if (!isPrime(max)) {
+            next = max;
+        }
+        else if (!isPrime(min)) {
+            next = min;
+        }
+        else {
+            ctrl.startOver(null, o);
+            return;
+        }
+
         o.topNumbers.push(next);
         o.topNumber = o.topNumbers.join(' -> ');
         resetGame(o, next);
     }
 
     function resetGame (o, n) {
-        o.leftVal = quotient(n, 2) - 1;
-        o.rightVal = quotient(n, 2) + 1;
+        o.leftVal = giveMeNumber(2, 2*n/3);
+        o.rightVal = giveMeNumber(2,2*n/3);
         o.leftDisabled = false;
         o.rightDisabled = false;
+        o.leftSuccess = false;
+        o.rightSuccess = false;
         o.totalSuccess = false;
     }
 
@@ -140,31 +168,43 @@ $(function () {
     });
 
     function zeClicken (robID) {
-        var val, disabled, halfDone, fail;
+        var top = model.topNumbers.last,
+            val, otherVal, success, disabled, halfDone, fail;
         if (robID === left) {
             val = 'leftVal';
+            otherVal = 'rightVal';
             disabled = 'leftDisabled';
-            halfDone = model.rightDisabled;
+            success = 'leftSuccess';
+            halfDone = model.rightSuccess;
             fail = 'leftFailed';
         }
         else {
             val = 'rightVal';
+            otherVal = 'leftVal';
             disabled = 'rightDisabled';
-            halfDone = model.leftDisabled;
+            success = 'rightSuccess';
+            halfDone = model.leftSuccess;
             fail = 'rightFailed';
         }
         if (!model[disabled]) {
-            if (model.topNumbers.last % model[val] === 0) {
+            if (halfDone && Math.abs(model[val] * model[otherVal] - top) < 0.001) {
+                model[disabled] = true;
+                model[success] = true;
+                model.totalSuccess = true;
+                setTimeout(function () { proceed(model); }, 1500);
+            }
+            else if (!halfDone && Math.abs(top % model[val]) < 0.001) {
                 model[fail] = false;
                 model[disabled] = true;
-                if (halfDone) {
-                    model.totalSuccess = true;
-                    setTimeout(function () { proceed(model); }, 1500);
-                }
+                model[success] = true;
             }
             else {
                 model[fail] = true;
-                setTimeout(function () { model[fail] = false; }, 1000);
+                model[disabled] = true;
+                setTimeout(function () {
+                    model[fail] = false;
+                    model[disabled] = false;
+                }, 1000);
             }
         }
     }
