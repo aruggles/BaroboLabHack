@@ -30,8 +30,8 @@ set(INSTALL_BIN_DIR ${DEF_INSTALL_BIN_DIR}
 set(INSTALL_SHARE_DIR ${DEF_INSTALL_SHARE_DIR}
   CACHE PATH "data installation directory")
 
-message(STATUS "Will install binaries to ${CMAKE_INSTALL_PREFIX}/${INSTALL_BIN_DIR}")
-message(STATUS "Will install data to ${CMAKE_INSTALL_PREFIX}/${INSTALL_SHARE_DIR}")
+message(STATUS "${PROJECT_NAME} will install binaries to ${CMAKE_INSTALL_PREFIX}/${INSTALL_BIN_DIR}")
+message(STATUS "${PROJECT_NAME} will install data to ${CMAKE_INSTALL_PREFIX}/${INSTALL_SHARE_DIR}")
 
 ##############################################################################
 # Content
