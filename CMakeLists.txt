@@ -7,6 +7,8 @@ cmake_policy(SET CMP0020 OLD) # we'll link with QTMAIN manually
 
 project(BaroboLab)
 
+add_subdirectory(../libbarobo libbarobo)
+
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
 set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR})
