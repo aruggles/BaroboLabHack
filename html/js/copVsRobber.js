@@ -1,6 +1,5 @@
 /* jshint jquery: true */
-/* -global Robot */
-/* exported runDemo */
+/* global bootbox */
 
 $(function() {
 "use strict";
@@ -47,8 +46,8 @@ else {
 var
   /* Constants */
   wheelRadius = 1.75,
-  blue = "4V21",
-  red = "CZ98",
+  blue = "4PMN",
+  red = "X769",
   imgH = 30, imgW = 40,
   ymin = -2, ymax = 12,
 
@@ -67,39 +66,46 @@ var
     })(window.location.search.substr(1).split('&')),
 
   /* Prototype objects */
-  cop = {
+  robot = {
+    posFn: function(t) {
+      return this.speed * t + this.start;
+    },
+  },
+  cop = Object.create(robot).update({
     color: "blue",
     label: "cop",
     data: [],
     speed: 2,
     start: -2,
-    img: (new Image()).update({src: "img/cop.jpg"}),
+    imgSrc: "img/cop.png",
     points: {
       symbol: function (ctx, x, y) {
         ctx.drawImage(cop.img, x - imgW/2, y - imgH/2, imgW, imgH);
       },
     },
     pos: 1.3,
-  },
-  robber = {
+  }),
+  robber = Object.create(robot).update({
     color: "red",
     label: "robber",
     data: [],
     speed: 0.5,
     start: 4,
-    img: (new Image()).update({src: "img/robber.jpg"}),
+    imgSrc: "img/robber.png",
     points: {
       symbol: function (ctx, x, y) {
         ctx.drawImage(robber.img, x - imgW/2, y - imgH/2, imgW, imgH);
       },
     },
     pos: 0.7,
-  },
+
+  }),
 
   /* IOrefs (mutated globals) */
   xvst, pos,
   xvstSeries, posSeries,
   loopID,
+  emergencyStopped = false,
 
   /* Functions */
   stopLoop = function () {
@@ -107,6 +113,11 @@ var
       clearTimeout(loopID);
       loopID = null;
     }
+  },
+
+  emergencyStop = function () {
+    stopRobots();
+    emergencyStopped = true;
   },
 
   stopRobots = function () {
@@ -129,7 +140,7 @@ var
       xaxis: {
         min: 0,
         max: 10,
-        tickSize: 1,
+        tickSize: 2,
         tickDecimals: 0,
       },
       yaxis: {
@@ -168,11 +179,16 @@ var
     });
   },
 
-  resetCharts = function () {
-    stopRobots();
+  initializeCharts = function () {
     xvstSeries = [
-      Object.create(cop),
-      Object.create(robber),
+      Object.create(cop).update(
+        {
+          data: [[0, cop.start]]
+        }),
+      Object.create(robber).update(
+        {
+          data: [[0, robber.start]]
+        }),
       Object.create(cop).update(
         {
           points: {
@@ -207,41 +223,62 @@ var
     plotCharts(xvstSeries, posSeries);
   },
 
+  resetCharts = function () {
+    if (emergencyStopped) {
+      bootbox.alert(
+        "You'll have to move the robots back yourself, " +
+        "since the stop button was pressed."
+      );
+      emergencyStopped = false;
+      initializeCharts();
+    }
+    else {
+      var dist = parseFloat($("#guess").val());
+      iterDemo(-dist);
+      runRobots(-dist);
+    }
+    //$("#guess").attr("disabled", false);
+    //$("#demoBtn").attr("disabled", false);
+    //$("#guess").val(null);
+  },
+
   iterDemo = (function() {
     var iter = 0;
-    var timeout = 200; // milliseconds
+    var timeout = (1000/24); // milliseconds
     var step = timeout/1000.0;
     var tolerance = step / 2;
     var xstop;
-    var d1, d2;
+    var reverse;
 
     function iterDemo(x) {
-      var reset = false;
       var y1, y2;
 
       if (typeof x !== "undefined" && x !== null) {
-        reset = true;
-      }
-
-      if (reset) {
         iter = 0;
         xstop = Math.abs(x);
-        d1 = [[0, cop.start]];
-        d2 = [[0, robber.start]];
+        reverse = x < 0;
       }
       iter = iter + step;
-      Robot.printMessage(iter);
-      y1 = cop.speed * iter + cop.start;
-      y2 = robber.speed * iter + robber.start;
-      d1.push([iter, y1]);
-      d2.push([iter, y2]);
+      if (!reverse) {
+        y1 = cop.speed * iter + cop.start;
+        y2 = robber.speed * iter + robber.start;
 
-      xvstSeries[0].data = d1;
-      xvstSeries[1].data = d2;
-      xvstSeries[2].data = [[iter,y1]];
-      xvstSeries[3].data = [[iter,y2]];
-      posSeries[0].data = [[cop.pos, y1]];
-      posSeries[1].data = [[robber.pos, y2]];
+        xvstSeries[0].data.push([iter, y1]);
+        xvstSeries[1].data.push([iter, y2]);
+        xvstSeries[2].data = [[iter,y1]];
+        xvstSeries[3].data = [[iter,y2]];
+        posSeries[0].data = [[cop.pos, y1]];
+        posSeries[1].data = [[robber.pos, y2]];
+      }
+      else { // reverse
+        xvstSeries[0].data.pop();
+        xvstSeries[1].data.pop();
+        xvstSeries[2].data = xvstSeries[0].data.slice(-1);
+        xvstSeries[3].data = xvstSeries[1].data.slice(-1);
+        posSeries[0].data[0][1] = xvstSeries[2].data[0][1];
+        posSeries[1].data[0][1] = xvstSeries[3].data[0][1];
+      }
+
       xvst.setData(xvstSeries);
       pos.setData(posSeries);
       xvst.draw();
@@ -257,60 +294,67 @@ var
     return iterDemo;
   })(),
 
+  runRobots = function (dist) {
+    //var robotList = Robot.getRobotIDList();
+    Robot.connectRobot(red);
+    Robot.connectRobot(blue);
+
+    Robot.setColorRGB(red, 255, 0, 0);
+    Robot.setColorRGB(blue, 0, 0, 255);
+
+    var xstart = 0;
+    var xstop = dist;
+
+    var reddist = robber.posFn(xstop) - robber.posFn(xstart);
+    var bluedist = cop.posFn(xstop) - cop.posFn(xstart);
+
+    var redradians = reddist / wheelRadius;
+    var blueradians = bluedist / wheelRadius;
+
+    var redspeed = robber.speed / wheelRadius;
+    var bluespeed = cop.speed / wheelRadius;
+
+    Robot.setJointSpeeds(red, redspeed, redspeed, redspeed, redspeed);
+    Robot.setJointSpeeds(blue, bluespeed, bluespeed, bluespeed, bluespeed);
+
+    Robot.moveNB(red, redradians, 0, -redradians, 0);
+    Robot.moveNB(blue, blueradians, 0, -blueradians, 0);
+  },
+
   runDemo = function () {
     var intersectGuess = parseFloat($("#guess").val());
     if (!isNaN(intersectGuess)) {
-      if (typeof Robot !== 'undefined' && Robot !== null) {
-        //var robotList = Robot.getRobotIDList();
-        Robot.connectRobot(red);
-        Robot.connectRobot(blue);
-
-        Robot.setColorRGB(red, 255, 0, 0);
-        Robot.setColorRGB(blue, 0, 0, 255);
-
-        var redfunc = function(x) {
-          return robber.speed * x + robber.start;
-        };
-
-        var bluefunc = function(x) {
-          return cop.speed * x + cop.start;
-        };
-
-        var xstart = 0;
-        var xstop = intersectGuess;
-
-        var reddist = redfunc(xstop) - redfunc(xstart);
-        var bluedist = bluefunc(xstop) - bluefunc(xstart);
-
-        var redradians = reddist / wheelRadius;
-        var blueradians = bluedist / wheelRadius;
-
-        var redspeed = robber.speed / wheelRadius;
-        var bluespeed = cop.speed / wheelRadius;
-
-        Robot.setJointSpeeds(red, redspeed, redspeed, redspeed, redspeed);
-        Robot.setJointSpeeds(blue, bluespeed, bluespeed, bluespeed, bluespeed);
-
-        Robot.moveNB(red, redradians, 0, -redradians, 0);
-        Robot.moveNB(blue, blueradians, 0, -blueradians, 0);
-        iterDemo(intersectGuess);
-      }
+      runRobots(intersectGuess);
+      iterDemo(intersectGuess);
+      //$("#guess").attr("disabled", true);
+      //$("#demoBtn").attr("disabled", true);
     }
   };
 
 /* __main__
+ *
+ * eff yeah, cps
  */
 
-setTimeout(resetCharts, 100);
-
-if (parseInt(qs.intersect)) {
-  setTimeout(runDemo, 200);
-}
+cop.img = $("<img />").attr('src', cop.imgSrc).load( function () {
+    robber.img = $("<img />").attr('src', robber.imgSrc).load( function () {
+      initializeCharts();
+      if (qs.hasOwnProperty('red')) {
+        red = qs.red;
+      }
+      if (qs.hasOwnProperty('blue')) {
+        blue = qs.blue;
+      }
+      if (parseInt(qs.intersect)) {
+        runDemo();
+      }
+    })[0];
+  })[0];
 
 $("#guess").val(qs.intersect);
 $("#demoBtn").click(runDemo);
 $("#resetBtn").click(resetCharts);
-$("#stopBtn").click(stopRobots);
+$("#stopBtn").click(emergencyStop);
 $(window).resize(function () { plotCharts(xvstSeries, posSeries); });
 
 });

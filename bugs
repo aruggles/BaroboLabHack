@@ -1,0 +1,6 @@
+use set_interval instead of set_timeout | id:0121e827fdf906099ada5db85c3d78235322eec3
+fix en/disable of all buttons | id:261ec7fe47fc45a6f039f4ef42917d6f24a108bd
+find robots and color them | id:8cb217aec674368f5c22caa22a1c927ca0ef4712
+topNumber is hacky | id:a0222ee0ec6cd79bdc67e1afff93104e3528e162
+js dialog for choosing robots | id:d45b0489aed84985a536560701c7b5c776275a80
+position or distance vernacular | id:f1bb1c614361adc9ab0f01827d530625ac1049c5

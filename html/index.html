@@ -1,60 +1,36 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!DOCTYPE HTML>
+
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>BaroboLab - DEMO</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-                        
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-                        
+        <title>
+            BaroboLab - DEMO
+        </title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
-    <body class="container">
-
-      <h1>BaroboLab Demo</h1>
-      <p>This is a demo application.</p>
-      <a href="page1.html">Sample Curriculum Content</a>
-
-      <div id="test"></div>
-
-      <div class="demo-container">
-        <div id="placeholder" class="demo-placeholder" style="width:680px; height:500px;"></div>
-      </div>
-
-        <script src="js/vendor/jquery-1.10.2.min.js"></script>
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/flot/jquery.flot.js"></script>
-        <script>
-          	$(function() {
-              if (typeof Robot !== 'undefined') {
-                Robot.printDbg();
-                var t = Robot.printMessage('Hello From Javascript');
-                $('#test').html('Message from the application: ' + t);
-              }
-              
-          		var d1 = [];
-          		for (var i = 0; i < 14; i += 0.5) {
-          			d1.push([i, Math.sin(i)]);
-          		}
-
-          		var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
-
-          		// A null signifies separate line segments
-
-          		var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
-
-          		$.plot("#placeholder", [ d1, d2, d3 ]);
-
-          	});
+    <body>
+        <nav class="app">
+            <a href="index.html">
+                <img src="img/barobo_logo.png">
+            </a>
+            <ol class="nav nav-stacked nav-pills">
+                <li class="invisible">
+                    foo
+                </li>
+            </ol>
+        </nav>
+        <section class="container">
+            <a href="holt.html">
+                <img class="textbook btn btn-default" id="holt_img" src="img/holt_california.png">
+            </a>
+            <a href="#">
+                <img class="textbook btn btn-default disabled" src="img/ca_common_core.png">
+            </a>
+        </section>
+        <script src="js/vendor/jquery-1.10.2.min.js">
+        </script>
+        <script src="js/vendor/bootstrap.min.js">
         </script>
     </body>
 </html>

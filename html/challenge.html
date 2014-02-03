@@ -38,51 +38,35 @@
                 </li>
                 <li class="active">
                     <a href="#">
-                        Overview
+                        Challenge
+                    </a>
+                </li>
+                <hr class="ftr">
+                <li>
+                    <a href="lab_overview.html">
+                        <small class="text-muted">
+                            Overview
+                        </small>
                     </a>
                 </li>
             </ol>
         </nav>
         <section class="container">
-            <table class="table table-striped overviewPics">
-                <tr>
-                    <td>
-                        <img src="img/labsetup.png">
-                    </td>
-                    <td>
-                        <div class="stepDescr">
-                            Set up the lab.
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="img/prediction.png">
-                    </td>
-                    <td>
-                        <div class="stepDescr">
-                            Read the question and introduce the charts. After entering a guess, press Next.
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="img/charts.png">
-                    </td>
-                    <td>
-                        <div class="stepDescr">
-                            The robots will advance. The charts can be reset and students can guess again!
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <a class="pull-right btn btn-primary" href="setup.html">
-                Go to first step
-            </a>
+            <h2>
+                Factoring Challenge
+            </h2>
+            <div id="challengeApp">
+            </div>
         </section>
         <script src="js/vendor/jquery-1.10.2.min.js">
         </script>
         <script src="js/vendor/bootstrap.min.js">
+        </script>
+        <script src="js/vendor/serenade.0.5.0.js">
+        </script>
+        <script src="js/challenge/sr-view-app.js">
+        </script>
+        <script src="js/challenge.js">
         </script>
     </body>
 </html>
