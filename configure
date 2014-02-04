@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+# A silly little configure script that simplifies some things.
+
+rm -rf build
+mkdir build
+cd build
+cmake ..
+ln -s ../html .
+
+echo -e "\n    Configure complete. You can now enter the build directory"
+echo -e   "    and run 'make'.\n"
