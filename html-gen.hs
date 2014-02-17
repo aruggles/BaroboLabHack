@@ -40,6 +40,9 @@ genHtml (file, html) = writeFile file $ renderHtml html
 str :: String -> Html
 str = toHtml
 
+val :: String -> AttributeValue
+val = toValue
+
 labNavHdr =
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
@@ -95,15 +98,22 @@ chap6 = boilerplate'
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li ! class_ "active" $ a ! href "#" $ "Chapter 6"
     ]
-    (ul ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "setup.html" $ do
-            "6.1"
+    (ul ! class_ "sections nav nav-stacked nav-pills" $ do
+        li $ a ! href "setup.html" ! A.title commonCoreWords $ do
+            small "6.1"
+            "Solving Systems by Graphing"
             small $ "(Common Core 5.1)"
-        li ! class_ "disabled" $ a ! href "#" $ "6.2"
-        li ! class_ "disabled" $ a ! href "#" $ "6.3"
-        li ! class_ "disabled" $ a ! href "#" $ "6.4"
-        li ! class_ "disabled" $ a ! href "#" $ "6.5"
+        li' "6.2"
+        li' "6.3"
+        li' "6.4"
+        li' "6.5"
     )
+  where
+    li' v = li !. "disabled" $ a ! href "#" $ small v
+    commonCoreWords = val $
+      "A-RE1.6; Solve systems of linear equations exactly and approximately "
+      ++ "(e.g., with graphs) focusing on pairs of linear equations in two "
+      ++ "variables."
 
 section6_1 = boilerplate'
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
