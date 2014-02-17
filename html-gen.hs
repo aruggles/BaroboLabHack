@@ -175,6 +175,14 @@ charts = boilerplate
 setup = boilerplate'
     (labNav "Setup")
     (do
+        dl $ do
+            dt "The objective"
+            dd $ str $ "Solve a system of linear equations in two variables"
+                ++ " by graphing."
+            dt "Vocabulary"
+            dd $ H.ul $ do
+                li "System of linear equations"
+                li "Solution of a system of linear equations"
         p $ str $ "To run this curriculum application, please setup the "
             ++ "robots according to the following image."
         img ! src "img/setup.png" ! class_ "center-block fullContent"
