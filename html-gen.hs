@@ -147,7 +147,7 @@ lab_overview = boilerplate'
     )
 
 charts = boilerplate
-    (labNav "Guess")
+    (labNav "Prediction")
     (do
         H.div ! class_ "row chartRow" $ do
             figure ! class_ "col-xs-3" $ do
