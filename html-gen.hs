@@ -11,6 +11,9 @@ import qualified Text.Blaze.Html5.Attributes as A
 
 import Text.Blaze.Html.Renderer.Pretty (renderHtml)
 
+elem !. c = elem ! class_ c
+elem !# i = elem ! A.id i
+
 boilerplate navlist content scripts =
   let scripts' = mapM_ (\s -> script ! src s $ mempty) $ [
                     "js/vendor/jquery-1.10.2.min.js"
@@ -40,7 +43,6 @@ str = toHtml
 labNavHdr =
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     , li $ a ! href "chap6.html" $ "Chapter 6"
-    , li $ a ! href "section6-1.html" $ "Section 6.1"
     , hr ! class_ "hdr"
     ]
 
@@ -52,7 +54,9 @@ labNavFtr =
 labNav, labNavInner :: String -> [Html]
 
 labNavInner title =
-    [ li $ a ! href "setup.html" $ "Cops vs. Robbers"
+    [ li $ a ! href "setup.html" $ H.div $ do
+        "6.1:"
+        small "Cops vs. Robbers"
     , li ! class_ "active" $ a ! href "#" $ toHtml title
     ]
 
@@ -92,7 +96,7 @@ chap6 = boilerplate'
     , li ! class_ "active" $ a ! href "#" $ "Chapter 6"
     ]
     (ul ! class_ "nav nav-stacked nav-pills" $ do
-        li $ a ! href "section6-1.html" $ do
+        li $ a ! href "setup.html" $ do
             "6.1"
             small $ "(Common Core 5.1)"
         li ! class_ "disabled" $ a ! href "#" $ "6.2"
