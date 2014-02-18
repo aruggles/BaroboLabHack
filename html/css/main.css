@@ -133,7 +133,8 @@ body > header {
 }
 
 body {
-  margin: 1em 1em;
+    position: relative;
+    margin: 1em 1em;
 }
 
 
@@ -150,12 +151,18 @@ body {
 }
 
 nav {
-  float: left;
-  width: 15%;
+    position: absolute;
+    width: 10em;
 }
 
 nav + section {
-  float: left;
+    position: absolute;
+    /* nav.width + 1 */
+    left: 11em;
+}
+
+h4:first-child {
+    margin-top: 0;
 }
 
 nav img {
@@ -164,11 +171,6 @@ nav img {
 
 img.fullContent {
   width: 45%;
-}
-
-nav + section.container {
-  width: 80%;
-  float: right;
 }
 
 nav.app > a > img {

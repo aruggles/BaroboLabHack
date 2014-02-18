@@ -29,7 +29,7 @@ boilerplate navlist content scripts =
             nav ! class_ "app" $ do
                 a ! href "index.html" $ img ! src "img/barobo_logo.png"
                 ol ! class_ "nav nav-stacked nav-pills" $ sequence_ navlist
-            section ! class_ "container" $ content
+            section $ content
             scripts'
 
 boilerplate' n c = boilerplate n c []
