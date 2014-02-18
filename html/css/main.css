@@ -204,6 +204,12 @@ ul.sections small {
     left: 5em;
 }
 
+a.next {
+    position: absolute;
+    left: 25em;
+    top:  20em;
+}
+
 .equations table {
     text-align: right;
     border-spacing: 3em;

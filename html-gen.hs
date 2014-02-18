@@ -238,11 +238,20 @@ calculateSetup = boilerplate
                 tr $ do
                     tdm "\\text y-intercept = 4"
                     tdm "\\text y-intercept = -2"
+        a ! href "calculate_chart.html"
+          !. "next btn btn-large btn-primary" $ "Next"
     )
     [ "js/vendor/jqmath-etc-0.4.0.min.js" ]
-    [ "css/jqmath-0.4.0.css"]
+    [ "css/jqmath-0.4.0.css" ]
   where
     tdm m = td $ str $ "$" ++ m ++ "$"
+
+calculateChart = boilerplate
+    (labNav "Calculate")
+    (mempty
+    )
+    [ "js/vendor/jqmath-etc-0.4.0.min.js" ]
+    [ "css/jqmath-0.4.0.css" ]
 
 -- This belongs to a different lab.
 {-
@@ -265,4 +274,5 @@ main = mapM_ genHtml [
     , ("html/setup.html", setup)
     , ("html/prediction.html", prediction)
     , ("html/calculate_setup.html", calculateSetup)
+    , ("html/calculate_chart.html", calculateChart)
     ]
