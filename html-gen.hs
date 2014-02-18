@@ -14,17 +14,19 @@ import Text.Blaze.Html.Renderer.Pretty (renderHtml)
 elem !. c = elem ! class_ c
 elem !# i = elem ! A.id i
 
-boilerplate navlist content scripts =
+boilerplate navlist content scripts styles =
   let scripts' = mapM_ (\s -> script ! src s $ mempty) $ [
                     "js/vendor/jquery-1.10.2.min.js"
                     , "js/vendor/bootstrap.min.js" ] ++ scripts
+      styles' = mapM_ (\s -> link ! rel "stylesheet" ! href s) $ [
+                    "css/bootstrap.min.css"
+                    , "css/main.css" ] ++ styles
   in do
     docTypeHtml ! lang "en" $ do
         H.head $ do
             meta ! charset "utf-8"
             H.title "BaroboLab - DEMO"
-            link ! rel "stylesheet" ! href "css/bootstrap.min.css"
-            link ! rel "stylesheet" ! href "css/main.css"
+            styles'
         body $ do
             nav ! class_ "app" $ do
                 a ! href "index.html" $ img ! src "img/barobo_logo.png"
@@ -32,7 +34,7 @@ boilerplate navlist content scripts =
             section $ content
             scripts'
 
-boilerplate' n c = boilerplate n c []
+boilerplate' n c = boilerplate n c [] []
 
 genHtml (file, html) = writeFile file $ renderHtml html
 
@@ -171,6 +173,7 @@ charts = boilerplate
               a ! href "calculate_setup.html" ! class_ "pull-right btn btn-primary" $ "Next"
     )
     ["js/flot/jquery.flot.js", "js/vendor/bootbox.min.js", "js/copVsRobber.js"]
+    []
 
 setup = boilerplate'
     (labNav "Setup")
@@ -214,6 +217,34 @@ prediction = boilerplate'
       a ! href "setup.html" ! class_ "btn btn-default" $ "Back"
     )
 
+calculateSetup = boilerplate
+    (labNav "Calculate")
+    (do
+        h4 "How to set up the equation to graph"
+        H.div !. "equations" $ do
+            "Graph each line"
+            table $ do
+                tr $ do
+                    tdm "-x + 2y = 8"
+                    tdm "-2x + y = -2"
+                tr $ do
+                    tdm "2y = x + 8"
+                    tdm "y = 2x - 2"
+                tr $ do
+                    tdm "y = 1/2x + 4"
+                    td mempty
+                tr $ do
+                    tdm "\\text slope = 1/2"
+                    tdm "\\text slope = 2"
+                tr $ do
+                    tdm "\\text y-intercept = 4"
+                    tdm "\\text y-intercept = -2"
+    )
+    [ "js/vendor/jqmath-etc-0.4.0.min.js" ]
+    [ "css/jqmath-0.4.0.css"]
+  where
+    tdm m = td $ str $ "$" ++ m ++ "$"
+
 -- This belongs to a different lab.
 {-
 challenge = boilerplate
@@ -234,4 +265,5 @@ main = mapM_ genHtml [
     , ("html/charts.html", charts)
     , ("html/setup.html", setup)
     , ("html/prediction.html", prediction)
+    , ("html/calculate_setup.html", calculateSetup)
     ]
