@@ -220,9 +220,8 @@ prediction = boilerplate'
 calculateSetup = boilerplate
     (labNav "Calculate")
     (do
-        h4 "How to set up the equation to graph"
         H.div !. "equations" $ do
-            "Graph each line"
+            h4 "Setting up the equations for graphing"
             table $ do
                 tr $ do
                     tdm "-x + 2y = 8"

@@ -198,6 +198,26 @@ ul.sections small {
     padding-right: 1em;
 }
 
+.equations {
+    position: relative;
+    top: 5em;
+    left: 5em;
+}
+
+.equations table {
+    text-align: right;
+    border-spacing: 3em;
+}
+
+.equations table td + td {
+    border-left: 1px solid #999;
+    padding-left: 1em;
+}
+
+.equations table td {
+    padding-right: 3em;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
