@@ -168,7 +168,7 @@ charts = boilerplate
               button ! class_ "btn btn-danger" ! type_ "button" ! A.id "stopBtn" $ "STOP!"
           H.div ! class_ "fwdBack" $ do
               a ! class_ "btn btn-default" ! href "prediction.html" $ "Back"
-              a ! href "challenge.html" ! class_ "pull-right btn btn-primary" $ "Next"
+              a ! href "calculate_setup.html" ! class_ "pull-right btn btn-primary" $ "Next"
     )
     ["js/flot/jquery.flot.js", "js/vendor/bootbox.min.js", "js/copVsRobber.js"]
 
@@ -214,6 +214,8 @@ prediction = boilerplate'
       a ! href "setup.html" ! class_ "btn btn-default" $ "Back"
     )
 
+-- This belongs to a different lab.
+{-
 challenge = boilerplate
     (labNav "Challenge")
     (do
@@ -221,6 +223,7 @@ challenge = boilerplate
       H.div ! A.id "challengeApp" $ mempty
     )
     ["js/vendor/serenade.0.5.0.js", "js/challenge/sr-view-app.js", "js/challenge.js"]
+-}
 
 main = mapM_ genHtml [
     ("html/index.html", index)
@@ -231,5 +234,4 @@ main = mapM_ genHtml [
     , ("html/charts.html", charts)
     , ("html/setup.html", setup)
     , ("html/prediction.html", prediction)
-    , ("html/challenge.html", challenge)
     ]
