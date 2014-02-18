@@ -1,4 +1,5 @@
 export HOME
+export LANG
 
 run ./Tup-gen-html-rules.sh
 
