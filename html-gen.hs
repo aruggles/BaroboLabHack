@@ -14,6 +14,9 @@ import Text.Blaze.Html.Renderer.Pretty (renderHtml)
 elem !. c = elem ! class_ c
 elem !# i = elem ! A.id i
 
+infixl 8 !#
+infixl 8 !.
+
 boilerplate navlist content scripts styles =
   let scripts' = mapM_ (\s -> script ! src s $ mempty) $ [
                     "js/vendor/jquery-1.10.2.min.js"
@@ -268,6 +271,8 @@ calculateChart = boilerplate
                 H.span !# "xlabel" $ "6"
                 H.span !# "ylabel" $ "4"
                 H.span !# "intersect" $ "(4,6)"
+        a ! href "explore.html"
+          !. "next btn btn-large btn-primary" $ "Next"
 
     )
     [ "js/vendor/jqmath-etc-0.4.0.min.js"
@@ -278,6 +283,34 @@ calculateChart = boilerplate
     ]
   where
     tdm m = td $ str $ "$" ++ m ++ "$"
+
+explore = boilerplate
+    (labNav "Explore")
+    (do
+        ul !. "nav nav-tabs" $ do
+            li !. "active" $
+                tabLink "standardForm" "Standard Form"
+            li $
+                tabLink "slopeInterceptForm" "Slope Intercept Form"
+        H.div !. "tab-content" $ do
+            H.div !. "tab-pane active" !# "standardForm" $ do
+                "Input a system of your choice."
+                eqns
+            H.div !. "tab-pane" !# "slopeInterceptForm" $ do
+                eqns
+        H.div !# "chartDisplay" $ do
+            H.div !# "chartGoesHere" $ mempty
+        a ! href "challenge.html"
+          !. "next btn btn-large btn-primary" $ "Next"
+    )
+    ["js/vendor/serenade.0.5.0.js", "js/explore.js"]
+    []
+  where
+    tabLink link title =
+      a ! href (val $ '#' : link) ! dataAttribute "toggle" "tab" $ title
+    eqns = do
+        H.div !. "eqn-control" !# "leftEqn" $ mempty
+        H.div !. "eqn-control" !# "rightEqn" $ mempty
 
 -- This belongs to a different lab.
 {-
@@ -301,4 +334,5 @@ main = mapM_ genHtml [
     , ("html/prediction.html", prediction)
     , ("html/calculate_setup.html", calculateSetup)
     , ("html/calculate_chart.html", calculateChart)
+    , ("html/explore.html", explore)
     ]

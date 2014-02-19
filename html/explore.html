@@ -8,8 +8,6 @@
         </title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/jqmath-0.4.0.css">
-        <link rel="stylesheet" href="css/calculate_chart.css">
     </head>
     <body>
         <nav class="app">
@@ -40,7 +38,7 @@
                 </li>
                 <li class="active">
                     <a href="#">
-                        Calculate
+                        Explore
                     </a>
                 </li>
                 <hr class="ftr">
@@ -54,48 +52,38 @@
             </ol>
         </nav>
         <section>
-            <div class="infoHalf">
-                <div class="eqnTable">
-                    <table class="equations">
-                        <tr>
-                            <td>
-                                $y = 1/2x + 4$
-                            </td>
-                            <td>
-                                Robber
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                $y = 2x - 2$
-                            </td>
-                            <td>
-                                Cop
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div>
-                    The solution of the system of linear equations is the ordered pair $(4,6)$.
-                </div>
-            </div>
-            <div class="chartHalf">
-                This graph represents the system of equations.
-                <div class="calc-chart-container">
-                    <div id="calculation_chart">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#standardForm" data-toggle="tab">
+                        Standard Form
+                    </a>
+                </li>
+                <li>
+                    <a href="#slopeInterceptForm" data-toggle="tab">
+                        Slope Intercept Form
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="standardForm">
+                    Input a system of your choice.
+                    <div class="eqn-control" id="leftEqn">
                     </div>
-                    <span id="xlabel">
-                        6
-                    </span>
-                    <span id="ylabel">
-                        4
-                    </span>
-                    <span id="intersect">
-                        (4,6)
-                    </span>
+                    <div class="eqn-control" id="rightEqn">
+                    </div>
+                </div>
+                <div class="tab-pane" id="slopeInterceptForm">
+                    <div class="eqn-control" id="leftEqn">
+                    </div>
+                    <div class="eqn-control" id="rightEqn">
+                    </div>
                 </div>
             </div>
-            <a href="explore.html" class="next btn btn-large btn-primary">
+            <div id="chartDisplay">
+                <div id="chartGoesHere">
+                </div>
+            </div>
+            <a href="challenge.html" class="next btn btn-large btn-primary">
                 Next
             </a>
         </section>
@@ -103,11 +91,9 @@
         </script>
         <script src="js/vendor/bootstrap.min.js">
         </script>
-        <script src="js/vendor/jqmath-etc-0.4.0.min.js">
+        <script src="js/vendor/serenade.0.5.0.js">
         </script>
-        <script src="js/flot/jquery.flot.js">
-        </script>
-        <script src="js/calculate_chart.js">
+        <script src="js/explore.js">
         </script>
     </body>
 </html>
