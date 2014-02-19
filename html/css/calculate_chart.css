@@ -1,0 +1,29 @@
+.calc-chart-container {
+    position: relative;
+}
+
+#calculation_chart {
+    height: 600px;
+    width: 600px;
+}
+
+#xlabel, #ylabel, #intersect {
+    position: absolute;
+    color: #545454;
+    font-size: 80%;
+}
+
+#ylabel {
+    left: 415px;
+    bottom: 280px;
+}
+
+#xlabel {
+    left: 295px;
+    bottom: 460px;
+}
+
+#intersect {
+    left: 425px;
+    bottom: 445px;
+}

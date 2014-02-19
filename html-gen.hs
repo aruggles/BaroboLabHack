@@ -248,10 +248,36 @@ calculateSetup = boilerplate
 
 calculateChart = boilerplate
     (labNav "Calculate")
-    (mempty
+    (do
+        H.div !. "infoHalf" $ do
+            H.div !. "eqnTable" $ do
+                table !. "equations" $ do
+                    tr $ do
+                        tdm "y = 1/2x + 4"
+                        td "Robber"
+                    tr $ do
+                        tdm "y = 2x - 2"
+                        td "Cop"
+
+            H.div $ str $ "The solution of the system of linear equations"
+                ++ " is the ordered pair $(4,6)$."
+        H.div !. "chartHalf" $ do
+            "This graph represents the system of equations."
+            H.div !. "calc-chart-container" $ do
+                H.div !# "calculation_chart" $ mempty
+                H.span !# "xlabel" $ "6"
+                H.span !# "ylabel" $ "4"
+                H.span !# "intersect" $ "(4,6)"
+
     )
-    [ "js/vendor/jqmath-etc-0.4.0.min.js" ]
-    [ "css/jqmath-0.4.0.css" ]
+    [ "js/vendor/jqmath-etc-0.4.0.min.js"
+    , "js/flot/jquery.flot.js"
+    , "js/calculate_chart.js" ]
+    [ "css/jqmath-0.4.0.css"
+    , "css/calculate_chart.css"
+    ]
+  where
+    tdm m = td $ str $ "$" ++ m ++ "$"
 
 -- This belongs to a different lab.
 {-

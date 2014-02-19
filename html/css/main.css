@@ -198,7 +198,7 @@ ul.sections small {
     padding-right: 1em;
 }
 
-.equations {
+div.equations {
     position: relative;
     top: 5em;
     left: 5em;
