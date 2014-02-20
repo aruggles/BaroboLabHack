@@ -14,9 +14,6 @@ import Text.Blaze.Html.Renderer.Pretty (renderHtml)
 elem !. c = elem ! class_ c
 elem !# i = elem ! A.id i
 
-infixl 8 !#
-infixl 8 !.
-
 boilerplate navlist content scripts styles =
   let scripts' = mapM_ (\s -> script ! src s $ mempty) $ [
                     "js/vendor/jquery-1.10.2.min.js"
@@ -287,30 +284,64 @@ calculateChart = boilerplate
 explore = boilerplate
     (labNav "Explore")
     (do
-        ul !. "nav nav-tabs" $ do
-            li !. "active" $
-                tabLink "standardForm" "Standard Form"
-            li $
-                tabLink "slopeInterceptForm" "Slope Intercept Form"
-        H.div !. "tab-content" $ do
-            H.div !. "tab-pane active" !# "standardForm" $ do
-                "Input a system of your choice."
-                eqns
-            H.div !. "tab-pane" !# "slopeInterceptForm" $ do
-                eqns
-        H.div !# "chartDisplay" $ do
-            H.div !# "chartGoesHere" $ mempty
-        a ! href "challenge.html"
-          !. "next btn btn-large btn-primary" $ "Next"
+        H.div ! ngApp "explore" $ do
+            ul !. "nav nav-tabs" $ do
+                li !. "active" $
+                    tabLink "standardForm" "Standard Form"
+                li $
+                    tabLink "slopeInterceptForm" "Slope Intercept Form"
+            H.div !. "tab-content" $ do
+                H.div !. "tab-pane active" ! ngController "Eqns" $ do
+                    "Input a system of your choice."
+                    eqns
+                H.div !. "tab-pane" !# "slopeInterceptForm" $ do
+                    "wat"
+            H.div !# "chartDisplay" $ do
+                H.div !# "chartGoesHere" $ mempty
+            a ! href "challenge.html"
+              !. "next btn btn-large btn-primary" $ "Next"
     )
-    ["js/vendor/serenade.0.5.0.js", "js/explore.js"]
-    []
+    ["js/vendor/angular.min.js", "js/vendor/jqmath-etc-0.4.0.min.js", "js/explore.js"]
+    ["css/jqmath-0.4.0.css"]
   where
     tabLink link title =
       a ! href (val $ '#' : link) ! dataAttribute "toggle" "tab" $ title
     eqns = do
-        H.div !. "eqn-control" !# "leftEqn" $ mempty
-        H.div !. "eqn-control" !# "rightEqn" $ mempty
+        H.div !. "eqn-control" !# "leftEqn" $ do
+            H.div $ do
+                numInput "x1"
+                "x + "
+                numInput "y1"
+                "y = "
+                numInput "z1"
+            H.div $ str $ num "x1" ++ "x + " ++ num "y1" ++ "y = " ++ num "z1"
+            H.div $ str $ num "y1" ++ "y = " ++ num "-x1" ++ "x + " ++ num "z1"
+            H.div $ str $ "y = " ++ num "-x1/y1" ++ "x + " ++ num "z1/y1"
+            H.div $ str $ "Slope = " ++ num "-x1/y1"
+            H.div $ str $ "y-intercept = " ++ num "z1/y1"
+        H.div !. "eqn-control" !# "rightEqn" $ do
+            H.div $ do
+                numInput "x2"
+                "x + "
+                numInput "y2"
+                "y = "
+                numInput "z2"
+            H.div $ str $ num "x2" ++ "x + " ++ num "y2" ++ "y = " ++ num "z2"
+            H.div $ str $ num "y2" ++ "y = " ++ num "-x2" ++ "x + " ++ num "z2"
+            H.div $ str $ "y = " ++ num "-x2/y2" ++ "x + " ++ num "z2/y2"
+            H.div $ str $ "Slope = " ++ num "-x2/y2"
+            H.div $ str $ "y-intercept = " ++ num "z2/y2"
+    numInput m = input ! maxlength "3" ! size "3" ! A.max "99" ! A.min "-99"
+                       ! ngModel m
+    num expr = "{{" ++ expr ++ "| number }}"
+
+--
+-- mini angular library
+--
+ngModel = customAttribute "ng-model"
+ngIf = customAttribute "ng-if"
+ngController = customAttribute "ng-controller"
+ngApp = customAttribute "ng-app"
 
 -- This belongs to a different lab.
 {-
