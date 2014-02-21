@@ -59,19 +59,30 @@ angular.module('explore', [])
             colors: ["red", "blue"]
         }
 
+        $scope.plotChart = ->
+            serieses =
+                for [a, b] in [[$scope.a1, $scope.b1],
+                               [$scope.a2, $scope.b2]]
+                    for x in [-10, 10]
+                        [x, a*x + b]
+            $.plot($(".chartGoesHere", $element), serieses, chartCfg)
+
 
         $('.chartGoesHere', $element).height("400px").width("400px")
 
         $scope.$watch(
             -> [ $scope.a1, $scope.b1 ,
                  $scope.a2, $scope.b2 ]
-            ->
-                serieses =
-                    for [a, b] in [[$scope.a1, $scope.b1],
-                                   [$scope.a2, $scope.b2]]
-                        for x in [-10, 10]
-                            [x, a*x + b]
-                $.plot($(".chartGoesHere", $element), serieses, chartCfg)
+            $scope.plotChart
             true
         )
     )
+
+# Without this, the chart on the hidden tab draws funny. Perhaps because it
+# is hidden, and some size information is wrong? Anyway, this ensures the
+# chart is redrawn after the tab is visible -- and thus drawn correctly.
+$('a[data-toggle="tab"]').on('shown.bs.tab', (ev) ->
+    # Gets the scope of the chart div.
+    s = $('.chartGoesHere', $(ev.target).attr("href")).scope()
+    s.plotChart()
+)

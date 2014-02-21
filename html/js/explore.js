@@ -56,10 +56,7 @@ angular.module('explore', []).controller('StandardEqns', function($scope) {
     },
     colors: ["red", "blue"]
   };
-  $('.chartGoesHere', $element).height("400px").width("400px");
-  return $scope.$watch(function() {
-    return [$scope.a1, $scope.b1, $scope.a2, $scope.b2];
-  }, function() {
+  $scope.plotChart = function() {
     var a, b, serieses, x;
     serieses = (function() {
       var _i, _len, _ref, _ref1, _results;
@@ -81,5 +78,15 @@ angular.module('explore', []).controller('StandardEqns', function($scope) {
       return _results;
     })();
     return $.plot($(".chartGoesHere", $element), serieses, chartCfg);
-  }, true);
+  };
+  $('.chartGoesHere', $element).height("400px").width("400px");
+  return $scope.$watch(function() {
+    return [$scope.a1, $scope.b1, $scope.a2, $scope.b2];
+  }, $scope.plotChart, true);
+});
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(ev) {
+  var s;
+  s = $('.chartGoesHere', $(ev.target).attr("href")).scope();
+  return s.plotChart();
 });
