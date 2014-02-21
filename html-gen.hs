@@ -14,6 +14,15 @@ import Text.Blaze.Html.Renderer.Pretty (renderHtml)
 elem !. c = elem ! class_ c
 elem !# i = elem ! A.id i
 
+--
+-- mini angular library
+--
+ngModel = customAttribute "ng-model"
+ngIf = customAttribute "ng-if"
+ngController = customAttribute "ng-controller"
+ngApp = customAttribute "ng-app"
+
+
 boilerplate navlist content scripts styles =
   let scripts' = mapM_ (\s -> script ! src s $ mempty) $ [
                     "js/vendor/jquery-1.10.2.min.js"
@@ -365,25 +374,6 @@ explore = boilerplate
                        ! A.max "99" ! A.min "-99" ! ngModel m
     num expr = "{{" ++ expr ++ "| number }}"
 
---
--- mini angular library
---
-ngModel = customAttribute "ng-model"
-ngIf = customAttribute "ng-if"
-ngController = customAttribute "ng-controller"
-ngApp = customAttribute "ng-app"
-
--- This belongs to a different lab.
-{-
-challenge = boilerplate
-    (labNav "Challenge")
-    (do
-      h2 $ "Factoring Challenge"
-      H.div ! A.id "challengeApp" $ mempty
-    )
-    ["js/vendor/serenade.0.5.0.js", "js/challenge/sr-view-app.js", "js/challenge.js"]
--}
-
 main = mapM_ genHtml [
     ("html/index.html", index)
     , ("html/holt.html", holt)
@@ -397,3 +387,14 @@ main = mapM_ genHtml [
     , ("html/calculate_chart.html", calculateChart)
     , ("html/explore.html", explore)
     ]
+
+-- This belongs to a different lab.
+{-
+challenge = boilerplate
+    (labNav "Challenge")
+    (do
+      h2 $ "Factoring Challenge"
+      H.div ! A.id "challengeApp" $ mempty
+    )
+    ["js/vendor/serenade.0.5.0.js", "js/challenge/sr-view-app.js", "js/challenge.js"]
+-}
