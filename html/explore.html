@@ -52,126 +52,124 @@
                 </li>
             </ol>
         </nav>
-        <section>
-            <div ng-app="explore">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#standardForm" data-toggle="tab">
-                            Standard Form
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#slopeInterceptForm" data-toggle="tab">
-                            Slope Intercept Form
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div id="standardForm" class="tab-pane active" ng-controller="StandardEqns">
-                        <div>
-                            Input a system of your choice.
-                            <div class="eqn-control" id="leftEqn">
-                                <div>
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x1">
-                                    x + 
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y1">
-                                    y = 
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z1">
-                                </div>
-                                <div>
-                                    {{x1| number }}x + {{y1| number }}y = {{z1| number }}
-                                </div>
-                                <div>
-                                    {{y1| number }}y = {{-x1| number }}x + {{z1| number }}
-                                </div>
-                                <div>
-                                    y = {{-x1/y1| number }}x + {{z1/y1| number }}
-                                </div>
-                                <div>
-                                    Slope = {{-x1/y1| number }}
-                                </div>
-                                <div>
-                                    y-intercept = {{z1/y1| number }}
-                                </div>
+        <section ng-app="explore">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#standardForm" data-toggle="tab">
+                        Standard Form
+                    </a>
+                </li>
+                <li>
+                    <a href="#slopeInterceptForm" data-toggle="tab">
+                        Slope Intercept Form
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="standardForm" class="tab-pane active" ng-controller="StandardEqns">
+                    <div>
+                        Input a system of your choice.
+                        <div class="eqn-control" id="leftEqn">
+                            <div>
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x1">
+                                x + 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y1">
+                                y = 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z1">
                             </div>
-                            <div class="eqn-control" id="rightEqn">
-                                <div>
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x2">
-                                    x + 
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y2">
-                                    y = 
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z2">
-                                </div>
-                                <div>
-                                    {{x2| number }}x + {{y2| number }}y = {{z2| number }}
-                                </div>
-                                <div>
-                                    {{y2| number }}y = {{-x2| number }}x + {{z2| number }}
-                                </div>
-                                <div>
-                                    y = {{-x2/y2| number }}x + {{z2/y2| number }}
-                                </div>
-                                <div>
-                                    Slope = {{-x2/y2| number }}
-                                </div>
-                                <div>
-                                    y-intercept = {{z2/y2| number }}
-                                </div>
+                            <div>
+                                {{x1| number }}x + {{y1| number }}y = {{z1| number }}
+                            </div>
+                            <div>
+                                {{y1| number }}y = {{-x1| number }}x + {{z1| number }}
+                            </div>
+                            <div>
+                                y = {{-x1/y1| number }}x + {{z1/y1| number }}
+                            </div>
+                            <div>
+                                Slope = {{-x1/y1| number }}
+                            </div>
+                            <div>
+                                y-intercept = {{z1/y1| number }}
                             </div>
                         </div>
-                        <div id="chartDisplay" ng-controller="Graph">
-                            <div class="chartGoesHere">
+                        <div class="eqn-control" id="rightEqn">
+                            <div>
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x2">
+                                x + 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y2">
+                                y = 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z2">
+                            </div>
+                            <div>
+                                {{x2| number }}x + {{y2| number }}y = {{z2| number }}
+                            </div>
+                            <div>
+                                {{y2| number }}y = {{-x2| number }}x + {{z2| number }}
+                            </div>
+                            <div>
+                                y = {{-x2/y2| number }}x + {{z2/y2| number }}
+                            </div>
+                            <div>
+                                Slope = {{-x2/y2| number }}
+                            </div>
+                            <div>
+                                y-intercept = {{z2/y2| number }}
                             </div>
                         </div>
                     </div>
-                    <div id="slopeInterceptForm" class="tab-pane" ng-controller="InterceptEqns">
-                        <div>
-                            Input a system of your choice.
-                            <div class="eqn-control" id="leftEqn">
-                                <div>
-                                    y = 
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a1">
-                                    x + 
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b1">
-                                </div>
-                                <div>
-                                    y = {{a1| number }}x + {{b1| number }}
-                                </div>
-                                <div>
-                                    Slope = {{a1| number }}
-                                </div>
-                                <div>
-                                    y-intercept = {{b1| number }}
-                                </div>
-                            </div>
-                            <div class="eqn-control" id="rightEqn">
-                                <div>
-                                    y = 
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a2">
-                                    x + 
-                                    <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b2">
-                                </div>
-                                <div>
-                                    y = {{a2| number }}x + {{b2| number }}
-                                </div>
-                                <div>
-                                    Slope = {{a2| number }}
-                                </div>
-                                <div>
-                                    y-intercept = {{b2| number }}
-                                </div>
-                            </div>
-                        </div>
-                        <div id="chartDisplay" ng-controller="Graph">
-                            <div class="chartGoesHere">
-                            </div>
+                    <div id="chartDisplay" ng-controller="Graph">
+                        <div class="chartGoesHere">
                         </div>
                     </div>
                 </div>
-                <a href="challenge.html" class="next btn btn-large btn-primary">
-                    Next
-                </a>
+                <div id="slopeInterceptForm" class="tab-pane" ng-controller="InterceptEqns">
+                    <div>
+                        Input a system of your choice.
+                        <div class="eqn-control" id="leftEqn">
+                            <div>
+                                y = 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a1">
+                                x + 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b1">
+                            </div>
+                            <div>
+                                y = {{a1| number }}x + {{b1| number }}
+                            </div>
+                            <div>
+                                Slope = {{a1| number }}
+                            </div>
+                            <div>
+                                y-intercept = {{b1| number }}
+                            </div>
+                        </div>
+                        <div class="eqn-control" id="rightEqn">
+                            <div>
+                                y = 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a2">
+                                x + 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b2">
+                            </div>
+                            <div>
+                                y = {{a2| number }}x + {{b2| number }}
+                            </div>
+                            <div>
+                                Slope = {{a2| number }}
+                            </div>
+                            <div>
+                                y-intercept = {{b2| number }}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chartDisplay" ng-controller="Graph">
+                        <div class="chartGoesHere">
+                        </div>
+                    </div>
+                </div>
             </div>
+            <a href="challenge.html" class="next btn btn-large btn-primary">
+                Next
+            </a>
         </section>
         <script src="js/vendor/jquery-1.10.2.min.js">
         </script>

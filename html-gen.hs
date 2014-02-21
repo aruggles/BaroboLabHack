@@ -40,10 +40,10 @@ boilerplate navlist content scripts styles =
             nav ! class_ "app" $ do
                 a ! href "index.html" $ img ! src "img/barobo_logo.png"
                 ol ! class_ "nav nav-stacked nav-pills" $ sequence_ navlist
-            section $ content
+            content
             scripts'
 
-boilerplate' n c = boilerplate n c [] []
+boilerplate' n c = boilerplate n (section c) [] []
 
 genHtml (file, html) = writeFile file $ renderHtml html
 
@@ -159,7 +159,7 @@ lab_overview = boilerplate'
 
 charts = boilerplate
     (labNav "Prediction")
-    (do
+    (section $ do
         H.div ! class_ "row chartRow" $ do
             figure ! class_ "col-xs-3" $ do
                 figcaption "Position"
@@ -228,7 +228,7 @@ prediction = boilerplate'
 
 calculateSetup = boilerplate
     (labNav "Calculate")
-    (do
+    (section $ do
         H.div !. "equations" $ do
             h4 "Setting up the equations for graphing"
             table $ do
@@ -257,7 +257,7 @@ calculateSetup = boilerplate
 
 calculateChart = boilerplate
     (labNav "Calculate")
-    (do
+    (section $ do
         H.div !. "infoHalf" $ do
             H.div !. "eqnTable" $ do
                 table !. "equations" $ do
@@ -292,30 +292,29 @@ calculateChart = boilerplate
 
 explore = boilerplate
     (labNav "Explore")
-    (do
-        H.div ! ngApp "explore" $ do
-            ul !. "nav nav-tabs" $ do
-                li !. "active" $
-                    tabLink "standardForm" "Standard Form"
-                li $
-                    tabLink "slopeInterceptForm" "Slope Intercept Form"
-            H.div !. "tab-content" $ do
-                H.div !# "standardForm" !. "tab-pane active"
-                      ! ngController "StandardEqns" $ do
-                    H.div $ do
-                        "Input a system of your choice."
-                        standardEquations
-                    H.div !# "chartDisplay" ! ngController "Graph" $ do
-                        H.div !. "chartGoesHere" $ mempty
-                H.div !# "slopeInterceptForm" !. "tab-pane"
-                      ! ngController "InterceptEqns" $ do
-                    H.div $ do
-                        "Input a system of your choice."
-                        interceptEquations
-                    H.div !# "chartDisplay" ! ngController "Graph" $ do
-                        H.div !. "chartGoesHere" $ mempty
-            a ! href "challenge.html"
-              !. "next btn btn-large btn-primary" $ "Next"
+    (section ! ngApp "explore" $ do
+        ul !. "nav nav-tabs" $ do
+            li !. "active" $
+                tabLink "standardForm" "Standard Form"
+            li $
+                tabLink "slopeInterceptForm" "Slope Intercept Form"
+        H.div !. "tab-content" $ do
+            H.div !# "standardForm" !. "tab-pane active"
+                  ! ngController "StandardEqns" $ do
+                H.div $ do
+                    "Input a system of your choice."
+                    standardEquations
+                H.div !# "chartDisplay" ! ngController "Graph" $ do
+                    H.div !. "chartGoesHere" $ mempty
+            H.div !# "slopeInterceptForm" !. "tab-pane"
+                  ! ngController "InterceptEqns" $ do
+                H.div $ do
+                    "Input a system of your choice."
+                    interceptEquations
+                H.div !# "chartDisplay" ! ngController "Graph" $ do
+                    H.div !. "chartGoesHere" $ mempty
+        a ! href "challenge.html"
+          !. "next btn btn-large btn-primary" $ "Next"
     )
     [ "js/vendor/angular.min.js"
     , "js/vendor/jqmath-etc-0.4.0.min.js"
