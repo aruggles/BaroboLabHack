@@ -290,12 +290,21 @@ explore = boilerplate
                     tabLink "standardForm" "Standard Form"
                 li $
                     tabLink "slopeInterceptForm" "Slope Intercept Form"
-            H.div !. "tab-content" ! ngController "Eqns" $ do
-                H.div !. "tab-pane active" $ do
-                    "Input a system of your choice."
-                    eqns
-                H.div !# "chartDisplay" ! ngController "Graph" $ do
-                    H.div !# "chartGoesHere" $ mempty
+            H.div !. "tab-content" $ do
+                H.div !# "standardForm" !. "tab-pane active"
+                      ! ngController "StandardEqns" $ do
+                    H.div $ do
+                        "Input a system of your choice."
+                        standardEquations
+                    H.div !# "chartDisplay" ! ngController "Graph" $ do
+                        H.div !. "chartGoesHere" $ mempty
+                H.div !# "slopeInterceptForm" !. "tab-pane"
+                      ! ngController "InterceptEqns" $ do
+                    H.div $ do
+                        "Input a system of your choice."
+                        interceptEquations
+                    H.div !# "chartDisplay" ! ngController "Graph" $ do
+                        H.div !. "chartGoesHere" $ mempty
             a ! href "challenge.html"
               !. "next btn btn-large btn-primary" $ "Next"
     )
@@ -308,7 +317,7 @@ explore = boilerplate
   where
     tabLink link title =
       a ! href (val $ '#' : link) ! dataAttribute "toggle" "tab" $ title
-    eqns = do
+    standardEquations = do
         H.div !. "eqn-control" !# "leftEqn" $ do
             H.div $ do
                 numInput "x1"
@@ -333,8 +342,27 @@ explore = boilerplate
             H.div $ str $ "y = " ++ num "-x2/y2" ++ "x + " ++ num "z2/y2"
             H.div $ str $ "Slope = " ++ num "-x2/y2"
             H.div $ str $ "y-intercept = " ++ num "z2/y2"
-    numInput m = input ! maxlength "3" ! size "3" ! A.max "99" ! A.min "-99"
-                       ! ngModel m
+    interceptEquations = do
+        H.div !. "eqn-control" !# "leftEqn" $ do
+            H.div $ do
+                "y = "
+                numInput "a1"
+                "x + "
+                numInput "b1"
+            H.div $ str $ "y = " ++ num "a1" ++ "x + " ++ num "b1"
+            H.div $ str $ "Slope = " ++ num "a1"
+            H.div $ str $ "y-intercept = " ++ num "b1"
+        H.div !. "eqn-control" !# "rightEqn" $ do
+            H.div $ do
+                "y = "
+                numInput "a2"
+                "x + "
+                numInput "b2"
+            H.div $ str $ "y = " ++ num "a2" ++ "x + " ++ num "b2"
+            H.div $ str $ "Slope = " ++ num "a2"
+            H.div $ str $ "y-intercept = " ++ num "b2"
+    numInput m = input ! type_ "number" ! maxlength "3" ! size "3"
+                       ! A.max "99" ! A.min "-99" ! ngModel m
     num expr = "{{" ++ expr ++ "| number }}"
 
 --

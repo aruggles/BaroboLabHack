@@ -1,5 +1,5 @@
 angular.module('explore', [])
-    .controller('Eqns', ($scope) ->
+    .controller('StandardEqns', ($scope) ->
         $scope.x1 = -1
         $scope.y1 = 2
         $scope.z1 = 8
@@ -7,8 +7,28 @@ angular.module('explore', [])
         $scope.x2 = -2
         $scope.y2 = 1
         $scope.z2 = -2
+
+        $scope.a1 = $scope.a2 = $scope.b1 = $scope.b2 = 0
+
+        $scope.$watch(
+            ->
+                [$scope.x1, $scope.y1, $scope.z1,
+                 $scope.x2, $scope.y2, $scope.z2]
+            ->
+                $scope.a1 = -$scope.x1/$scope.y1
+                $scope.b1 =  $scope.z1/$scope.y1
+                $scope.a2 = -$scope.x2/$scope.y2
+                $scope.b2 =  $scope.z2/$scope.y2
+            true
+        )
     )
-    .controller('Graph', ($scope) ->
+    .controller('InterceptEqns', ($scope) ->
+        $scope.a1 = 0.5
+        $scope.b1 = 4
+        $scope.a2 = 2
+        $scope.b2 = -2
+    )
+    .controller('Graph', ($scope, $element) ->
         chartCfg = {
             grid: {
                 markings: [
@@ -40,17 +60,18 @@ angular.module('explore', [])
         }
 
 
-        $('#chartGoesHere').height("400px").width("400px")
+        $('.chartGoesHere', $element).height("400px").width("400px")
 
         $scope.$watch(
-            -> [[$scope.x1, $scope.y1, $scope.z1],
-                [$scope.x2, $scope.y2, $scope.z2]]
+            -> [ $scope.a1, $scope.b1 ,
+                 $scope.a2, $scope.b2 ]
             ->
-                serieses = for [x, y, z] in [[$scope.x1, $scope.y1, $scope.z1],
-                                             [$scope.x2, $scope.y2, $scope.z2]]
-                    a = -x/y
-                    b = z/y
-                    [x, a*x + b] for x in [-10, 10]
-                $.plot("#chartGoesHere", serieses, chartCfg)
+                serieses =
+                    for [a, b] in [[$scope.a1, $scope.b1],
+                                   [$scope.a2, $scope.b2]]
+                        for x in [-10, 10]
+                            [x, a*x + b]
+                $.plot($(".chartGoesHere", $element), serieses, chartCfg)
+            true
         )
     )
