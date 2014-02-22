@@ -19,8 +19,10 @@ elem !# i = elem ! A.id i
 --
 ngModel = customAttribute "ng-model"
 ngIf = customAttribute "ng-if"
+ngHide = customAttribute "ng-hide"
 ngController = customAttribute "ng-controller"
 ngApp = customAttribute "ng-app"
+ngClass = customAttribute "ng-class"
 
 
 boilerplate navlist content scripts styles =
@@ -292,7 +294,7 @@ calculateChart = boilerplate
 
 explore = boilerplate
     (labNav "Explore")
-    (section ! ngApp "explore" $ do
+    (section ! ngApp "explore" ! ngController "Explore" $ do
         ul !. "nav nav-tabs" $ do
             li !. "active" $
                 tabLink "standardForm" "Standard Form"
@@ -321,31 +323,43 @@ explore = boilerplate
     , "js/flot/jquery.flot.js"
     , "js/explore.js"
     ]
-    [ "css/jqmath-0.4.0.css"]
+    [ "css/jqmath-0.4.0.css"
+    , "css/explore.css"
+    ]
   where
     tabLink link title =
       a ! href (val $ '#' : link) ! dataAttribute "toggle" "tab" $ title
     standardEquations = do
         H.div !. "eqn-control" !# "leftEqn" $ do
-            H.div $ do
+            H.div ! ngHide "!mockRobot" $ do
                 numInput "x1"
                 "x + "
                 numInput "y1"
                 "y = "
                 numInput "z1"
-            H.div $ str $ num "x1" ++ "x + " ++ num "y1" ++ "y = " ++ num "z1"
+            H.div $ do
+                control0 "0" "x1"
+                "x + "
+                control0 "1" "y1"
+                "y = "
+                control0 "2" "z1"
             H.div $ str $ num "y1" ++ "y = " ++ num "-x1" ++ "x + " ++ num "z1"
             H.div $ str $ "y = " ++ num "-x1/y1" ++ "x + " ++ num "z1/y1"
             H.div $ str $ "Slope = " ++ num "-x1/y1"
             H.div $ str $ "y-intercept = " ++ num "z1/y1"
         H.div !. "eqn-control" !# "rightEqn" $ do
-            H.div $ do
+            H.div ! ngHide "!mockRobot" $ do
                 numInput "x2"
                 "x + "
                 numInput "y2"
                 "y = "
                 numInput "z2"
-            H.div $ str $ num "x2" ++ "x + " ++ num "y2" ++ "y = " ++ num "z2"
+            H.div $ do
+                control1 "0" "x2"
+                "x + "
+                control1 "1" "y2"
+                "y = "
+                control1 "2" "z2"
             H.div $ str $ num "y2" ++ "y = " ++ num "-x2" ++ "x + " ++ num "z2"
             H.div $ str $ "y = " ++ num "-x2/y2" ++ "x + " ++ num "z2/y2"
             H.div $ str $ "Slope = " ++ num "-x2/y2"
@@ -372,6 +386,16 @@ explore = boilerplate
     numInput m = input ! type_ "number" ! maxlength "3" ! size "3"
                        ! A.max "99" ! A.min "-99" ! ngModel m
     num expr = "{{" ++ expr ++ "| number }}"
+    control0 = control "0"
+    control1 = control "1"
+    control rob n v =
+        H.span
+            ! activeControlClass rob n
+            $ str $ num v
+    activeControlClass rob n =
+        ngClass $ val
+                $ "{activeControl: selected["
+                    ++ rob ++ "] == " ++ n ++ "}"
 
 main = mapM_ genHtml [
     ("html/index.html", index)

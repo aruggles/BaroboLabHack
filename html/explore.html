@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/jqmath-0.4.0.css">
+        <link rel="stylesheet" href="css/explore.css">
     </head>
     <body>
         <nav class="app">
@@ -52,7 +53,7 @@
                 </li>
             </ol>
         </nav>
-        <section ng-app="explore">
+        <section ng-app="explore" ng-controller="Explore">
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a href="#standardForm" data-toggle="tab">
@@ -70,7 +71,7 @@
                     <div>
                         Input a system of your choice.
                         <div class="eqn-control" id="leftEqn">
-                            <div>
+                            <div ng-hide="!mockRobot">
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x1">
                                 x + 
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y1">
@@ -78,7 +79,17 @@
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z1">
                             </div>
                             <div>
-                                {{x1| number }}x + {{y1| number }}y = {{z1| number }}
+                                <span ng-class="{activeControl: selected[0] == 0}">
+                                    {{x1| number }}
+                                </span>
+                                x + 
+                                <span ng-class="{activeControl: selected[0] == 1}">
+                                    {{y1| number }}
+                                </span>
+                                y = 
+                                <span ng-class="{activeControl: selected[0] == 2}">
+                                    {{z1| number }}
+                                </span>
                             </div>
                             <div>
                                 {{y1| number }}y = {{-x1| number }}x + {{z1| number }}
@@ -94,7 +105,7 @@
                             </div>
                         </div>
                         <div class="eqn-control" id="rightEqn">
-                            <div>
+                            <div ng-hide="!mockRobot">
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x2">
                                 x + 
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y2">
@@ -102,7 +113,17 @@
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z2">
                             </div>
                             <div>
-                                {{x2| number }}x + {{y2| number }}y = {{z2| number }}
+                                <span ng-class="{activeControl: selected[1] == 0}">
+                                    {{x2| number }}
+                                </span>
+                                x + 
+                                <span ng-class="{activeControl: selected[1] == 1}">
+                                    {{y2| number }}
+                                </span>
+                                y = 
+                                <span ng-class="{activeControl: selected[1] == 2}">
+                                    {{z2| number }}
+                                </span>
                             </div>
                             <div>
                                 {{y2| number }}y = {{-x2| number }}x + {{z2| number }}

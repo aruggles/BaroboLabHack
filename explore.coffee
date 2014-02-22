@@ -1,5 +1,12 @@
+robots = ['8KV7', '6C19']
+
 angular.module('explore', [])
+    .controller('Explore', ($scope) ->
+        $scope.mockRobot = Robot.mock? && Robot.mock
+    )
     .controller('StandardEqns', ($scope) ->
+        $scope.selected = [0,0]
+
         $scope.x1 = -1
         $scope.y1 = 2
         $scope.z1 = 8
@@ -21,6 +28,16 @@ angular.module('explore', [])
                 $scope.b2 =  $scope.z2/$scope.y2
             true
         )
+
+        $scope.changeSelected = (robot, left) ->
+            if left
+                if $scope.selected[robot] > 0
+                    $scope.selected[robot] -= 1
+
+            else
+                if $scope.selected[robot] < 2
+                    $scope.selected[robot] += 1
+
     )
     .controller('InterceptEqns', ($scope) ->
         $scope.a1 = 0.5
@@ -85,4 +102,70 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', (ev) ->
     # Gets the scope of the chart div.
     s = $('.chartGoesHere', $(ev.target).attr("href")).scope()
     s.plotChart()
+)
+
+##
+## Set up mock robot if necessary
+##
+
+Robot =
+    if Robot?
+        Robot
+    else
+        rb = { mock: true }
+        (rb[x] = ->) for x in [
+            "connectRobot",
+            "disconnectRobot",
+            "getRobotIDList",
+            "moveNB",
+            "printMessage",
+            "setColorRGB",
+            "setJointSpeeds",
+            "stop",
+        ]
+        (rb[event] = { connect: -> }) for event in [
+            "scrollUp"
+            "scrollDown"
+            "buttonChanged"
+        ]
+
+        rb
+
+
+##
+## Bracket robot connections.
+##
+
+Robot.connectRobot(x) for x in robots
+Robot.setColorRGB(robots[0], 255, 0, 0)
+Robot.setColorRGB(robots[1], 0, 0, 255)
+
+window.onbeforeunload = ->
+    Robot.setColorRGB(robots[0], 0, 255, 0)
+    Robot.setColorRGB(robots[1], 0, 255, 0)
+    Robot.disconnectRobot(x) for x in robots
+    null
+
+Robot.buttonChanged.connect((id, btn) ->
+    ###
+    if it's the right robot, change the input field of the left eqn on the
+    active pane.
+
+    What is the active pane? Well we can get that with
+
+    activeTab = $("tab-pane active").scope().
+
+    Then we want the 
+
+    ###
+    activeTab = $(".tab-pane.active")
+
+    activeTab.scope().changeSelected(
+        robots.indexOf(id)
+        (btn == 0)
+    )
+)
+Robot.scrollDown.connect((id) ->
+)
+Robot.scrollUp.connect((id) ->
 )

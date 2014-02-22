@@ -1,0 +1,8 @@
+.eqn-control span.activeControl {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.eqn-control span {
+    margin-right: -0.25em;
+}
