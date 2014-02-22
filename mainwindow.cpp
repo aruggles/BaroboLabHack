@@ -66,6 +66,7 @@ MainWindow::MainWindow(const QUrl& url) : m_dongle(new mobot_t)
     m_interface = new JsInterface(this);
 //! [2]
     view = new QWebView(this);
+    view->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
     view->load(url);
     connect(view, SIGNAL(loadFinished(bool)), SLOT(adjustLocation()));
     connect(view, SIGNAL(titleChanged(QString)), SLOT(adjustTitle()));
