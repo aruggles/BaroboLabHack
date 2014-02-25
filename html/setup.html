@@ -10,77 +10,103 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-        <nav class="app">
-            <a href="index.html">
-                <img src="img/barobo_logo.png">
-            </a>
-            <ol class="nav nav-stacked nav-pills">
-                <li>
-                    <a href="holt.html">
-                        <img src="img/holt_california.png">
-                    </a>
-                </li>
-                <li>
-                    <a href="chap6.html">
-                        Chapter 6
-                    </a>
-                </li>
-                <hr class="hdr">
-                <li>
-                    <a href="setup.html">
-                        <div>
-                            6.1:
-                            <small>
-                                Cops vs. Robbers
-                            </small>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                   
+                        <a href="index.html">
+                            <img src="img/barobo_logo.png">
+                        </a>
+                        <ol class="nav nav-stacked nav-pills">
+                            <li>
+                                <a href="holt.html">
+                                    <img src="img/holt_california.png" width="150" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="chap6.html">
+                                    Chapter 6
+                                </a>
+                            </li>
+                            <hr class="hdr">
+                            <li>
+                                <a href="setup.html">
+                                    <div>
+                                        6.1:
+                                        <small>
+                                            Cops vs. Robbers
+                                        </small>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="#">
+                                    Setup
+                                </a>
+                            </li>
+                            <hr class="ftr">
+                            <li>
+                                <a href="lab_overview.html">
+                                    <small class="text-muted">
+                                        Overview
+                                    </small>
+                                </a>
+                            </li>
+                        </ol>
+                   
+                </div> <!-- /.sidebar -->
+                <div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 main">
+                    
+                        <div class=" row lab-crumbs">
+                            <ul>
+                                <li class="active"><a href="setup.html">Setup</a></li>
+                                <li><a href="prediction.html">Prediction</a></li>
+                                <li><a href="charts.html">Charts</a></li>
+                                <li><a href="calculate_setup.html">Calculate</a></li>
+                            </ul>
                         </div>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="#">
-                        Setup
-                    </a>
-                </li>
-                <hr class="ftr">
-                <li>
-                    <a href="lab_overview.html">
-                        <small class="text-muted">
-                            Overview
-                        </small>
-                    </a>
-                </li>
-            </ol>
-        </nav>
-        <section>
-            <dl>
-                <dt>
-                    The objective
-                </dt>
-                <dd>
-                    Solve a system of linear equations in two variables by graphing.
-                </dd>
-                <dt>
-                    Vocabulary
-                </dt>
-                <dd>
-                    <ul>
-                        <li>
-                            System of linear equations
-                        </li>
-                        <li>
-                            Solution of a system of linear equations
-                        </li>
-                    </ul>
-                </dd>
-            </dl>
-            <p>
-                To run this curriculum application, please setup the robots according to the following image.
-            </p>
-            <img src="img/setup.png" class="center-block fullContent">
-            <a href="prediction.html" class="pull-right btn btn-large btn-primary">
-                Next
-            </a>
-        </section>
+                    
+                    <div class="row" style="margin-top: 20px; font-size: 1.5em;">
+                        <div class="col-md-6">
+                            <dl>
+                                <dt>
+                                    The objective
+                                </dt>
+                                <dd>
+                                    Solve a system of linear equations in two variables by graphing.
+                                </dd>
+                                <dt>
+                                    Vocabulary
+                                </dt>
+                                <dd>
+                                    <ul>
+                                        <li>
+                                            System of linear equations
+                                        </li>
+                                        <li>
+                                            Solution of a system of linear equations
+                                        </li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                            <p>
+                                To run this curriculum application, please setup the robots according to the following image.
+                            </p>
+                        </div>
+                        <div class="col-md6">
+                            <img src="img/setup.png" class="center-block fullContent">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top: 10px;">
+                            <a href="prediction.html" class="pull-right btn btn-lg btn-primary" style="margin-right: 10px;">
+                            Next
+                            </a>
+                        </div>
+                    </div>
+                </div> <!-- /.main -->
+            </div> <!-- /.row -->
+        </div> <!-- /.container-fluid -->
         <script src="js/vendor/jquery-1.10.2.min.js">
         </script>
         <script src="js/vendor/bootstrap.min.js">
